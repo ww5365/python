@@ -4,7 +4,7 @@
 # 导入NumPy函数库，一般都是用这样的形式(包括别名np，几乎是约定俗成的)
 import numpy as np
 import matplotlib as mpl
-#from mpl_toolkits.mplot3d import Axes3D
+from mpl_toolkits.mplot3d import Axes3D
 from matplotlib import cm
 import time
 from scipy.optimize import leastsq
@@ -13,7 +13,7 @@ import scipy.optimize as opt
 import matplotlib.pyplot as plt
 from scipy.stats import norm, poisson
 from scipy.interpolate import BarycentricInterpolator
-#from scipy.interpolate import CubicSpline
+from scipy.interpolate import CubicSpline
 import scipy as sp
 import math
 # import seaborn
@@ -24,7 +24,7 @@ def residual(t, x, y):
 
 
 def residual2(t, x, y):
-    print t[0], t[1]
+    print(t[0], t[1])
     return y - (t[0]*np.sin(t[1]*x) + t[2])
 
 
@@ -48,122 +48,122 @@ if __name__ == "__main__":
     #  [30 31 32 33 34 35]
     #  [40 41 42 43 44 45]
     #  [50 51 52 53 54 55]]
-    # a = np.arange(0, 60, 10).reshape((-1, 1)) + np.arange(6)
-    # print a
+    a = np.arange(0, 60, 10).reshape((-1, 1)) + np.arange(6)
+    print(a)
 
     # 正式开始  -:)
     # 标准Python的列表(list)中，元素本质是对象。
     # 如：L = [1, 2, 3]，需要3个指针和三个整数对象，对于数值运算比较浪费内存和CPU。
     # 因此，Numpy提供了ndarray(N-dimensional array object)对象：存储单一数据类型的多维数组。
 
-     # 1.使用array创建
-     #通过array函数传递list对象
-     L = [1, 2, 3, 4, 5, 6]   ##python的 list 数据结构
-     print "L = ", L
-     a = np.array(L)  ##后面的计算，都是基于转换后的数组来实现
-     print "a = ", a
-     print type(a), type(L)
-     # 若传递的是多层嵌套的list，将创建多维数组
-     b = np.array([[1, 2, 3, 4], [5, 6, 7, 8], [9, 10, 11, 12]])
-     print b
-    
-     # # # # 数组大小可以通过其shape属性获得
-     print a.shape
-     print b.shape
-    
+    # # 1.使用array创建
+    # 通过array函数传递list对象
+    # L = [1, 2, 3, 4, 5, 6]
+    # print("L = ", L)
+    # a = np.array(L)
+    # print("a = ", a)
+    # print(type(a), type(L))
+    # # 若传递的是多层嵌套的list，将创建多维数组
+    # b = np.array([[1, 2, 3, 4], [5, 6, 7, 8], [9, 10, 11, 12]])
+    # print(b)
+    #
+    # # # # # 数组大小可以通过其shape属性获得
+    # print(a.shape)
+    # print(b.shape)
+    #
     # # # 也可以强制修改shape
     # b.shape = 4, 3
-    # print b
+    # print(b)
     # # 注：从(3,4)改为(4,3)并不是对数组进行转置，而只是改变每个轴的大小，数组元素在内存中的位置并没有改变
     #
-     # # 当某个轴为-1时，将根据数组元素的个数自动计算此轴的长度
-     b.shape = 2, -1
-     print b
-     print b.shape
-    
-     b.shape = 3, 4
-     print b
-     # # # 使用reshape方法，可以创建改变了尺寸的新数组，原数组的shape保持不变
-     c = b.reshape((4, -1))
-     print "b = \n", b
-     print 'c = \n', c
-    
-     # # # 数组b和c共享内存，修改任意一个将影响另外一个
-     b[0][1] = 20
-     print "share mem: b = \n", b
-     print "share mem: c = \n", c
-    
-     # # # 数组的元素类型可以通过dtype属性获得
-     print a.dtype
-     print b.dtype
-     # # # #
-     # # # # 可以通过dtype参数在创建时指定元素类型
-     d = np.array([[1, 2.80, 3, 4], [5, 6, 7, 8], [9, 10, 11, 12]], dtype=np.float)
-     f = np.array([[1, 2 + 1j, 3, 4], [5, 6, 7, 8], [9, 10, 11, 12]], dtype=np.complex) ##复数
-     print d, d.dtype
-     print f, f.dtype
-    
+    # # # 当某个轴为-1时，将根据数组元素的个数自动计算此轴的长度
+    # b.shape = 2, -1
+    # print(b)
+    # print(b.shape)
+    #
+    # b.shape = 3, 4
+    # print(b)
+    # # # # 使用reshape方法，可以创建改变了尺寸的新数组，原数组的shape保持不变
+    # c = b.reshape((4, -1))
+    # print("b = \n", b)
+    # print('c = \n', c)
+    #
+    # # # # 数组b和c共享内存，修改任意一个将影响另外一个
+    # b[0][1] = 20
+    # print("b = \n", b)
+    # print("c = \n", c)
+    #
+    # # # # 数组的元素类型可以通过dtype属性获得
+    # print(a.dtype)
+    # print(b.dtype)
+    # # # # #
+    # # # # # 可以通过dtype参数在创建时指定元素类型
+    # d = np.array([[1, 2, 3, 4], [5, 6, 7, 8], [9, 10, 11, 12]], dtype=np.float)
+    # # f = np.array([[1, 2, 3, 4], [5, 6, 7, 8], [9, 10, 11, 12]], dtype=np.complex)
+    # print(d)
+    # # print(f)
+    #
     # # # 如果更改元素类型，可以使用astype安全的转换
     # f = d.astype(np.int)
-    # print f
+    # print(f)
     # # #
     # # # # 但不要强制仅修改元素类型，如下面这句，将会以int来解释单精度float类型
     # d.dtype = np.int
-    # print d
+    # print(d)
 
     # 2.使用函数创建
     # 如果生成一定规则的数据，可以使用NumPy提供的专门函数
     # arange函数类似于python的range函数：指定起始值、终止值和步长来创建数组
     # 和Python的range类似，arange同样不包括终值；但arange可以生成浮点类型，而range只能是整数类型
-    #np.set_printoptions(linewidth=100, suppress=True)
+    np.set_printoptions(linewidth=100, suppress=True)
     # a = np.arange(1, 10, 0.5)
-    # print a
+    # print(a)
     #
     # # # # linspace函数通过指定起始值、终止值和元素个数来创建数组，缺省包括终止值
     # b = np.linspace(1, 10, 10)
-    # print 'b = ', b
+    # print('b = ', b)
     #
     # # 可以通过endpoint关键字指定是否包括终值
     # c = np.linspace(1, 10, 10, endpoint=False)
-    # print 'c = ', c
+    # print('c = ', c)
     #
     # # # 和linspace类似，logspace可以创建等比数列
     # # 下面函数创建起始值为10^1，终止值为10^2，有10个数的等比数列
     # d = np.logspace(1, 4, 4, endpoint=True, base=2)
-    # print d
+    # print(d)
     # # # # #
     # # # # # 下面创建起始值为2^0，终止值为2^10(包括)，有10个数的等比数列
     # f = np.logspace(0, 10, 11, endpoint=True, base=2)
-    # print f
+    # print(f)
     #
     # # # # 使用 frombuffer, fromstring, fromfile等函数可以从字节序列创建数组
     # s = 'abcdzzzz'
     # g = np.fromstring(s, dtype=np.int8)
-    # print g
+    # print(g)
     # #
     # 3.存取
     # 3.1常规办法：数组元素的存取方法和Python的标准方法相同
     # a = np.arange(10)
-    # print a
+    # print(a)
     # # # 获取某个元素
-    # print a[3]
+    # print(a[3])
     # # # # # 切片[3,6)，左闭右开
-    # print a[3:6]
+    # print(a[3:6])
     # # # 省略开始下标，表示从0开始
-    # print a[:5]
+    # print(a[:5])
     # # # 下标为负表示从后向前数
-    # print a[3:]
+    # print(a[3:])
     # # 步长为2
-    # print a[1:9:2]
+    # print(a[1:9:2])
     # # # # # # 步长为-1，即翻转
-    # print a[::-1]
+    # print(a[::-1])
     # # 切片数据是原数组的一个视图，与原数组共享内容空间，可以直接修改元素值
     # # a[1:4] = 10, 20, 30
-    # # print a
+    # # print(a)
     # # 因此，在实践中，切实注意原始数据是否被破坏，如：
     # b = a[2:5]
     # b[0] = 200
-    # print a
+    # print(a)
 
     # 3.2 整数/布尔数组存取
     # 3.2.1
@@ -171,32 +171,32 @@ if __name__ == "__main__":
     # 将使用整数序列中的每个元素作为下标，整数序列可以是列表(list)或者数组(ndarray)。
     # 使用整数序列作为下标获得的数组不和原始数组共享数据空间。
     # a = np.logspace(0, 9, 10, base=2)
-    # print a
+    # print(a)
     # i = np.arange(0, 10, 2)
-    # print i
+    # print(i)
     # # # 利用i取a中的元素
     # b = a[i]
-    # print b
+    # print(b)
     # # # b的元素更改，a中元素不受影响
     # b[2] = 1.6
-    # print b
-    # print a
+    # print(b)
+    # print(a)
 
     # # 3.2.2
     # 使用布尔数组i作为下标存取数组a中的元素：返回数组a中所有在数组b中对应下标为True的元素
     # 生成10个满足[0,1)中均匀分布的随机数
     # a = np.random.rand(10)
-    # print a
+    # print(a)
     # # 大于0.5的元素索引
-    # print a > 0.5
+    # print(a > 0.5)
     # # # 大于0.5的元素
     # b = a[a > 0.5]
-    # print b
+    # print(b)
     # # # 将原数组中大于0.5的元素截取成0.5
     # a[a > 0.5] = 0.5
-    # print a
+    # print(a)
     # # # # # b不受影响
-    # print b
+    # print(b)
 
     # 3.3 二维数组的切片
     # [[ 0  1  2  3  4  5]
@@ -206,23 +206,23 @@ if __name__ == "__main__":
     #  [40 41 42 43 44 45]
     #  [50 51 52 53 54 55]]
     # a = np.arange(0, 60, 10)    # 行向量
-    # print 'a = ', a
+    # print('a = ', a)
     # b = a.reshape((-1, 1))      # 转换成列向量
-    # print b
+    # print(b)
     # c = np.arange(6)
-    # print c
+    # print(c)
     # f = b + c   # 行 + 列
-    # print f
+    # print(f)
     # # 合并上述代码：
     # a = np.arange(0, 60, 10).reshape((-1, 1)) + np.arange(6)
-    # print a
+    # print(a)
     # # # 二维数组的切片
-    # print a[[0, 1, 2], [2, 3, 4]]
-    # print a[4, [2, 3, 4]]
-    # print a[4:, [2, 3, 4]]
+    # print(a[[0, 1, 2], [2, 3, 4]])
+    # print(a[4, [2, 3, 4]])
+    # print(a[4:, [2, 3, 4]])
     # i = np.array([True, False, True, False, False, True])
-    # print a[i]
-    # print a[i, 3]
+    # print(a[i])
+    # print(a[i, 3])
 
     # 4.1 numpy与Python数学库的时间比较
     # for j in np.logspace(0, 7, 8):
@@ -236,72 +236,72 @@ if __name__ == "__main__":
     #     for i, t in enumerate(x):
     #         x[i] = math.sin(t)
     #     t2 = time.clock() - start
-    #     print j, ": ", t1, t2, t2/t1
+    #     print(j, ": ", t1, t2, t2/t1)
 
     # 4.2 元素去重
     # 4.2.1直接使用库函数
     # a = np.array((1, 2, 3, 4, 5, 5, 7, 3, 2, 2, 8, 8))
-    # print '原始数组：', a
+    # print('原始数组：', a)
     # # # 使用库函数unique
     # b = np.unique(a)
-    # print '去重后：', b
+    # print('去重后：', b)
     # # 4.2.2 二维数组的去重，结果会是预期的么？
-    # c = np.array(((1, 2), (3, 4), (5, 6), (1, 3), (3, 4), (7, 6)))
-    # print '二维数组：\n', c
-    # print '去重后：', np.unique(c)
+    c = np.array(((1, 2), (3, 4), (5, 6), (1, 3), (3, 4), (7, 6)))
+    print('二维数组：\n', c)
+    print('去重后：', np.unique(c))
     # # # 4.2.3 方案1：转换为虚数
-    # # r, i = np.split(c, (1, ), axis=1)
-    # # x = r + i * 1j
+    r, i = np.split(c, (1, ), axis=1)
+    x = r + i * 1j
     # x = c[:, 0] + c[:, 1] * 1j
-    # print '转换成虚数：', x
-    # print '虚数去重后：', np.unique(x)
-    # print np.unique(x, return_index=True)   # 思考return_index的意义
-    # idx = np.unique(x, return_index=True)[1]
-    # print '二维数组去重：\n', c[idx]
+    print('转换成虚数：', x)
+    print('虚数去重后：', np.unique(x))
+    print(np.unique(x, return_index=True))   # 思考return_index的意义
+    idx = np.unique(x, return_index=True)[1]
+    print('二维数组去重：\n', c[idx])
     # # 4.2.3 方案2：利用set
-    # print '去重方案2：\n', np.array(list(set([tuple(t) for t in c])))
+    print('去重方案2：\n', np.array(list(set([tuple(t) for t in c]))))
 
     # 4.3 stack and axis
-    # a = np.arange(1, 7).reshape((2, 3))
-    # b = np.arange(11, 17).reshape((2, 3))
-    # c = np.arange(21, 27).reshape((2, 3))
-    # d = np.arange(31, 37).reshape((2, 3))
-    # print 'a = \n', a
-    # print 'b = \n', b
-    # print 'c = \n', c
-    # print 'd = \n', d
-    # s = np.stack((a, b, c, d), axis=0)
-    # print 'axis = 0 ', s.shape, '\n', s
-    # s = np.stack((a, b, c, d), axis=1)
-    # print 'axis = 1 ', s.shape, '\n', s
-    # s = np.stack((a, b, c, d), axis=2)
-    # print 'axis = 2 ', s.shape, '\n', s
+    a = np.arange(1, 7).reshape((2, 3))
+    b = np.arange(11, 17).reshape((2, 3))
+    c = np.arange(21, 27).reshape((2, 3))
+    d = np.arange(31, 37).reshape((2, 3))
+    print('a = \n', a)
+    print('b = \n', b)
+    print('c = \n', c)
+    print('d = \n', d)
+    s = np.stack((a, b, c, d), axis=0)
+    print('axis = 0 ', s.shape, '\n', s)
+    s = np.stack((a, b, c, d), axis=1)
+    print('axis = 1 ', s.shape, '\n', s)
+    s = np.stack((a, b, c, d), axis=2)
+    print('axis = 2 ', s.shape, '\n', s)
 
     # a = np.arange(1, 10).reshape(3,3)
-    # print a
+    # print(a)
     # b = a + 10
-    # print b
-    # print np.dot(a, b)
-    # print a * b
+    # print(b)
+    # print(np.dot(a, b)
+    # print(a * b)
 
     # a = np.arange(1, 10)
-    # print a
+    # print(a)
     # b = np.arange(20,25)
-    # print b
-    # print np.concatenate((a, b))
+    # print(b)
+    # print(np.concatenate((a, b)))
 
     # 5.绘图
     # 5.1 绘制正态分布概率密度函数
-    #mpl.rcParams['font.sans-serif'] = [u'SimHei']  #FangSong/黑体 FangSong/KaiTi
-    #mpl.rcParams['axes.unicode_minus'] = False
+    mpl.rcParams['font.sans-serif'] = [u'SimHei']  #FangSong/黑体 FangSong/KaiTi
+    mpl.rcParams['axes.unicode_minus'] = False
     # mu = 0
     # sigma = 1
     # x = np.linspace(mu - 3 * sigma, mu + 3 * sigma, 51)
     # y = np.exp(-(x - mu) ** 2 / (2 * sigma ** 2)) / (math.sqrt(2 * math.pi) * sigma)
-    # print x.shape
-    # print 'x = \n', x
-    # print y.shape
-    # print 'y = \n', y
+    # print(x.shape)
+    # print('x = \n', x)
+    # print(y.shape)
+    # print('y = \n', y)
     # plt.figure(facecolor='w')
     # plt.plot(x, y, 'ro-', linewidth=2)
     # # plt.plot(x, y, 'r-', x, y, 'go', linewidth=2, markersize=8)
@@ -348,12 +348,12 @@ if __name__ == "__main__":
     # plt.show()
 
     # 5.5 心形线
-    # t = np.linspace(0, 2*np.pi, 100)
-    # x = 16 * np.sin(t) ** 3
-    # y = 13 * np.cos(t) - 5 * np.cos(2*t) - 2 * np.cos(3*t) - np.cos(4*t)
-    # plt.plot(x, y, 'r-', linewidth=2)
-    # plt.grid(True)
-    # plt.show()
+    t = np.linspace(0, 2*np.pi, 100)
+    x = 16 * np.sin(t) ** 3
+    y = 13 * np.cos(t) - 5 * np.cos(2*t) - 2 * np.cos(3*t) - np.cos(4*t)
+    plt.plot(x, y, 'r-', linewidth=2)
+    plt.grid(True)
+    plt.show()
 
     # # 5.6 渐开线
     # t = np.linspace(0, 50, num=1000)
@@ -424,13 +424,13 @@ if __name__ == "__main__":
 
     # 6.3 Poisson分布
     # x = np.random.poisson(lam=5, size=10000)
-    # print x
+    # print(x)
     # pillar = 15
     # a = plt.hist(x, bins=pillar, normed=True, range=[0, pillar], color='g', alpha=0.5)
     # plt.grid()
     # plt.show()
-    # print a
-    # print a[0].sum()
+    # print(a)
+    # print(a[0].sum())
 
     # # 6.4 直方图的使用
     # mu = 2
@@ -478,13 +478,20 @@ if __name__ == "__main__":
     # plt.show()
 
     # 7. 绘制三维图像
-    #u = np.linspace(-3, 3, 101)
-    #x, y = np.meshgrid(u, u)
-    #z = x*np.exp(-(x**2 + y**2))
-    #fig = plt.figure()
-    #ax = fig.add_subplot(111, projection='3d')
-    #ax.plot_surface(x, y, z, rstride=3, cstride=3, cmap=cm.coolwarm, linewidth=0.5)
-    #plt.show()
+    # x, y = np.mgrid[-3:3:7j, -3:3:7j]
+    # print(x)
+    # print(y)
+    # u = np.linspace(-3, 3, 101)
+    # x, y = np.meshgrid(u, u)
+    # print(x)
+    # print(y)
+    # z = x*y*np.exp(-(x**2 + y**2)/2) / math.sqrt(2*math.pi)
+    # # z = x*y*np.exp(-(x**2 + y**2)/2) / math.sqrt(2*math.pi)
+    # fig = plt.figure()
+    # ax = fig.add_subplot(111, projection='3d')
+    # # ax.plot_surface(x, y, z, rstride=5, cstride=5, cmap=cm.coolwarm, linewidth=0.1)  #
+    # ax.plot_surface(x, y, z, rstride=3, cstride=3, cmap=cm.gist_heat, linewidth=0.5)
+    # plt.show()
     # # cmaps = [('Perceptually Uniform Sequential',
     # #           ['viridis', 'inferno', 'plasma', 'magma']),
     # #          ('Sequential', ['Blues', 'BuGn', 'BuPu',
@@ -513,8 +520,8 @@ if __name__ == "__main__":
     #
     # t = leastsq(residual, [0, 0, 0], args=(x, y))
     # theta = t[0]
-    # print '真实值：', A, B, C
-    # print '预测值：', theta
+    # print('真实值：', A, B, C)
+    # print('预测值：', theta)
     # y_hat = theta[0] * x ** 2 + theta[1] * x + theta[2]
     # plt.plot(x, y, 'r-', linewidth=2, label=u'Actual')
     # plt.plot(x, y_hat, 'g-', linewidth=2, label=u'Predict')
@@ -531,8 +538,8 @@ if __name__ == "__main__":
     #
     # t = leastsq(residual2, [3, 5, 1], args=(x, y))
     # theta = t[0]
-    # print '真实值：', a, w, phi
-    # print '预测值：', theta
+    # print('真实值：', a, w, phi)
+    # print('预测值：', theta)
     # y_hat = theta[0] * np.sin(theta[1] * x) + theta[2]
     # plt.plot(x, y, 'r-', linewidth=2, label='Actual')
     # plt.plot(x, y_hat, 'g-', linewidth=2, label='Predict')
@@ -544,9 +551,9 @@ if __name__ == "__main__":
     # a = opt.fmin(f, 1)
     # b = opt.fmin_cg(f, 1)
     # c = opt.fmin_bfgs(f, 1)
-    # print a, 1/a, math.e
-    # print b
-    # print c
+    # print(a, 1/a, math.e)
+    # print(b)
+    # print(c)
 
     # marker	description
     # ”.”	point

@@ -19,7 +19,7 @@ def func(a):
 
 
 if __name__ == '__main__':
-    mpl.rcParams['font.sans-serif'] = [u'SimHei']
+    mpl.rcParams['font.sans-serif'] = ['SimHei']
     mpl.rcParams['axes.unicode_minus'] = False
     x = np.linspace(0, 30, num=50)
     func_ = np.frompyfunc(func, 1, 1)
@@ -28,7 +28,7 @@ if __name__ == '__main__':
     plt.figure(figsize=(10, 5), facecolor='w')
     plt.plot(x, y, 'ro-', lw=2, markersize=6)
     plt.grid(b=True, ls=':')
-    plt.xlabel(u'X', fontsize=16)
-    plt.ylabel(u'Y', fontsize=16)
-    plt.title(u'这段代码在计算什么？', fontsize=18)
+    plt.xlabel('X', fontsize=16)
+    plt.ylabel('Y', fontsize=16)
+    plt.title('这段代码在计算什么？', fontsize=18)
     plt.show()

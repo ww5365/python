@@ -28,17 +28,17 @@ def calc_sin(x):
 
 if __name__ == "__main__":
     t = np.linspace(-2*np.pi, 2*np.pi, 100, endpoint=False)
-    print t     # 横轴数据
+    print(t)     # 横轴数据
     y = np.empty_like(t)
     for i, x in enumerate(t):
         y[i] = calc_sin(x)
-        print 'sin(', x, ') = ', y[i], '(近似值)\t', math.sin(x), '(真实值)'
-        # print '误差：', y[i] - math.sin(x)
-    mpl.rcParams['font.sans-serif'] = [u'SimHei']
+        print('sin(', x, ') = ', y[i], '(近似值)\t', math.sin(x), '(真实值)')
+        print('误差：', y[i] - math.sin(x))
+    mpl.rcParams['font.sans-serif'] = ['SimHei']
     mpl.rcParams['axes.unicode_minus'] = False
     plt.figure(facecolor='w')
     plt.plot(t, y, 'r-', t, y, 'go', linewidth=2)
-    plt.title(u'Taylor展式的应用 - 正弦函数', fontsize=18)
+    plt.title('Taylor展式的应用 - 正弦函数', fontsize=18)
     plt.xlabel('X', fontsize=15)
     plt.ylabel('sin(X)', fontsize=15)
     plt.xlim((-7, 7))

@@ -33,17 +33,16 @@ if __name__ == "__main__":
     t1 = np.linspace(-2, 0, 10, endpoint=False)
     t2 = np.linspace(0, 4, 20)
     t = np.concatenate((t1, t2))
-    print t     # 横轴数据
+    print(t)     # 横轴数据
     y = np.empty_like(t)
     for i, x in enumerate(t):
         y[i] = calc_e(x)
-        print 'e^', x, ' = ', y[i], '(近似值)\t', math.exp(x), '(真实值)'
-        # print '误差：', y[i] - math.exp(x)
+        print('e^', x, ' = ', y[i], '(近似值)\t', math.exp(x), '(真实值)')
     plt.figure(facecolor='w')
-    mpl.rcParams['font.sans-serif'] = [u'SimHei']
+    mpl.rcParams['font.sans-serif'] = ['SimHei']
     mpl.rcParams['axes.unicode_minus'] = False
     plt.plot(t, y, 'r-', t, y, 'go', linewidth=2)
-    plt.title(u'Taylor展式的应用 - 指数函数', fontsize=18)
+    plt.title('Taylor展式的应用 - 指数函数', fontsize=18)
     plt.xlabel('X', fontsize=15)
     plt.ylabel('exp(X)', fontsize=15)
     plt.grid(True, ls=':')

@@ -41,10 +41,10 @@ def top4(number):
 
 if __name__ == '__main__':
     N = 100000
-    x = range(1, N+1)
+    x = list(range(1, N+1))
     frequency = np.zeros(9, dtype=np.int)
     f = 1
-    print '开始计算...'
+    print('开始计算...')
     t0 = time()
     # top1
     # a = 1
@@ -74,17 +74,17 @@ if __name__ == '__main__':
 
     # Top 4：本质与Top3相同
     y = np.cumsum(np.log10(x))
-    map(top4, y)
+    list(map(top4, y))
 
     t1 = time()
-    print '耗时：', t1 - t0
-    print frequency
+    print('耗时：', t1 - t0)
+    print(frequency)
     plt.figure(facecolor='w')
     t = np.arange(1, 10)
     plt.plot(t, frequency, 'r-', t, frequency, 'go', lw=2, markersize=8)
     for x,y in enumerate(frequency):
-        plt.text(x+1.1, y, frequency[x], verticalalignment='top', fontsize=15)
-    plt.title(u'%d!首位数字出现频率' % N, fontsize=18)
+        plt.text(x+1.1, y, frequency[x], verticalalignment='top', fontsize=13)
+    plt.title('%d!首位数字出现频率' % N, fontsize=18)
     plt.xlim(0.5, 9.5)
     plt.ylim(0, max(frequency)*1.03)
     plt.grid(b=True)
