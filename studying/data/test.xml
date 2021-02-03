@@ -1,0 +1,21 @@
+<?xml version="1.0" ?>
+<fruit>
+ <item type="int">20</item>
+ <item type="str">name</item>
+ <item type="dict">
+  <name type="str">apple</name>
+  <num type="int">10</num>
+  <price type="int">23</price>
+ </item>
+ <item type="dict">
+  <name type="str">pear</name>
+  <num type="int">20</num>
+  <price type="float">18.7</price>
+ </item>
+ <item type="dict">
+  <name type="str">banana</name>
+  <num type="float">10.5</num>
+  <price type="int">23</price>
+ </item>
+</fruit>
+
