@@ -43,8 +43,19 @@ if __name__ == '__main__':
     print(str2.format(country="China"))
 
     # 字符串之前加上r ，表示这个字符串是raw string ,比如，字符串里面的: \n 是两个字符，不是换行符
-    str3 = r'd:\n\files'
-    print(str3)
+    str3 = r'd:\n\files\t\test'
+    print("str3=", str3)
+
+    # 多行字符串,使用三引号，保留了所见即所得的格式
+
+    str4 = '''
+    select * from talble1
+    where col1 = "test"
+    and   col2 = 3
+    '''
+
+    print('str4=', str4)
+
     '''
     字符串编码:
     在Python 3版本中，所有的字符串都是使用Unicode编码的字符串序列。
@@ -73,7 +84,7 @@ if __name__ == '__main__':
     s33 = s.encode("utf-8").decode('utf-8')
     print(s33, type(s33))  # 中国 <class 'str'>
 
-    # 字符串分割
+    # 字符串分割： split partition
     line = "wang  wei nihao  a 北京"
     tokens = line.split(
         ' ')  # 默认split()也是空格分割；但和split(' ')有区别，对于连续空格情况，这个只考虑1个，其它空格保留
@@ -83,3 +94,7 @@ if __name__ == '__main__':
     line = "en"
     arr = line.split('-')  # 源字符串没有-情况下，只有1个结果
     print(arr[0])
+
+    line = "wangwei&hello&world"
+    arr = line.partition("&")  # 把字符串分割成：[左边, 自身(分割符), 右边] 三部分
+    print(arr)

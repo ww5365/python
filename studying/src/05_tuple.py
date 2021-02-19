@@ -9,6 +9,15 @@ https://www.runoob.com/python3/python3-tuple.html
 
 
 def tuple_use():
+    '''
+      元组 (x,y) 
+      tuple与list类似，不同之处在于tuple中的元素不能进行修改。
+      而且tuple使用小括号()，list使用方括号[]。
+      * 比列表操作速度快
+      * 对数据写保护
+      * 可用于字符串格式化中
+      * 可作为字典的key
+    '''
     print("-" * 30)
 
     # tuple定义：() 小括号 元素不修改
@@ -31,16 +40,18 @@ def tuple_use():
     except Exception as e:
         print("raise exception: ", e)
 
+    # 类型转换： 把可迭代类型转成tuple tuple(iterable):
+    li1 = ['go', 'python', 'c++']
+    tup4 = tuple(li1)  # list-> tuple
+    print("list->tuple: ", tup4)
+
+    enum_obj = enumerate(li1)   # 下面有对 enumerate 介绍
+    print("enum obj： ", type(enum_obj))  # enumerate 对象  <class 'enumerate'>
+
+    for idx, value in enum_obj:
+        print("enum obj content: ", idx, value)
+
     '''
-
-    2、元组 (x,y) 
-      tuple与list类似，不同之处在于tuple中的元素不能进行修改。
-      而且tuple使用小括号()，list使用方括号[]。
-      * 比列表操作速度快
-      * 对数据写保护
-      * 可用于字符串格式化中
-      * 可作为字典的key
-
     zip:用于将可迭代的对象作为参数，将对象中对应的元素打包成一个个元组，然后返回由这些元组组成的列表。 
     python3中返回的是：一个对象，可以手动转成list
     '''
@@ -48,13 +59,24 @@ def tuple_use():
     li2 = ["test1", "test2", "test4", "test5", "test2"]
 
     tuple_list = zip(li1, li2)
-    print("tuple_list:", tuple_list)  # 一个对象
+    # 一个可迭代对象, zip类的对象 ： <class 'zip'>
+    print("tuple_list type:", type(tuple_list))
 
     for key, value in zip(li1, li2):  # 一个可迭代对象，对每个元素(是一个元祖)
         print("key:value=[%d:%s]" % (key, value))  # key:value=[1:test1]
 
+    '''
+    enumerate 接口说明:
+    enumerate(iterable, start=0)
+    iterable - a sequence, an iterator, or objects that supports iteration
+    start (optional) - enumerate() starts counting from this number. If start is omitted, 0 is taken as start.
+    RETURN: adds counter to an iterable and returns it. The returned object is a enumerate object.
+    
+    You can convert enumerate objects to list and tuple using list() and tuple() method respectively.
+    '''
     for idx, value in enumerate(zip(li1, li2)):
-        print("key:value=[%d:%s]" % (idx, value))  # key:value=[0:(1, 'test1')]
+        print("enumerate key:value=[%d:%s]" %
+              (idx, value))  # key:value=[0:(1, 'test1')]
 
 
 def namedtuple_use():

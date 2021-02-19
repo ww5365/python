@@ -8,6 +8,7 @@ import time
 from datetime import datetime
 import types
 import codecs
+import tarfile
 '''
 dir():  dir([object])  --object: 对象、变量、类型  返回：属性列表list
 
@@ -57,13 +58,13 @@ def get_file_path():
     print("pathlib: syspath:", root_path, sys.path)
     '''
         os.walk : 通过在目录树中游走输出在目录中的文件名，向上或者向下;
-        
+
         os.walk(top[, topdown=True[, onerror=None[, followlinks=False]]])
-        
+
         输入和输出说明：
-        
+
         top -- 是你所要遍历的目录的地址
-        
+
         返回的是一个三元组(root,dirs,files)。
             root 所指的是当前正在遍历的这个文件夹的本身的地址
             dirs 是一个 list ，内容是该文件夹中所有的目录的名字(不包括子目录)
@@ -89,11 +90,11 @@ def get_file_name():
     file = ".\dir\test.txt"
     os.path.split : 返回(.\dir, test.txt)
     os.path.splitext : 返回(.\dir\test, txt)
-    
+
     '''
     CUR_PATH = os.path.abspath(os.path.dirname(__file__))
 
-    ## 获取文件的名称，去掉后缀
+    # 获取文件的名称，去掉后缀
     (path_filename, ext) = os.path.splitext(__file__)
     (path, filename) = os.path.split(path_filename)
 
@@ -204,7 +205,7 @@ def codecs_use():
         3.如果最后一个组件为空，则生成的路径以一个’/’分隔符结尾
     '''
     file_path = os.path.join(cur_path,
-                             r'tmp\random.txt')  ## 得到错误路径：d:\tmp\random.txt
+                             r'tmp\random.txt')  # 得到错误路径：d:\tmp\random.txt
     print(file_path)
     file_path = cur_path + r'\tmp\random.txt'
     print(file_path)
@@ -219,58 +220,108 @@ def codecs_use():
     f.close()
 
 
+def basic_input():
+    str_info = input("input your tips info: ")
+    print(str_info)
+
+
+def unzip_file():
+    '''
+    使用tarfile读取压缩文件中的多个文本文件
+    比如：
+    test.tar.gz
+        file1
+        file2
+        file3
+    '''
+    data_path = "c:\dir\test"
+    vip_siteid_set = {}
+    siteid_set = set()
+    siteid2id_dict = dict()
+    for root, dirs, files in os.walk(data_path, topdown=False):
+        for tar_file in files:
+            if tar_file.endswith("data2.tar.gz"):
+                tar_data_path = os.path.join(data_path, tar_file)
+                # print(data_path)
+                tar = tarfile.open(tar_data_path, "r:gz")  # 打开压缩包: tar.gz
+                for member in tar.getmembers():  # 逐个解压压缩包中的各个文件; 返回TarInfo对象，里面有name属性
+                    # print(member)
+                    f = tar.extractfile(member)  # 提取压缩包中的文件;异常文件，可能返回None
+                    if f is not None:
+                        for binary in f.readlines():  # 逐行读取文件, 返回的是bytes
+                            # print(binary)
+                            content = binary.decode(
+                                "utf-8").strip()  # 将bytes数据转成str
+                            line = content.split('\x01')
+                            # print("line: ", line)
+                            if len(line) < 3:
+                                continue
+                            site_id = line[0]
+                            id = line[1]
+                            if site_id in vip_siteid_set:
+                                siteid_set.add(site_id)
+                                if site_id not in siteid2id_dict:
+                                    siteid2id_dict[site_id] = id
+                tar.close()  # 处理完一个压缩
+    return
+
+
 if __name__ == '__main__':
 
-    # dir function use case
-    print("\n".join(dir(Foo)))  # 4个成员函数
+    # 获取用户输入：input
 
-    get_file_path()
-    read_file()
-    save_file()
-    codecs_use()
+    basic_input()
 
-    # get filename
-    get_file_name()
+   # # dir function use case
+   # print("\n".join(dir(Foo)))  # 4个成员函数
 
-    # 格式化打印
-    str1 = "wang"
-    print("format print: %s ... %s" % (str1, str1), end='*')
+   # get_file_path()
+   # read_file()
+   # save_file()
+   # codecs_use()
 
-    print("\n")
-    print("escape charater: \\")
+   # # get filename
+   # get_file_name()
 
-    # time 使用
-    start = datetime.now()
-    time.sleep(1)
-    print((datetime.now() - start).seconds)
+   # # 格式化打印
+   # str1 = "wang"
+   # print("format print: %s ... %s" % (str1, str1), end='*')
 
-    # 格式输出，还能拼接
-    format_str = "test format %d : %s"
-    num = 10
-    str1 = "format str"
-    format_str = format_str % (num, str1)
-    print(format_str)
-    print("test format2: %d : %s" % (num, str1))
+   # print("\n")
+   # print("escape charater: \\")
 
-    # str.format  一种格式化字符串的函数,它通过 {} 和 : 来代替以前的 %
-    wiki_url = "http://www.baidu.com/api/{}/query={}"
-    url = wiki_url.format("v1", "kaocheng")  # 直接填{}中内容
-    print(url)
+   # # time 使用
+   # start = datetime.now()
+   # time.sleep(1)
+   # print((datetime.now() - start).seconds)
 
-    wiki_url2 = "http://www.baidu.com/api/{version}/query={key}"
-    url2 = wiki_url2.format(version="v2", key="kaocheng")  # 使用{参数}
-    print(url2)
+   # # 格式输出，还能拼接
+   # format_str = "test format %d : %s"
+   # num = 10
+   # str1 = "format str"
+   # format_str = format_str % (num, str1)
+   # print(format_str)
+   # print("test format2: %d : %s" % (num, str1))
 
-    # 保留小数点后两位
-    print("{:.2f}".format(3.1415926))
+   # # str.format  一种格式化字符串的函数,它通过 {} 和 : 来代替以前的 %
+   # wiki_url = "http://www.baidu.com/api/{}/query={}"
+   # url = wiki_url.format("v1", "kaocheng")  # 直接填{}中内容
+   # print(url)
 
-    # 四舍五入，保留小数后n位 round(x, n)
-    x = 1.545
-    print(round(x, 2))
-    print(round(x))  # 默认保留整数部分
+   # wiki_url2 = "http://www.baidu.com/api/{version}/query={key}"
+   # url2 = wiki_url2.format(version="v2", key="kaocheng")  # 使用{参数}
+   # print(url2)
 
-    # 数据类型
+   # # 保留小数点后两位
+   # print("{:.2f}".format(3.1415926))
 
-    li2 = [1, 2, 3]
+   # # 四舍五入，保留小数后n位 round(x, n)
+   # x = 1.545
+   # print(round(x, 2))
+   # print(round(x))  # 默认保留整数部分
 
-    print("list type: ", type(li2), type(li2) == list)
+   # # 数据类型
+
+   # li2 = [1, 2, 3]
+
+   # print("list type: ", type(li2), type(li2) == list)

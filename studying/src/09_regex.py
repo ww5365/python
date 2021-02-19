@@ -38,7 +38,7 @@ def test_re_sub():
     re.sub(pattern, repl, string, count=0, flags=0):
     功能：匹配到特定模式的字符串，并将匹配部分替换为指定的repl
     输出：处理处理后的字符串
-    
+
     输入：
     pattern : 正则中的模式字符串。
     repl : 替换的字符串，也可为一个函数。
@@ -46,21 +46,22 @@ def test_re_sub():
     count : 模式匹配后替换的最大次数，默认 0 表示替换所有的匹配。
     flags : 编译时用的匹配模式，数字形式。
     前三个为必选参数，后两个为可选参数。
-    
+
     '''
     print("--" * 30)
     phone = "010-1891234567 #电话号码"
-    #删除#开头的注释
+    # 删除#开头的注释
     phone = re.sub(r'#.*$', '', phone)
     print(phone)
-    #去掉非数字的字符
+    # 去掉非数字的字符
     phone = re.sub(r'\D', '', phone)
     print(phone)
 
     line = r"#E-s[傲慢]-表情"
 
     print("before sub:", line)
-    line = re.sub(r"#E\-[\w]*\[(得意|傲慢)+]", "α", line)
+    # 正则匹配串里的()是为了提取整个正则串中符合括号里的正则的内容
+    line = re.sub(r"#E\-[\w]*\[(得意|傲慢)+\]", "α", line)
 
     print("sub:", line)
 
@@ -68,7 +69,7 @@ def test_re_sub():
 if __name__ == '__main__':
     '''
     re.match(pattern, string, flags=0): 
-    
+
     功能：从字符串的起始位置匹配一个模式，如果不是起始位置匹配成功的话，match()就返回None
     参数说明：
     flags: re.I 大小写不敏感  re.M 多行匹配   多个标识使用： |  来生效
@@ -76,16 +77,16 @@ if __name__ == '__main__':
     匹配对象或None
     group(num = 0):
       匹配的整个表达式的字符串，group() 可以输入多个组号，它返回包含那些组所对应值的元组
-      
+
     groups():  
-       	返回一个包含所有小组字符串的元组，从 1 到 所含的小组号
-    
+        返回一个包含所有小组字符串的元组，从 1 到 所含的小组号
+
     另外：span函数用来返回匹配对象起始位置和结束位置 
-    
+
     '''
 
     print(re.match('wwW', 'www.baidu.com www.huawei.com',
-                   re.I).span())  #返回[begin, end) 结束位置 (0, 3)
+                   re.I).span())  # 返回[begin, end) 结束位置 (0, 3)
     print(re.match('bai', 'www.baidu.com', re.I))  # 不在起始位置匹配，返回None
 
     line = 'Cats are smarter than dogs'
@@ -99,7 +100,7 @@ if __name__ == '__main__':
         print(match_obj.group())  # 匹配的整个表达式的字符串结果
         print(match_obj.group(1))  # 从1开始，匹配对象中的索引
         print(match_obj.group(2))
-        #print(match_obj.group(3))
+        # print(match_obj.group(3))
     else:
         print("match result is None!")
     '''
