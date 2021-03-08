@@ -24,6 +24,11 @@ def tuple_use():
     tup1 = (1, 2, 3, 4, 5)
     print(type(tup1))
     tup2 = (3,)  # 注意单个元素，需要后面加上逗号，不然就成了()运算符
+    tup = tuple([10, "test"])  # tuple是内置类，参数需要是可迭代对象： list tuple set 都是这种情况
+
+    print(tup)
+    # index 函数
+    print("tupp1 index: ", tup1.index(5))  # 获取元素5的下标值
 
     # 访问元祖： 切片 类似list
     print(tup1[1:])  # 从第2个元素到结尾
@@ -60,7 +65,9 @@ def tuple_use():
 
     tuple_list = zip(li1, li2)
     # 一个可迭代对象, zip类的对象 ： <class 'zip'>
-    print("tuple_list type:", type(tuple_list))
+    print("tuple_list type:", type(tuple_list), tuple_list)
+
+    print("tuple_list to list: ", list(tuple_list))
 
     for key, value in zip(li1, li2):  # 一个可迭代对象，对每个元素(是一个元祖)
         print("key:value=[%d:%s]" % (key, value))  # key:value=[1:test1]
@@ -81,7 +88,7 @@ def tuple_use():
 
 def namedtuple_use():
     '''
-    collections 库提供了namedtuple 结构，作用？
+    col:lections 库提供了namedtuple 结构，作用？
     因为元组的局限性：不能为元组内部的数据进行命名，所以往往我们并不知道一个元组所要表达的意义.
     所以在这里引入了 collections.namedtuple 这个工厂函数，来构造一个带字段名的元祖
     '''

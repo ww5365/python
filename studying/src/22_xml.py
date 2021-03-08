@@ -19,7 +19,6 @@ from xml.dom.minidom import parse
 3. ElementTree：ElementTree就像一个轻量级的DOM，具有方便友好的API。代码可用性好，速度快，消耗内存少。
 from xml.etree.ElementTree import ElementTree
 
-
 ps:其他第三方工具包有：
 untangle工具包，将xml格式转换成python object；
 xmltodict工具包，像操作dict一样来操作xml  pip install xmltodict

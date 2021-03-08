@@ -49,6 +49,44 @@ input_str = input("input your info: ")
 
  ####  字符串操作
 
- * 切片：
+ * 切片，索引：
  * 分割: split, partition
- * 
+
+#### 语句控制
+
+##### 循环语句
+
+```
+while 条件：
+   do something  //循环多次
+else：
+   other something //本次
+
+for <var> in <sequence>:
+   <statements>
+else:
+   <statements>
+
+range(start, end, step):生成[start, end)之间的序列，并且按照步长step生成    # 生成器
+
+for i in range(len(var)):
+    pass  # 占位
+
+```
+
+##### 条件语句
+
+```
+# 多路分支语句
+if condition_1:
+    statement_block_1
+elif condition_2:
+    statement_block_2
+else:
+    statement_block_3
+
+```
+注意：
+* python 没有swith case的多路分支语句
+
+

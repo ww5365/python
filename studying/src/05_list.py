@@ -9,36 +9,16 @@ if __name__ == '__main__':
 
     * 元素可重复，类型可不同
 
-    * list是最常用的数据类型,关注
+    * list是最常用的数据类型,关注:
       切片
       列表表达式
       排序
     '''
+    # 定义： [] list
 
-    '''
-    列表表达式:
-    [想要的值 值满足的表达式条件]
-    '''
+    li = []   # 定义一个空列表
 
-    # list 取出符合条件的元素的下标indices
-    li = [1, 2, 3, 3, 4, 5, 7, 8, 10]
-    indices = [idx for idx in range(len(li)) if li[idx] % 2 == 0]  # 列表表达式
-    print("indices:", indices)
-
-    li = [x for x in range(10)]
-    print(li)
-    for idx in li:
-        print(idx)
-
-    order_level_id = ['order_{}_id'.format(idx) for idx in range(10)]
-    print(order_level_id)
-
-    # 列表表达式?
-    is_assitance = 0
-    aStr = 'customer' if str(is_assitance) == '0' else 'assitance'
-    print(aStr)
-
-    # list 填充操作？
+    # list 填充操作
     vocab_size = 10
     parent = [1] * (2 * vocab_size - 2)
     print("parent: ", parent)
@@ -112,11 +92,17 @@ if __name__ == '__main__':
     该方法无返回值，但是会修改原来的列表。
     '''
     aList.append('appendtest')
-    print(aList)
+    print("aList:", aList)
+
+    '''
+    insert(index, object): 
+    '''
+    aList.insert(0, 'inserttest')
+    print("aList:", aList)
 
     '''
     list(tuple) : 把元素转成list
-    
+    list(可迭代对象) : 
     '''
 
     atuple = (1, 2, 3, 4)
@@ -148,3 +134,28 @@ if __name__ == '__main__':
     # 排序方法2
     cList.sort(key=lambda x: x[1], reverse=True)
     print(cList)
+
+    '''
+    列表推导式:
+    [想要的值 值满足的表达式条件]
+    '''
+    # list 取出符合条件的元素的下标indices
+    li = [1, 2, 3, 3, 4, 5, 7, 8, 10]
+    indices = [idx for idx in range(
+        len(li)) if li[idx] % 2 == 0]  # 取所有li中是偶数的元素的下标
+    print("indices list:", indices)
+
+    li = [x for x in range(10)]  # 产出0~9的列表
+    print(li)
+
+    order_level_id = ['order_{}_id'.format(idx) for idx in range(10)]
+    print(order_level_id)
+
+    # 列表表达式
+    is_assitance = 0
+    aStr = 'customer' if str(is_assitance) == '0' else 'assitance'
+    print(aStr)
+
+    # 多个元素的列表表达式
+    points = [(x, y) for x in range(1, 4) for y in range(2, 5)]
+    print("points: ", points)

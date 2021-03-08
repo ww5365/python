@@ -20,11 +20,20 @@ if __name__ == '__main__':
     print('rindex pos', pos)
     print("befor pos:", str1[:pos], str1[pos + 1:].upper())
 
+    str5 = "TOMTOM222-33"
+    pos = str5.startswith("TOMTOM")
+    print("str5 pos: ", str5[len("TOMTOM"):])
+
     # 替换字符串中某个字符
 
     print("before replace: ", str1)
     str1 = str1.replace("-", ' ')
     print("after replace: ", str1)
+
+    # 字符串连接
+
+    li2 = []
+    print("string join: ", "#".join(li2))  # 只有1个元素时，不添加#
 
     # 内置函数的使用:
     # type(变量): 返回某个变量的类型；只认继承类自己；
@@ -65,16 +74,16 @@ if __name__ == '__main__':
     也无法在字节流里搜索字符串（反之亦然），
     也不能将字符串传入参数为字节流的函数（反之亦然）。
     
-    encode : 字符编码 -》 字节编码
-    decode : 字节编码-》 字符编码
+    encode : 字符编码 -》 bytes
+    decode : bytes-》 字符编码
     '''
-    print(sys.getdefaultencoding())
+    print("system encoding: ", sys.getdefaultencoding())
 
-    s = '中国'  # Python3中定义的字符串（str）默认就是 unicode字符串
+    s = '中'  # Python3中定义的字符串（str）默认就是 unicode字符串
     print(s, type(s))  # 中国 <class 'str'>
     # s1 = s.decode("utf-8")  # AttributeError: 'str' object has no attribute 'decode' ← Python3中字符串不再有decode方法
 
-    s2 = s.encode("gbk")  # 将字符串（str）用 “gbk字符编码” 编码为 “gbk字符编码的字节”
+    s2 = s.encode("gbk")  # 将字符串（str）用 “gbk字符编码” 编码为 “gbk字符编码的bytes”
     print(s2, type(s2))  # b'\xd6\xd0\xb9\xfa' <class 'bytes'>
     s22 = s2.decode('gbk')  # 将 “字节串” 用 “gbk字符编码” 解码 为 “字符串（str)”
     print(s22, type(s22))  # 中国 <class 'str'>
@@ -83,6 +92,12 @@ if __name__ == '__main__':
     print(s3, type(s3))  # b'\xe4\xb8\xad\xe5\x9b\xbd' <class 'bytes'>
     s33 = s.encode("utf-8").decode('utf-8')
     print(s33, type(s33))  # 中国 <class 'str'>
+
+    x = ord("你")  # ord(CHAR)  返回某个字符的二进制表示，实际是unicode编码
+    print("ord : ", x, type(x), hex(x))  # ord(CHAR)  返回某个字符的二进制表示，实际是unicode编码
+
+    y = chr(20320)  # chr(unicide编码) 返回对应编码的字符
+    print("chr y: ", y, type(y))
 
     # 字符串分割： split partition
     line = "wang  wei nihao  a 北京"

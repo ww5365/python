@@ -41,3 +41,7 @@ if __name__ == "__main__":
     color = 0x23e48f
     red = color & 0x0000ff
     print(hex(red))
+
+    '''
+    
+    '''
