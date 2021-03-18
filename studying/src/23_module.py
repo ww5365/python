@@ -19,3 +19,6 @@ from MODULE import (FUN, VAR..)
 
 
 '''
+
+# 增加模块的搜索路径
+sys.path.append()
