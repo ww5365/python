@@ -23,23 +23,25 @@ def find_dict(dict_data, key_target):
 
 
 if __name__ == '__main__':
-    print("map use example")
+    print("dict use example")
 
     # dict 初始化
     dict1 = dict()
     dict2 = {}
+    # key只能是不可变的数据类型：str, int, tuple
     dict3 = {'id': 12, 'name': 'ww', 'class': 5}
+    print(dir(dict()))  # 查看哪些成员
+
+    # 查
+    print(dict1.get('id', 0))
+    print(dict1.get('ids', 0))
+    # print(dict1['id'])  # key 不存在会抛异常; get不会抛异常
 
     # 更新
     dict1.update(dict3)
     dict2['id'] = 13
     print("dict1", dict1)
     print("dict3", dict3)
-
-    # 查
-    print(dict1.get('id', 0))
-    print(dict1.get('ids', 0))
-    print(dict1['id'])  # key 不存在会抛异常
 
     # 轮询： items() 返回[(key, val),..] 以列表返回元祖数组
     dict2['id1'] = 14
@@ -55,17 +57,29 @@ if __name__ == '__main__':
     print(type(dict2.keys()))  # <class 'dict_keys'>
     print(list(dict2.keys()))  # 转成list
 
-    # 方法1
+    # 遍历方法1
     for key, val in dict2.items():
         print("dict2 key:val = ", key, val)
+
+    # 遍历方法2
+    for x in dict2:
+        print("dict2 key:val 22 = ", x, dict2[x])
+
+    # 遍历方法3
+    for x in dict2.values():
+        print("x in dict2 value: ", x)
 
     # 获取dict 的 key 和 value
     dict6 = {'name': 'haohao'}
     (key, value), = dict6.items()  # 不要遗漏后面的逗号
     print("key:value = %s:%s" % (key, value))
 
-    # 对dict 按照value排序
-    # sorted返回list
+    # 字典推导式
+    dict7 = {k: v for k, v in zip(range(10), range(1, 11))}
+    print("dict7:", dict7)
+
+    # 对dict按照value排序; sorted返回list
+
     res = sorted(dict2.items(), key=lambda x: x[1], reverse=True)
     for key, val in dict2.items():
         print("dict2 sorted key:val", key, val)  # dict2中的值不会发生变化

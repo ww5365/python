@@ -9,6 +9,7 @@ from datetime import datetime
 import types
 import codecs
 import tarfile
+import chardet
 '''
 dir():  dir([object])  --object: 对象、变量、类型  返回：属性列表list
 
@@ -39,7 +40,9 @@ def get_file_path():
       os.path.split: 按照"\"来切割最后一层目录和之前的路径,tuple：比如： /tmp/test/test1  ->  (/tmp/test, test1)
       os.path.join: 将两个目录字符串拼接起来，用/进行连接
     '''
-    print(os.path.dirname(__file__))
+    # 当前文件的路径： d:/workspace/python/studying/src linux风格
+    print("dirname:", os.path.dirname(__file__))
+    # 绝对路径：  d:\workspace\python\studying\src windows路径风格
     cur_path = os.path.abspath(os.path.dirname(__file__))
     print("cur_path:", cur_path)
     print("split path:", os.path.split(cur_path))
@@ -52,37 +55,49 @@ def get_file_path():
     print("work_path: ", work_path)
 
     # 使用pathlib直接获取文件的root路径,并加入到系统path中
+    print("pathlib path: ", pathlib.Path(__file__))  # window路径风格：
+    root_path = pathlib.Path(
+        __file__).parent.parent.absolute()  # 父父节点的绝对路径，感觉更好用
+    print("pathlib parent: ", root_path)
+    sys.path.append(sys.path.append(root_path))  # 加入到系统搜索路径
+    print("pathlib and  syspath:", root_path, sys.path)
 
-    root_path = pathlib.Path(__file__).parent.parent.absolute()
-    sys.path.append(sys.path.append(root_path))
-    print("pathlib: syspath:", root_path, sys.path)
     '''
+     目标：遍历某个目录下所有文件和子目录?
+
         os.walk : 通过在目录树中游走输出在目录中的文件名，向上或者向下;
-
         os.walk(top[, topdown=True[, onerror=None[, followlinks=False]]])
-
         输入和输出说明：
 
         top -- 是你所要遍历的目录的地址
 
         返回的是一个三元组(root,dirs,files)。
             root 所指的是当前正在遍历的这个文件夹的本身的地址
-            dirs 是一个 list ，内容是该文件夹中所有的目录的名字(不包括子目录)
+            dirs 是一个 list ，内容是该文件夹中所有的子目录的名字(不包括子子目录)
             files 同样是 list , 内容是该文件夹中所有的文件(不包括子目录)
-        topdown --可选，为 True，则优先遍历 top 目录，否则优先遍历 top 的子目录(默认为开启)。如果 topdown 参数为 True，walk 会遍历top文件夹，与top 文件夹中每一个子目录。
+        topdown --可选，为 True，则优先遍历 top 目录，否则优先遍历 top 的子目录(默认为开启)。如果 topdown 参数为 True，walk会先遍历top文件夹，与top 文件夹中每一个子目录。
         onerror -- 可选，需要一个 callable 对象，当 walk 需要异常时，会调用。
         followlinks -- 可选，如果为 True，则会遍历目录下的快捷方式(linux 下是软连接 symbolic link )实际所指的目录(默认关闭)，如果为 False，则优先遍历 top 的子目录。
     '''
 
-    for root, dirs, files in os.walk(".", topdown=False):
+    '''
+        root_path: d:\workspace\python\studying
+        总共循环几次：
+        第一轮： data src test.txt
+        第二轮： 子目录data下面的文件
+        第三轮：子目录data/sample下面的文件和目录
+        第三轮：子目录src下面的文件和目录
+    '''
 
+    level = 0
+    for root, dirs, files in os.walk(root_path, topdown=True):
+        print("loop dir level:", level, root)
+        level += 1
         for name in dirs:
             print("current dir subdirs: ", os.path.join(root, name))
 
         for name in files:
             print("current dir files: ", os.path.join(root, name))
-
-    print()
 
 
 def get_file_name():
@@ -112,7 +127,7 @@ def read_file():
     root_path = pathlib.Path(__file__).parent
     file_path = os.path.join(root_path, 'test.txt')
     print("file_path:", file_path)
-    f = open(file_path)
+    f = open(file_path, mode='r+', encoding="utf-8")
     lines = f.readlines()  # 全部读入，放入list 包含换行符
     print("file content:", lines)
 
@@ -158,20 +173,19 @@ def read_file():
             print("line333: %d -> %s" % (line_no, line))
 
 
-'''
-1、创建目录：
-目录文件不存在的情况下，提前创建目录，再进行目录下文件的创建，读写操作
-'''
-
-
 def save_file():
+    '''
+    os.path.exists: 目录是否存在
+    os.makedirs: 创建目录
+    file.write: 写入文件
+    '''
 
     # 获取当前文件目录
     cur_dir = os.path.dirname(__file__)
     print(cur_dir)
 
     # 创建tmp目录
-    full_dir = cur_dir + "/tmp/"
+    full_dir = os.path.join(cur_dir, "tmp/")
     if not os.path.exists(full_dir):
         os.makedirs(full_dir)
         print("full path: ", full_dir)
@@ -186,17 +200,17 @@ def save_file():
 def codecs_use():
 
     # python3 字符串存储，编码相关
-    u = '王伟'
-    str1 = u.encode('gb18030')  # 以gb18030编码对u进行编码，获得bytes类型对象str
-    print("encode typpe: ", str1, type(str1))
-    print(str1.decode('gb18030'))
+    str1 = '王伟'   # type: str
+    u_str1 = str1.encode('gb18030')  # 以gb18030编码对str进行编码，获得bytes类型对象
+    print("encode typpe: ", u_str1, type(u_str1))
+    print(u_str1.decode('gb18030'))
     # print(str1.decode('utf-8'))
 
     print("--" * 30)
-    cur_path = os.path.dirname(__file__)
-    print(cur_path)
-    cur_path = os.path.abspath(cur_path)
-    print(cur_path)
+    cur_path = os.path.abspath(os.path.dirname(__file__))
+    work_path = pathlib.Path(cur_path).absolute().parent
+    print("workp path: ", work_path)
+
     '''
     os.path.join()函数：连接两个或更多的路径名组件
         1.如果各组件名首字母不包含’/’，则函数会自动加上
@@ -204,18 +218,24 @@ def codecs_use():
             比如：os.path.join(d:/test1/test2, /test3/test4) -> d:/test3/test4 第二个参数是绝对路径，将test1 ，test2舍弃
         3.如果最后一个组件为空，则生成的路径以一个’/’分隔符结尾
     '''
-    file_path = os.path.join(cur_path,
-                             r'tmp\random.txt')  # 得到错误路径：d:\tmp\random.txt
-    print(file_path)
-    file_path = cur_path + r'\tmp\random.txt'
-    print(file_path)
+    file_path = os.path.join(work_path,
+                             r'data\sample\random.txt')  # 得到错误路径：d:\tmp\random.txt
+    print("file path: ", file_path)
 
-    f = codecs.open(file_path, 'r+', encoding='utf-8')  # codecs 库主要可以读入文件的编码格式
-    content = f.read()  # f.write('content') 你想写入的内容
-    print("content: ", content)
+    # codecs 库主要可以读入文件的编码格式
+    f = codecs.open(file_path, 'wb+')  # 以二进制的方式读写
 
-    for c in content:
-        print("---", c)
+    # 写入types类型的数据
+    f.write(u_str1)
+
+    # 以bytes方式读取文件数据
+    f.seek(0)
+    content = f.read()  # 取文件内容时候，会自动转换为内部的unicode, types类型
+    print("content: ", content, type(content), content.decode("gb18030"))
+
+    encode_info = chardet.detect(content)  # 只能检测bytes类型的编码格式
+    print(encode_info)
+    print("content2:", content.decode(encode_info["encoding"]))
 
     f.close()
 
@@ -268,17 +288,16 @@ def unzip_file():
 
 if __name__ == '__main__':
 
-    # 获取用户输入：input
-
-    basic_input()
+    # 获取键盘上用户输入：input
+    # basic_input()
 
    # # dir function use case
    # print("\n".join(dir(Foo)))  # 4个成员函数
 
-   # get_file_path()
+    get_file_path()
    # read_file()
    # save_file()
-   # codecs_use()
+    codecs_use()
 
    # # get filename
    # get_file_name()

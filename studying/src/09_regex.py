@@ -49,7 +49,8 @@ def test_re_sub():
 
     '''
     print("--" * 30)
-    phone = "010-1891234567 #电话号码"
+    # phone = "010-1891234567 #电话号码"
+    phone = ["010-1891234567 #电话号码", "192002212"]
     # 删除#开头的注释
     phone = re.sub(r'#.*$', '', phone)
     print(phone)
@@ -118,4 +119,4 @@ if __name__ == '__main__':
     str1 = 'A23G4HFD567'
     # (?P<name> Expression) 命名捕获组 可以通过name来使用匹配组的值
     str_match = re.search(r'(?P<value>\d+)', str1)
-    print(str_match.group('value'))
+    print("re.search :  ", str_match.group('value'))
