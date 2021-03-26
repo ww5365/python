@@ -10,18 +10,21 @@ if __name__ == '__main__':
     # numpy 版本
     print(np.__version__)
 
+    # 创建： list(list1,list2,...) ->ndarray: 二维数组
     li = [[1.00, 2, 3, 4], [5, 6, 7, 8]]
     arr1 = np.array(li)
     print(li)
     print(arr1)
 
+    # 查看ndarray类型： 基本属性
     print(arr1.shape)
     print(arr1.dtype)
     print(arr1.size)
 
-    # reshape 改变数组的形状，按照列优先的方式，本质要进行深拷贝
+    # 操作函数：reshape 改变数组的形状
     print("before arr1 shape:\n", arr1)
-    arr2 = arr1.reshape((4, 2), order='F')
+    arr2 = arr1.reshape((4, 2), order='F')  # 按照列优先的方式，本质要进行深拷贝
+    # arr2 = arr1.reshape((4, 2))  # 按照行优先取数，不进行深拷贝
     print("after reshape arr2:\n", arr2)
     arr1[0][0] = 8.0
     print("arr1 update:\n", arr1)
@@ -33,9 +36,11 @@ if __name__ == '__main__':
     arr3 = np.arange(0, 4, 0.5)
     print(arr3)
 
-    # 等差，等比数列
+    # 等差数列
     arr4 = np.linspace(0, 1, 11)
     print("linesapce arr4:\n", arr4)
+
+    # 等比数列
     arr6 = np.logspace(0, 1, 3)
     print("logspace arr6:\n", arr6)
 
@@ -144,6 +149,4 @@ if __name__ == '__main__':
     print(np.argmax(arr23, axis=0))
     print(np.argmin(arr23, axis=1))
 
-    print(np.cumsum(arr23)) # 累积和，斐波那契数列
-
-
+    print(np.cumsum(arr23))  # 累积和，斐波那契数列
