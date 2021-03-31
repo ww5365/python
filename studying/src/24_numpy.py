@@ -16,6 +16,12 @@ if __name__ == '__main__':
     print(li)
     print(arr1)
 
+    # list <-> ndarray 数据类型转换
+    li2 = arr1.tolist()
+
+    print(li2, li2[1][:])   # list ndarray支持的索引方式
+    print(arr1[1, :])  # 仅ndarray支持此种索引方式
+
     # 查看ndarray类型： 基本属性
     print(arr1.shape)
     print(arr1.dtype)
@@ -41,7 +47,8 @@ if __name__ == '__main__':
     print("linesapce arr4:\n", arr4)
 
     # 等比数列
-    arr6 = np.logspace(0, 1, 3)
+    # a1 = 10^0,.. a5 = q^4 = 10^4 -> q = 10 -> 1,10,100,1000,10000
+    arr6 = np.logspace(0, 4, 5)
     print("logspace arr6:\n", arr6)
 
     # 特殊数组的生成接口
@@ -53,8 +60,7 @@ if __name__ == '__main__':
     print("diag:\n", arr9)
 
     # 随机数生成
-
-    # 使用random，只能生成1个随机数
+    # 直接使用random库，只能生成1个随机数
     arr10 = random.random()  # 生成随机浮点数[0,1]
     arr11 = random.randint(1, 2)  # 生成[1,2]之间的1个数
     print(arr10, arr11)
@@ -63,12 +69,13 @@ if __name__ == '__main__':
     arr12 = np.random.random(4)  # 生成一维，4个0-1之间的小数
     arr13 = np.random.rand(2, 3)  # 生成2*3维数据,float
     arr14 = np.random.randn(3, 2)  # 生成3*2维标准正态分布的数据
+    print("test for module random")
     print(arr12, arr13, arr14)
 
     # 切片
 
+    # #list的切片
     li3 = [1, 2, 3, 4, 5, 6, 7]
-
     # list倒置
     print(li3[::-1])  # 从最后一个开始，按照步长1来返回数据
     li3.reverse()  # 直接将list中数逆置
@@ -82,32 +89,37 @@ if __name__ == '__main__':
     li4 = [i for i in range(10)]  # list
     print(li4)
     li5 = np.arange(12)  # array
-    print(type(li5), li5)
+    print("li5: ", type(li5), li5)
     arr16 = li5.reshape(3, 4, order='C')
-    print(arr16, arr16.ndim)
+    print(arr16)
+    print("ndarray dimension: ", arr16.ndim)
 
-    # li6 = arr16.revel()
-    li7 = arr16.flatten('C')  # 默认就是c，行优先
-    li8 = arr16.flatten('F')  # 列优先
-    print(li7, li8)
+    # ndarray数组的展开  flatten
+    li7 = arr16.flatten('C')  # 默认就是c，行优先，理解：行的维度铺展开
+    li8 = arr16.flatten('F')  # 列优先，理解：列的维度优先展开
+    print(li7)
+    print(li8)
 
     # 数组拼接
     li9 = np.arange(20)
     li10 = np.arange(21, 41)
     arr17 = li9.reshape(4, 5)
     arr18 = li10.reshape(4, 5)
-    print(arr17)
-    print(arr18)
+    print("arr17: ", arr17)
+    print("arr18: ", arr18)
 
     arr19 = np.concatenate((arr17, arr18), axis=0)
     arr20 = np.concatenate((arr17, arr18), axis=1)
 
-    print(arr19)
-    print(arr20)
+    print("arr19: ", arr19)
+    print("arr20: ", arr20)
 
     # 排序
     li11 = np.arange(12)
-    print(sorted(li11, reverse=True))
+    li12 = sorted(li11, reverse=True)
+
+    print("li11: ", li11)
+    print("li12: ", li12)
 
     # 数组相乘 multiply, *, dot
     arr21 = np.arange(4).reshape(2, 2)
@@ -116,9 +128,9 @@ if __name__ == '__main__':
     print(arr21)
     print(arr22)
 
-    print(arr21*arr22)
-    print(np.multiply(arr21, arr22))  # 对应位置相乘
-    print(np.dot(arr21, arr22))  # 矩阵乘法，1维数组就是点击
+    print("* : ", arr21*arr22)
+    print("multiply: ", np.multiply(arr21, arr22))  # 对应位置相乘
+    print("dot: ", np.dot(arr21, arr22))  # 矩阵乘法，1维数组就是点积
 
     li12 = np.array([1, 2, 3])
     print(np.dot(li12, li12))  # 点积

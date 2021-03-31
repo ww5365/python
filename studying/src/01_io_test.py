@@ -35,11 +35,17 @@ class Foo(object):
 
 def get_file_path():
     '''
+      os.getcwd(): 
       os.path.dirname: 返回当前文件所在路径
       os.path.abspath: 返回当前路径的绝对路径
       os.path.split: 按照"\"来切割最后一层目录和之前的路径,tuple：比如： /tmp/test/test1  ->  (/tmp/test, test1)
       os.path.join: 将两个目录字符串拼接起来，用/进行连接
     '''
+
+    # 获取当前运行进程的工作目录
+    print("os.getcwd(): ", os.getcwd())
+    print("abspath:", os.path.abspath(os.getcwd()))
+
     # 当前文件的路径： d:/workspace/python/studying/src linux风格
     print("dirname:", os.path.dirname(__file__))
     # 绝对路径：  d:\workspace\python\studying\src windows路径风格
