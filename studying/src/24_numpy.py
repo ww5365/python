@@ -69,8 +69,12 @@ if __name__ == '__main__':
     arr12 = np.random.random(4)  # 生成一维，4个0-1之间的小数
     arr13 = np.random.rand(2, 3)  # 生成2*3维数据,float
     arr14 = np.random.randn(3, 2)  # 生成3*2维标准正态分布的数据
+    # numpy.random.randint(low, high=None, size=None, dtype='1') 产生离散均匀分布的整数，这些整数大于等于low，小于high。
+    arr14_2 = np.random.randint(1, 10, size=(1, 10))
+
     print("test for module random")
     print(arr12, arr13, arr14)
+    print("arr14_2:", arr14_2)
 
     # 切片
 
