@@ -5,8 +5,12 @@ import sys
 
 if __name__ == '__main__':
 
-    # 常用函数使用
+    # 汉字字符串长度
 
+    str0 = r'我爱你'
+    print(len(str0))
+
+    # 常用函数使用
     str0 = ' this is a test ! '
     print(str0.strip().strip('!'))  # 去除首位空格以及!号
 

@@ -30,6 +30,39 @@ def foo():
         print("res:", res)
 
 
+def foo2():
+    '''
+    1、iter(object[, sentinel])
+    iter() 函数用来生成迭代器
+    返回：迭代器对象
+    参数：
+    object -- 支持迭代的集合对象。
+    sentinel -- 如果传递了第二个参数，则参数 object 必须是一个可调用的对象（如，函数）
+    此时，iter 创建了一个迭代器对象，每次调用这个迭代器对象的__next__()方法时，都会调用 object。
+
+    2、next(iterable[, default])
+    iterable -- 可迭代对象
+    default -- 可选，用于设置在没有下一个元素时返回该默认值，如果不设置，又没有下一个元素则会触发 StopIteration 异常。
+
+    https://www.runoob.com/python/python-func-next.html
+
+    '''
+
+    li = [2, 3, 4, 5, 6]
+    li_iterator = iter(li)   # 列表转成迭代器对象
+    print(type(iter(li)))  # <class 'list_iterator'>
+    print(type(li_iterator))
+
+    while True:
+        try:
+            # 获取下一个值
+            elem = next(li_iterator)
+            print(elem)
+        except StopIteration:
+            # 遇到stopiteration就退出循环
+            break
+
+
 def lambda_use():
     '''
     1、lambda 表达式： 创建匿名函数
@@ -106,6 +139,7 @@ def lambda_use():
 
 if __name__ == '__main__':
 
+    # 生成器相关测试
     # test yield
     g = foo()
     # print(g)
@@ -114,6 +148,7 @@ if __name__ == '__main__':
     print(type(g))  # <class 'generator'>
     print(isinstance(g, types.GeneratorType))  # 迭代器类型 true
 
+    foo2()
     print('*' * 20)
     print(next(g))
 

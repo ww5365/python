@@ -49,8 +49,8 @@ def test_re_sub():
 
     '''
     print("--" * 30)
-    # phone = "010-1891234567 #电话号码"
-    phone = ["010-1891234567 #电话号码", "192002212"]
+    phone = "010-1891234567 #电话号码"
+    # phone = ["010-1891234567 #电话号码", "192002212"]
     # 删除#开头的注释
     phone = re.sub(r'#.*$', '', phone)
     print(phone)
@@ -63,8 +63,26 @@ def test_re_sub():
     print("before sub:", line)
     # 正则匹配串里的()是为了提取整个正则串中符合括号里的正则的内容
     line = re.sub(r"#E\-[\w]*\[(得意|傲慢)+\]", "α", line)
-
     print("sub:", line)
+
+    key = "zh_hk_alias"
+    key = re.sub(r'_alias\d*', '', key)
+    print(key)
+
+
+def string_filter(input_str: str):
+    pat = r"[`~!@#$%^()={}:;\[\]<>《》/！￥…（）【】‘；：”“\"’。、?·,，]"
+    if len(input_str) <= 0:
+        return input_str
+    else:
+        # print("before: ", input_str)
+        input_str = re.sub(pat, ' ', input_str).strip()  # 把pat集合中字符，匹配到的换成空格
+        # print("after: ", input_str)
+        input_str = re.sub(r"\.{2,}", " ", input_str)  # 把连续2个以上的.替换成1个
+        # print("after2: ", input_str)
+        input_str = re.sub(r" {2,}", " ", input_str)  # 把连续2个以上的空格替换成1个
+        # print("afte3: ", input_str)
+    return input_str
 
 
 if __name__ == '__main__':
@@ -120,3 +138,12 @@ if __name__ == '__main__':
     # (?P<name> Expression) 命名捕获组 可以通过name来使用匹配组的值
     str_match = re.search(r'(?P<value>\d+)', str1)
     print("re.search :  ", str_match.group('value'))
+
+    # 想把中英文的逗号过滤掉
+    str2 = 'Comuna ，Etropole, Sofia'
+    print(string_filter(str2))
+
+    # 把以_std结尾的字符串替换为空
+
+    str3 = "test_for_std"
+    print(re.sub(r"_std$", "", str3))

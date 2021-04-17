@@ -5,7 +5,45 @@ import math
 import numpy as np
 from multiprocessing import Array
 
+
+g_types_dict = {
+    # 原始数据是10位的编码不足的后面都是0补充，使用方便仅保留4位或8位
+    "0101": ["restaurant"],
+    "0102": ["café", "pub"],
+    "0502": ["tourist attraction"],
+    "0601": ["hospital", "polyclinic"],
+    "0702": ["hotel", "motel"],
+    "0801": ["airport"],
+    "0802": ["train station", "railway station"],
+    "0911": ["education institution", "educational institute"],
+    "08020040": ["metro", "subway", "tube", "underground"],
+    "08030010": ["bus stop"],
+    "08030020": ["taxi stand"],
+    "08030030": ["tram stop"],
+    "08030040": ["coach station", "coach stop"],
+    "08070010": ["terminal", "airport terminal"],
+    "11060010": ["parking lot", "car park", "car parking", "car lot",
+                 "parking facility", "parking space", "parking"],
+    "11060040": ["parking garage"],
+}
+
+
+def is_choose_type(types: str):
+    print("types 4 and 8:[%s][%s] " % (types[0:4], types[0:8]))
+
+    return types[0:4] in g_types_dict or types[0:8] in g_types_dict
+
+
 if __name__ == '__main__':
+
+    # 前4或8位是否在dict的key中
+
+    code_type = '0103030000'
+
+    if is_choose_type(code_type):
+        print("is choose type")
+    else:
+        print("not choose types")
 
     # _ 代表什么？不关心的变量，以忽略特定的值
     test1, _ = 'bbc', 4
