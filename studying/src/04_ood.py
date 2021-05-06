@@ -1,8 +1,122 @@
 # -*- coding: utf8 -*-
 
 import sys
+import types
+
 '''
-1、python中_,__,__varname__,varname 下划线的前后缀，修饰变量和方法,作用？
+* 类基础
+
+1、在类的内部，使用 def 关键字来定义一个方法，类方法必须包含参数self，且为第一个参数，self代表的是类的实例。
+
+2、类属性 和 实例属性
+
+   实例属性： 构造函数中使用self的变量
+   类属性： 类和实例同时拥有
+
+3、类的专有方法：
+    __init__ : 构造函数，在生成对象时调用
+    __del__ : 析构函数，释放对象时使用
+    __repr__ : 打印，转换
+    __setitem__ : 按照索引赋值
+    __getitem__: 按照索引获取值
+    __len__: 获得长度
+    __cmp__: 比较运算
+    __call__: 函数调用
+    __add__: 加运算
+    __sub__: 减运算
+    __mul__: 乘运算
+    __truediv__: 除运算
+    __mod__: 求余运算
+    __pow__: 乘方
+    
+4、继承：
+   class DerivedClassName(modname.BaseClassName):  模块名.基类名
+   class DerivedClassName(Base1, Base2, Base3): 多继承，基类中重名函数调用顺序，从左到右
+
+5、Python 子类继承父类构造函数说明
+      
+   如果在子类中需要父类的构造方法就需要显式地调用父类的构造方法，或者不重写父类的构造方法。
+   子类不重写 __init__，实例化子类时，会自动调用父类定义的 __init__。
+   如果重写了__init__ 时，实例化子类，就不会自动调用父类已经定义的 __init__
+   如果重写了__init__ 时，要继承父类的构造方法，可以使用 super 关键字：
+        super(子类名，self).__init__(参数1，参数2，....)
+        父类名称.__init__(self,参数1，参数2，...)
+    
+'''
+
+
+class Father(object):
+    count = 1  # 类属性
+
+    def __init__(self, name):
+        self.name = name  # 实例属性
+        print("father init")
+
+    def getName(self):  # 类成员函数，至少有一个参数；第一个参数是类的实例：self
+        return 'Father ' + self.name
+
+
+class Son(Father):
+
+    def __init__(self, name):
+        super(Son, self).__init__(name)   # super(): 函数
+        print("son init")
+        self.name = name
+
+    def getName(self):
+        return 'Son ' + self.name
+
+
+def test():
+    son = Son("ww")  # 定义类的对象
+    print(son.getName())
+
+    print("class property count: ", Son.count)  # 类属性,通过类访问
+    print("class property count: ", son.count)  # 类属性，通过类实例来访问
+    print("instance property name: ", son.name)  # 实例属性，通过实例来访问
+
+
+'''
+
+* 获取对象的信息
+type(): 获取对象（普通变量，类，函数名）类型
+isinstance(): 获取对象的类型判断，特别针对类的继承，可以识别子类对象是否属于父类
+dir(): 列出类或对象中的属性，方法
+getattr():
+setattr():
+hasattr(): hasattr(son, 'name')  #判断son对象是否有name属性
+
+'''
+
+
+def test3():
+
+    print(type(test))  # 获取函数类型
+    print(type(Son))  # 获取类的类型
+
+    if type(abs) == types.BuiltinFunctionType:
+        print("abs is builtin function!")
+
+    print(dir(Son))  # 使用dir把类中属性和方法都列出来
+    son = Son('www')
+    print(dir(son))  # 比类多一个name实例属性
+    print("son type:", type(son))
+    if type(son) == Father:
+        print("son is Father type")
+    else:
+        print("son is not  Father type")
+
+    if isinstance(son, Father):  # 可以判断出子类对象，是父类的一种类型
+        print("son is also class Father type")
+
+    if hasattr(son, 'name'):
+        print("instance son has attr name")
+
+
+'''
+类的访问权限：
+
+python中_,__,__varname__,varname 下划线的前后缀，修饰变量和方法,作用？
 
 object     # public
 __object__ # special, python system use, user should not define like it
@@ -78,11 +192,15 @@ def test1():
 '''
 self  cls
 
-实例方法,我们知道在类里每次定义方法的时候都需要绑定这个实例,就是foo(self, x),为什么要这么做呢?
+实例方法:  self
+我们知道在类里每次定义方法的时候都需要绑定这个实例,就是foo(self, x),为什么要这么做呢?
 因为实例方法的调用离不开实例,我们需要把实例自己传给函数,调用时：a.foo(x)， 其实是foo(a, x)
-类方法一样,只不过它传递的是类而不是实例.
 
+类方法:    cls  classmethod
 对于classmethod，它的第一个参数不是self，是cls，它表示这个类本身。
+
+静态方法： 无 staticmethod
+
 
 @staticmethod和@classmethod 
 
@@ -150,9 +268,11 @@ __metaclass__是创建类时起作用.
 if __name__ == '__main__':
 
     print("--" * 30)
-
+    test()
+    print("--" * 30)
     test1()
-
+    print("--" * 30)
     test2()
-
+    print("--" * 30)
+    test3()
     print("--" * 30)

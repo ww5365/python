@@ -7,6 +7,22 @@ import types
 from functools import reduce
 
 
+'''
+函数参数：
+1、可变对象： 列表，字典
+   不可变对象：整数，字符串，元组; 
+   如 fun(a)，传递的只是 a 的值，没有影响 a 对象本身。
+   如果在 fun(a) 内部修改 a 的值，则是新生成一个 a 的对象。
+'''
+
+
+def test(val: int):
+
+    print("before id val: ", id(val))
+    val = 10
+    print("after id val: ", id(val))
+
+
 def foo():
     '''
     yield how to work?
@@ -137,8 +153,20 @@ def lambda_use():
     print(df2)
 
 
+def fun(arg1, *arg2, **arg3):
+    '''
+    任意个数的参数导入
+    单引号： 以元祖形式导入参数; 函数使用时，表示解压参数列表：li = [1, 2]  fun(*li) -> fun(1,2)
+    双引号： 以字典形式的导入参数
+    '''
+    print(arg1)
+    print(arg2)
+    print(arg3)
+
+
 if __name__ == '__main__':
 
+    print('--' * 30)
     # 生成器相关测试
     # test yield
     g = foo()
@@ -148,9 +176,16 @@ if __name__ == '__main__':
     print(type(g))  # <class 'generator'>
     print(isinstance(g, types.GeneratorType))  # 迭代器类型 true
 
+    print('--' * 30)
     foo2()
-    print('*' * 20)
-    print(next(g))
+    print('--' * 30)
+
+    # test  参数
+    test(15)
 
     # test lambda
+    print('--' * 30)
     lambda_use()
+
+    # 函数的参数
+    fun(1, 2, 3, 4, e=5, f=6)

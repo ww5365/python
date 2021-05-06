@@ -1,3 +1,11 @@
 {
-    "python.pythonPath": "C:\\Users\\w00590050\\AppData\\Local\\Programs\\Python\\Python37\\python.exe"
+    "python.pythonPath": "C:\\Users\\w00590050\\AppData\\Local\\Programs\\Python\\Python37\\python.exe",
+    "C_Cpp.autocomplete": "Disabled",
+    "C_Cpp.intelliSenseEngine": "Disabled",
+    "python.linting.pylintEnabled": true,
+    "python.linting.enabled":true,
+    "python.linting.lintOnSave": true,
+    "python.linting.pylintUseMinimalCheckers": false,
+    "python.linting.pylintPath": "pylint",
+    "python.linting.maxNumberOfProblems": 300  //这个默认是100
 }
