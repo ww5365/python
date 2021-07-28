@@ -117,3 +117,8 @@ if __name__ == '__main__':
     line = "wangwei&hello&world"
     arr = line.partition("&")  # 把字符串分割成：[左边, 自身(分割符), 右边] 三部分
     print(arr)
+    
+    # 两个由字符串构成的list，进行拼接
+    li_str1 = ["test for ww"]
+    li_str2 = ["sep"]
+    print(li_str1 + li_str2)

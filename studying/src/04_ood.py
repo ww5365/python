@@ -5,14 +5,10 @@ import types
 
 '''
 * 类基础
-
 1、在类的内部，使用 def 关键字来定义一个方法，类方法必须包含参数self，且为第一个参数，self代表的是类的实例。
-
 2、类属性 和 实例属性
-
    实例属性： 构造函数中使用self的变量
    类属性： 类和实例同时拥有
-
 3、类的专有方法：
     __init__ : 构造函数，在生成对象时调用
     __del__ : 析构函数，释放对象时使用
@@ -28,7 +24,6 @@ import types
     __truediv__: 除运算
     __mod__: 求余运算
     __pow__: 乘方
-    
 4、继承：
    class DerivedClassName(modname.BaseClassName):  模块名.基类名
    class DerivedClassName(Base1, Base2, Base3): 多继承，基类中重名函数调用顺序，从左到右
@@ -63,17 +58,23 @@ class Son(Father):
         print("son init")
         self.name = name
 
+    def __getitem__(self, idx):
+        # 这个类的对象，可以通过[idx]来获取下标idx的值
+        if idx < len(self.name):
+            return self.name[idx]
+        return ""
     def getName(self):
         return 'Son ' + self.name
 
 
 def test():
-    son = Son("ww")  # 定义类的对象
+    son = Son("wangwei")  # 定义类的对象
     print(son.getName())
 
     print("class property count: ", Son.count)  # 类属性,通过类访问
     print("class property count: ", son.count)  # 类属性，通过类实例来访问
     print("instance property name: ", son.name)  # 实例属性，通过实例来访问
+    print("__getitem__ use idx: ", son[1])
 
 
 '''
@@ -87,16 +88,11 @@ setattr():
 hasattr(): hasattr(son, 'name')  #判断son对象是否有name属性
 
 '''
-
-
 def test3():
-
     print(type(test))  # 获取函数类型
     print(type(Son))  # 获取类的类型
-
     if type(abs) == types.BuiltinFunctionType:
         print("abs is builtin function!")
-
     print(dir(Son))  # 使用dir把类中属性和方法都列出来
     son = Son('www')
     print(dir(son))  # 比类多一个name实例属性
@@ -111,7 +107,6 @@ def test3():
 
     if hasattr(son, 'name'):
         print("instance son has attr name")
-
 
 '''
 类的访问权限：
@@ -141,13 +136,12 @@ class Foo():
     def __full_private(self):
         print("__full_private")
 
-
 class A(object):
     def __init__(self):
         print("A__init__")
         self.__private()  # name mangling后，_A__private()
         self.public()
-
+    
     def __private(self):
         print("A.__private")
 
@@ -159,7 +153,6 @@ class B(A):
     '''
     类的继承
     '''
-
     def __private(self):
         print("B.__private")
 
@@ -254,15 +247,12 @@ def test2():
 
 '''
 __metaclass__ __new__ __init__ :
-
 __new__是一个静态方法,而__init__是一个实例方法.
 __new__方法会返回一个创建的实例,而__init__什么都不返回.
 只有在__new__返回一个cls的实例时后面的__init__才能被调用.
 当创建一个新实例时调用__new__,初始化一个实例时用__init__.
 __metaclass__是创建类时起作用.
 所以我们可以分别使用__metaclass__,__new__和__init__来分别在类创建,实例创建和实例初始化的时候做一些小手脚.
-
-
 '''
 
 if __name__ == '__main__':

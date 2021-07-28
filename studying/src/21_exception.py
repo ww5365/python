@@ -49,13 +49,21 @@ class MyError(Exception):
     '''
     @desc  自己的异常处理类，继承了Exception
     '''
-
     def __init__(self, value):
         self.value = value
-
     def __str__(self):
-        return repr(self.value)  # 返回一个对象的 string 格式
+        return repr(self.value)  # 返回一个对象的string格式
 
+def test_assert():
+    '''
+    assert 后面也可以紧跟参数:
+    assert expression [, arguments]
+    等价于：
+    if not expression:
+        raise AssertionError(arguments)
+    '''
+    assert 1==2, '1 不等于 2'
+    
 
 if __name__ == '__main__':
 
@@ -64,10 +72,12 @@ if __name__ == '__main__':
     divide(12, 0)
     divide(12, 2)
     #divide(12, '2')
-
+    
     # 自己抛出自己的异常
-
     try:
         raise MyError(2*2)
     except MyError as e:
         print("my except value: ", e.value)
+
+    test_assert()
+        

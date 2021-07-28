@@ -84,9 +84,10 @@ if __name__ == '__main__':
     propertie = df2.to_dict(orient='records')
     print(propertie)
     
-    # 缺失值的处理
+    # 缺失值或重复的处理
     print("*" * 40)
     print("drop duplicate line rely on col1 col2")
+    df2.dropna(subset=['col1', 'col2'])
     df2 = df2.drop_duplicates(subset=['col1','col2'], keep='first', inplace=False)
     print(df2)
     
@@ -154,7 +155,7 @@ if __name__ == '__main__':
     print(df2.loc[[2, 3], :].var(axis=1))
     print("test :", df2.mean(axis=1))
 
-    # list ,np.array, dataframe
+    # list ,np.array, dataframe 类型相互转换：np -> list <- df : tolist()  df -> np: values  np,list->df: 定义pd.Dataframe()
     print("tolist-----------------")
     print(df2)
     li = df2['col4'].tolist()
@@ -209,9 +210,9 @@ if __name__ == '__main__':
     # 使用lambda和函数达到的效果一致;每句话进行切词
     data['text'] = data['text'].apply(lambda doc: list(jieba.cut(doc)))
     # data['text'] = data['text'].apply(query_cut)
-
+    print("orginal cut word string: ", data['text'])
     # 将dataframe中'text'列，逐行处理，分词后的结果，使用空格分割
-    data['text'] = data["text"].apply(lambda doc: " ".join(doc))
+    data['text'] = data["text"].apply(lambda doc : " ".join(doc))
     print('cut word string: ', data['text'])
 
     # 提取tfidf的特征
@@ -221,7 +222,7 @@ if __name__ == '__main__':
     # print(model.transform(data['text']))
 
     # 每行使用空格分好词的文本，转成list; eg: A B C -> [A,B,C]
-    data['text'] = data['text'].apply(lambda x: x.split(' '))
+    data['text'] = data['text'].apply(lambda x : x.split(' '))
     print("cut word to list: ", data['text'])
 
     print("-------------------------------------------------")

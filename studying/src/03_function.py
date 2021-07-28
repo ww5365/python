@@ -101,6 +101,7 @@ def lambda_use():
     map(function, iterable, ...)
     function -- 函数，如果iterable有多个序列，则function的参数也对应有多个
     iterable -- 一个或多个序列
+    返回：迭代器  可以通过list转成列表
     
     参考：https://www.cnblogs.com/gdjlc/p/11483646.html
     
@@ -108,6 +109,16 @@ def lambda_use():
 
     li = list(map(lambda x, y: x * y, range(1, 10), range(1, 5)))
     print("lamda_use:", li)
+    
+    li2 = ["借款什么时候 换", "卡里没有qian了"]
+    df = pd.DataFrame(li2, columns=["query1"])
+    print("df and map use ******* ")
+    print(df)
+    df["new_query"] = df["query1"].apply(lambda x : "".join(x.split())) #值变成一个字符串
+    print(df)
+    print(df["query1"].values, df['new_query'].values)
+    print(type(df['new_query'].values))  # 有两个元素的数组: numpy.ndarray
+    print(list(map(lambda x : x + "test", df['new_query'].values))) # 有两个元素的list
 
     '''
     
