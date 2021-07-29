@@ -211,7 +211,7 @@ class Foo2(object):
 
     @classmethod
     def class_method_create(cls, title):  # 修饰器: @classmethod，cls:指代类本身
-        foo2 = cls(title=title)  # 使用类Foo2 来构造对象
+        foo2 = cls(title=title)  # 使用类cls 来构造对象
         return foo2
 
     @staticmethod

@@ -78,6 +78,13 @@ if __name__ == '__main__':
     print(df2.size)
     print(df2.ndim)
 
+    # 使用list中的每条数据，构建dataFrame ： from_records
+    li3 = [{'col1': 1, 'col2': 2}, {'col1': 11, 'col2': 12}]
+    df3 = pd.DataFrame.from_records(li3)
+    print("df3 ------:", df3)
+    print("df3 cols:------:", df3.columns)
+
+
     # dataFrame中的行转dict
     # 参考：https://blog.csdn.net/m0_37804518/article/details/78444110
     print("*" * 40)
