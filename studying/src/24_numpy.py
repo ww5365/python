@@ -7,6 +7,7 @@ import random
 
 if __name__ == '__main__':
 
+    print("-"*20)
     # numpy 版本
     print(np.__version__)
 
@@ -14,13 +15,19 @@ if __name__ == '__main__':
     li = [[1.00, 2, 3, 4], [5, 6, 7, 8]]
     arr1 = np.array(li)
     print(li)
+    print("li -> array : \n")
     print(arr1)
 
+    print("array -> li : \n")
     # list <-> ndarray 数据类型转换
     li2 = arr1.tolist()
 
-    print(li2, li2[1][:])   # list ndarray支持的索引方式
-    print(arr1[1, :])  # 仅ndarray支持此种索引方式
+    # 索引方式
+    print(li2[1][:])   # list ndarray支持的索引方式,获取第2行
+    print(arr1[1, :])  # ndarray支持此种索引方式，获取第2行
+    print(arr1[:, -1])  # ndarray支持此种索引方式，获取第2行
+    print(arr1[:, :-1])  # ndarray支持此种索引方式，获取第2行
+
 
     # 查看ndarray类型： 基本属性
     print(arr1.shape)
@@ -69,12 +76,8 @@ if __name__ == '__main__':
     arr12 = np.random.random(4)  # 生成一维，4个0-1之间的小数
     arr13 = np.random.rand(2, 3)  # 生成2*3维数据,float
     arr14 = np.random.randn(3, 2)  # 生成3*2维标准正态分布的数据
-    # numpy.random.randint(low, high=None, size=None, dtype='1') 产生离散均匀分布的整数，这些整数大于等于low，小于high。
-    arr14_2 = np.random.randint(1, 10, size=(1, 10))
-
     print("test for module random")
     print(arr12, arr13, arr14)
-    print("arr14_2:", arr14_2)
 
     # 切片
 
