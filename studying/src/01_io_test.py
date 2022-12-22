@@ -10,6 +10,9 @@ import types
 import codecs
 import tarfile
 import chardet
+import asyncio
+
+
 '''
 dir():  dir([object])  --object: 对象、变量、类型  返回：属性列表list
 
@@ -245,12 +248,6 @@ def codecs_use():
 
     f.close()
 
-
-def basic_input():
-    str_info = input("input your tips info: ")
-    print(str_info)
-
-
 def unzip_file():
     '''
     使用tarfile读取压缩文件中的多个文本文件
@@ -291,19 +288,38 @@ def unzip_file():
                 tar.close()  # 处理完一个压缩
     return
 
+@asyncio.coroutine
+def countDown(name,num):
+    while num>0:
+        print(f'countdown[{name}]:{num}')  # {name} 被替换为相应变量的值;去掉f，不会被替换
+        yield from asyncio.sleep(1)
+        num -= 1
+
+def basic_input():
+    # 接受键盘输入
+    str_info = input("input your tips info: ")
+    print(str_info)
+
+    # print(f"{var}") : formatted string literal 以f开头，包含的{}表达式在程序运行时会被表达式的值代替。
+    loop = asyncio.get_event_loop()
+    tasks =[countDown("A",10),countDown("B",5),]
+    loop.run_until_complete(asyncio.wait(tasks))
+    loop.close
+
+
 
 if __name__ == '__main__':
 
     # 获取键盘上用户输入：input
-    # basic_input()
+    basic_input()
 
    # # dir function use case
    # print("\n".join(dir(Foo)))  # 4个成员函数
 
-    get_file_path()
+    # get_file_path()
    # read_file()
    # save_file()
-    codecs_use()
+    # codecs_use()
 
    # # get filename
    # get_file_name()
