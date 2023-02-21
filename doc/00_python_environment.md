@@ -71,14 +71,9 @@ channels:
 
 conda list   # 要查看当前环境中所有安装了的包可以用
 
-
-
 conda env export > environment.yaml   //导入导出环境,如果想要导出当前环境的包信息可以用
 
-
-
 conda env create -f environment.yaml  //将包信息存入yaml,文件中当需要重新创建一个相同的虚拟环境时可以用
-
 
 activate //切换到base环境
 
@@ -101,6 +96,8 @@ conda update requests //更新requests包
 conda env export > environment.yaml // 导出当前环境的包信息
 
 conda env create -f environment.yaml // 用配置文件创建新的虚拟环境
+
+conda config --show channels  //显示它的源配置
 
 
 ```
