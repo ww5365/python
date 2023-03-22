@@ -178,6 +178,43 @@ Traning-servering skew
     
     print("t27: {} \n t27 size:{}\n t28:{} t28 size:{} t29:{} t29 size:{}".format(t27, t27.shape, t28,  t28.shape, t29, t29.shape))
 
+    
+    
+def torch_multiply():
+
+    '''
+    参考：https://www.cnblogs.com/HOMEofLowell/p/15963140.html
+    '''
+
+    t1 = torch.tensor([1, 2, -1])
+    t2 = torch.tensor([1, 2, 1])
+    print("t2: {} dtype:{} shape:{}".format(t2, t2.dtype, t2.shape))
+
+    t3 = torch.matmul(t1, t2)   # 结果是个标量 等价：torch.dot 点积运算,输入两个向量元素个数相同
+    print("t3: {} dtype:{} shape:{}".format(t3, t3.dtype, t3.shape))
+
+    t33 = torch.dot(t1, t2)
+    print("t33: {} dtype:{} shape:{}".format(t33, t33.dtype, t33.shape))
+
+    t4 = torch.unsqueeze(t3, dim=0) # 1个元素向量, 1维张量  升维操作
+    print("t4: {} dtype:{} shape:{}".format(t4, t4.dtype, t4.shape))
+    t5 = torch.unsqueeze(t4, dim=1) # 1*1个元素矩阵， 2维张量
+    print("t4: {} dtype:{} shape:{}".format(t5, t5.dtype, t5.shape))
+
+    t6 = torch.mul(t1, t2)  # 对位相乘，这个没有对应的mamul()运算的
+    print("t6: {} dtype:{} shape:{}".format(t6, t6.dtype, t6.shape))
+
+    
+    t7 = torch.tensor([[1,2,1],[2,2,1]])  # 2*3 
+    t8 = torch.tensor([[1,2,2],[2,2,1],[1,1,1]]) # 3*3
+    t9 = torch.mm(t7, t8)  # 得到： 2 * 3  向量
+
+    print("t9: {} dtype:{} shape:{}".format(t9, t9.dtype, t9.shape))
+
+    t10 = torch.matmul(t7, t8)  # 等价：torch.mm 矩阵的乘法，满足 (m * n)  (n * q)
+
+    print("t10: {} dtype:{} shape:{}".format(t10, t10.dtype, t10.shape))
+
 
 
 
