@@ -76,32 +76,88 @@ def lesson02():
 
     功能：在dim上，按照index索引数据
     
-
-
+    torch.masked_select(input, mask, output)
+    功能：按照msak中的true进行索引选择
+    返回：一维张量
+    
+    '''
+    t7 = torch.randint(0, 9, (3,3))
+    idx = torch.tensor([0,2])
+    t77 = torch.index_select(t7, dim=0, index=idx)
+    print("t7:{}, t77 size:{} t77:{}".format(t7, t77.shape, t77))
+    
+    mask = t7.ge(5)  # t7中大于等于5的mask
+    t777 = torch.masked_select(t7, mask)  # 返回一维张量
+    print("mask:{}, t777:{}".format(mask, t777))
+    
+    
+    '''
+    张量的变换：
+    
+    torch.reshape(input, shape)    
+    返回值：和原数值共享变量
+    
+    torch.transpose(input, dim0=, dim1= )
+    dim0 和 dim1  是要交换的两个维度
+    
+    
+    矩阵的转置：transpose的简化
+    
+    torch.t(input)  等价 ： torch.transpose(input, dim0 = 0, dim1=1)
+    
+    
+    '''
+    
+    t8 = torch.randperm(10)
+    t88 = torch.reshape(t8, (-1,5)) # 自己计算行数，每列是5个元素
+    print("t8: {} t88: {}".format(t8, t88))
+    print("t8 id: {}, t88 id:{}".format(id(t8.data), id(t88.data)))  
+    
+    
+    t9 = torch.randint(low = 0, high=10, size =(2,2,3))
+    t99 = torch.transpose(t9, dim0 = 0, dim1= 1)
+    print("t9:{}, \n t99:{}".format(t9, t99))
+    
+    
+    '''
+    torch.squeenze(input, dim=)
+    压缩长度为1的维度
+    
+    
+    '''
+    
+    t10 = torch.randint(10, size=(1,2,3))
+    t10_1 = torch.squeeze(t10)
+    t10_2 = torch.squeeze(t10, dim=1)
+    
+    print("t10: {}, t10_1: {} t10_2:{}".format(t10, t10_1, t10_2.shape))
+    
+    
+    '''
+    torch.add(input, other=, alpha=)
+    
+    input + alpha * other
+    
+    torch.mul(input=, other=)
+    input * other : 对位乘
     '''
 
+    
+    t11 = torch.randint(10, size=(2,3))
+    t12 = torch.randint(10, size=(2,3))
+    t12_1 = torch.mul(t11, t12)
+    t12_2 = t11 * t12
+    print("t11: {}, \n t12: {} \n t12_1:{} \n t12_2:{}".format(t11, t12, t12_1, t12_2))
+    
+    t13 = torch.tensor([3.])
+    
+    print("t13: {} size:{}".format((t13 < 13), t13.shape))
+    
+    print("type1: {} type2:{}".format(torch.tensor(1), torch.tensor([1])))
+    print("type1: {} type2:{}".format(type(torch.tensor(1)), type(torch.tensor([1]))))
 
 
-'''
-
-增加了google的样本数据，效果没有样本的banlance效果明显？ 原因
-
-样本banlacne的方法？
-样本不平衡，会造成什么问题？
-答：样本不平衡，在我们构建模型时，看不出来什么问题。往往能得到很高的accuracy，为什么？假设y=1占比1%，模型整体把测试集预测为0，
-https://cloud.tencent.com/developer/article/1947624
-
-实验的结果onebox
-特征分析的excel
-
-
-特征穿越 ： https://zhuanlan.zhihu.com/p/402812843  
-Traning-servering skew
-
-模型膨胀 ： 
-
-'''
-        '''
+	'''
     矩阵运算
 
     torch.mul(input, other)
@@ -116,8 +172,6 @@ Traning-servering skew
     torch.add(input=, other=, alpha = )
 
     功能：input + other * alpha 
-
-
 
     '''
 
@@ -168,7 +222,6 @@ Traning-servering skew
     print("t24: {} \n t24 size:{}\n t25:{} t25 size:{} t26:{} t26 size:{}".format(t24, t24.shape, t25,  t25.shape, t26, t26.shape))
 
 
-
     t27 = torch.rand((2, 3))
 
     t28 = torch.rand((2,3))
@@ -214,7 +267,6 @@ def torch_multiply():
     t10 = torch.matmul(t7, t8)  # 等价：torch.mm 矩阵的乘法，满足 (m * n)  (n * q)
 
     print("t10: {} dtype:{} shape:{}".format(t10, t10.dtype, t10.shape))
-
 
 
 
