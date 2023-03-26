@@ -31,7 +31,7 @@ def mse_loss(Y, y_pred):
 # 定义loss function对y_pred的导数
 def d_loss_function(Y, y_pred):
     N = y_pred.size(0)
-    result = 2 * (Y - y_pred) * 1/N
+    result = 2 * (y_pred-Y) * 1/N
     return result
 
 
@@ -64,15 +64,22 @@ def training(epochs, lr, params, X, Y):
         loss = mse_loss(Y, y_pred)
 
         grad = grad_fun(X, Y, y_pred, w, b)
+        
+        print("before Params: {}".format(params))
+        
+        print("grad: {}".format(grad))
 
         params = params - grad * lr
 
+        print("Params: {}".format(params))
         print("Epoch %d, Loss %f" %(epoch, loss))
 
+    print ("final params: {}".format(params))
+    return params
 
 def linear_regression_demo1(X, Y):
     
-    training(epochs = 100, lr = 1e-2, params = torch.tensor([1.0, 0.0]), X = X, Y = Y)
+    training(epochs = 20000, lr = 1e-4, params = torch.tensor([1.0, 0.0]), X = X, Y = Y)
     return
 
 
@@ -85,6 +92,8 @@ def main():
 
     print(X.size())
     print(X.size(0))
+    
+    # X = 0.1 * X   ## 这个也很关键啊，不规范化，训练不出结果来,loss 越来越大？ 原因是由于grad值太大，导致learn_rate 不足够小了，每个学习步长太大了，不收敛了 
 
     linear_regression_demo1(X, Y)
 

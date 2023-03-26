@@ -11,7 +11,7 @@ def zScore():
     scaler = preprocessing.StandardScaler().fit(X)
     print(scaler.mean_)  # 计算每一列的均值
     print(scaler.var_)  # 计算每一列的方差
-    print(scaler.transform(X))
+    print(scaler.transform(X))  # 计算x的每个原始对应的zScore值
     
     
 
