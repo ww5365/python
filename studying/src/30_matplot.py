@@ -64,7 +64,6 @@ interval2 = [1 if (i>30) else 0 for i in x]
 # plt.show() #图形可视化
 
 
-
 '''
 一张图上画两个坐标轴，每个坐标轴可以展示不同的画图方式：
 图1连续函数线
@@ -72,21 +71,31 @@ interval2 = [1 if (i>30) else 0 for i in x]
 使用相同的y轴
 '''
 
-# First create some toy data:
-x = np.linspace(0, 2*np.pi, 400)
-print(np.pi)
-y = np.sin(x**2)
+# # First create some toy data:
+# x = np.linspace(0, 2*np.pi, 400)
+# print(np.pi)
+# y = np.sin(x**2)
+# # Create two subplots and unpack the output array immediately
+# f, (ax1, ax2) = plt.subplots(1, 2, sharey=True)  # 共享y轴
+# ax1.plot(x, y)
+# ax1.set_title('Sharing Y axis') 
+# ax2.scatter(x, y)  # 画坐标点图
+# ax2.grid()  # 右图坐标中显示网格
+# plt.show()
 
-# Create two subplots and unpack the output array immediately
-f, (ax1, ax2) = plt.subplots(1, 2, sharey=True)  # 共享y轴
-ax1.plot(x, y)
-ax1.set_title('Sharing Y axis') 
-ax2.scatter(x, y)  # 画坐标点图
-ax2.grid()  # 右图坐标中显示网格
-
+'''
+一张图上画多条曲线
+'''
+x = np.linspace(-5, 5, 40)
+y1 = np.log(1 + np.exp(-x))
+y2 = np.log(1 + np.exp(x))
+y3 = np.log(1 + np.exp(-x)) + (0.5 * x)  ## 这个函数很牛逼，竟然是关于y周对称的
+fig , ax = plt.subplots()   #一张图上画3个散点曲线图
+ax.scatter(x, y1, label='Sij=1')
+ax.scatter(x, y2, label='Sij=-1')
+ax.scatter(x, y3, label='Sij=0')
+ax.legend() # 坐标图上，有框来显示label标注
 plt.show()
-
-
 
 
 
