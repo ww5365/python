@@ -98,4 +98,39 @@ ax.legend() # 坐标图上，有框来显示label标注
 plt.show()
 
 
+'''
+画三维的图
+z = f(x1, x2) = x1 + x2
+z = x1^2 + x2^2
+'''
+
+plt.figure()
+ax = plt.axes(projection="3d")
+
+x1 = np.arange(-5, 5, 0.1)
+x2 = np.arange(-5, 5, 0.1)
+
+X1,X2 = np.meshgrid(x1, x2)   # 生成绘制3D图形所需要的网格数据
+
+Z = X1 + X2
+
+ax.plot_surface(X1, X2, Z, alpha=0.5, cmap="winter")  # 生成表面, alpha用于控制透明度
+
+
+
+ax.set_xlabel("X1")
+ax.set_xlim(-6, 6)
+ax.set_ylabel("X2")
+ax.set_ylim(-6, 6)
+
+ax.set_zlabel("Z")
+
+
+ax.contour(X1,X2,Z,zdir="x",offset=-6,cmap="rainbow")   # x轴投影 
+ax.contour(X1,X2,Z,zdir="y",offset=6,cmap="rainbow")    # y轴投影
+ax.contour(X1,X2,Z,zdir="z",offset=-10,cmap="rainbow")   # z轴投影
+
+#  offset：默认的投影面是在（0,0,0）处，如果想让投影位于坐标轴平面上，就要用offset去设置投影的位置
+
+plt.show()
 
