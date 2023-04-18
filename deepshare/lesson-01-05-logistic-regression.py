@@ -8,6 +8,12 @@ import matplotlib.pyplot as plt
 
 torch.manual_seed(10)
 
+def binary_cross_entropy(y, y_pred):
+
+    t1 = y * torch.log(y_pred) + (1 - y) * torch.log(1 - y_pred)
+    
+    return t1.mean()
+
 def test_logistic_regression():
     '''
     逻辑回归：
@@ -28,7 +34,8 @@ def test_logistic_regression():
 
     #===========样本数据===================
 
-    sample_nums = 200
+    sample_nums = 5
+
     mean_value = 1.7
     bias = 1
     n_data = torch.ones(sample_nums, 2)  # 100 * 2 张量 [100, 2]
@@ -46,13 +53,15 @@ def test_logistic_regression():
     print("n_data tensor: {} trainy: {}".format(train_x, train_y))
     print("n_data tensor type: {} y0 dtype: {} y0: {}".format(n_data.shape, y0.shape, y0))
 
+    sigmod_fun = nn.Sigmoid()
+
 
     #============模型选择========================
 
     class LR(nn.Module):
 
         def __init__(self):
-            super(LR, self).__init__()   # super() 是调用父类的方法 python2： super(Class, self) python3: super()
+            super(LR, self).__init__()   # super() 是调用父类的方法 python2: super(自己类名，self) python3: super()
             self.features = nn.Linear(2, 1)  
             # 输入特征数为2，输出特征数为1  Y = X * W +  b
             # 查看模型参数
@@ -83,27 +92,57 @@ def test_logistic_regression():
 
     #================模型训练=========================
 
-    for iteration in range(200):
+    for epoch in range(2):
 
+
+        print("epoch: {} train_x: {} w0: {} b0: {}".format(epoch, train_x, lr_net.features.weight, lr_net.features.bias))
         # 前向传播
         y_pred = lr_net(train_x)   #这里对象是自动调用了forward(self, x) ? 返回：20 * 1 结果
 
+        print("==" * 20)
+
         #计算loss
         loss = loss_fn(y_pred.squeeze(), train_y)
+        print("y_pred: {}  y_pred shape: {} squeeze: {}, loss: {}".format(y_pred, y_pred.shape, y_pred.squeeze(), loss))
 
+        loss1 = binary_cross_entropy(train_y, y_pred.squeeze())
 
-        print("y_pred: {}  y_pred shape: {} squeeze: {}".format(y_pred, y_pred.shape, y_pred.squeeze()))
+        print("loss1: {}".format(loss1))
+
+        # 手动计算了：逻辑回归的反向传播   参考：https://blog.csdn.net/chosen1hyj/article/details/93176560
+        print("==" * 20)
+        t1 = torch.mm(train_x, lr_net.features.weight.t())
+        t2 = torch.add(t1, lr_net.features.bias)
+        t3 = sigmod_fun(t2)
+        t4 = t3 - train_y.unsqueeze(dim = 1)
+        t5 = torch.mul(train_x, t4)
+
+        
+        print("t1 : {}  t2: {} t3: {} t4:{} t4 mean=db:{} t5 : {} t5 mean=dw: {}".format(t1, t2, t3, t4, t4.mean(), t5, torch.mean(t5, dim = 0)))
+
+        optimizer.zero_grad()  #  在反向传播之前，需要清空原来的梯度，不然上个epoch的梯度会累积起来
 
         # 反向传播
-
         loss.backward()
+
+        # 模型的反向传播的w和b的梯度，保存在：named_parameters() 返回tuple：参数名  参数的具体值
+        for name, params in lr_net.named_parameters():
+            print("loss name: {} grad: {}".format(name, params.grad))
+
+     
 
         # 更新参数
         optimizer.step()
 
 
+        # 模型更新完w b 的梯度后
+
+        print("after backward: w= {} b= {}".format(lr_net.features.weight, lr_net.features.bias))
+
+
+
         # 绘图看效果
-        if  iteration % 20 == 0:
+        if  iteration % 5 == 0:
             mask = y_pred.ge(0.5).float().squeeze()  # 以0.5为阈值进行分类, 大于0.5的变成1.(浮点数),同时降维 100 * 1 -》 100
 
             correct = (mask == train_y).sum()  # 张量中，对位元素相同的个数统计;torch.int64 的标量;预测为1/0且实际为1/0的个数,也就是预测正确的个数
@@ -153,7 +192,6 @@ def test_logistic_regression():
             if acc > 0.99:
                 break
             
-
 def lesson01_05():
 
     test_logistic_regression()
