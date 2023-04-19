@@ -34,24 +34,22 @@ def test_logistic_regression():
 
     #===========样本数据===================
 
-    sample_nums = 5
-
+    sample_nums = 10
     mean_value = 1.7
     bias = 1
-    n_data = torch.ones(sample_nums, 2)  # 100 * 2 张量 [100, 2]
+    n_data = torch.ones(sample_nums, 2)  # 10 * 2 张量 [10, 2]
 
     x0 = torch.normal(n_data * mean_value, 1) + bias
-    y0 = torch.zeros(sample_nums)  # 类别0的label, 长度为100的向量  [100]
+    y0 = torch.zeros(sample_nums)  # 类别0的label, 长度为10的向量  [10]
 
+    x1 = torch.normal(-mean_value * n_data, 1) + bias  #类别1， [10, 2]
+    y1 = torch.ones(sample_nums)  # 类别1的label, 长度为100的向量  [10]
 
-    x1 = torch.normal(-mean_value * n_data, 1) + bias  #类别1， [100, 2]
-    y1 = torch.ones(sample_nums)  # 类别1的label, 长度为100的向量  [100]
+    train_x = torch.cat([x0, x1], dim = 0)  # 20 * 2
+    train_y = torch.cat([y0, y1], dim = 0) # [10] 向量
 
-    train_x = torch.cat([x0, x1], dim = 0)  # 200 * 2
-    train_y = torch.cat([y0, y1], dim = 0) # [100] 向量
-
-    print("n_data tensor: {} trainy: {}".format(train_x, train_y))
-    print("n_data tensor type: {} y0 dtype: {} y0: {}".format(n_data.shape, y0.shape, y0))
+    # print("n_data tensor: {} trainy: {}".format(train_x, train_y))
+    # print("n_data tensor type: {} y0 dtype: {} y0: {}".format(n_data.shape, y0.shape, y0))
 
     sigmod_fun = nn.Sigmoid()
 
@@ -67,7 +65,6 @@ def test_logistic_regression():
             # 查看模型参数
             # for param in self.features.parameters():
             #   print(param)
-
             self.sigmoid = nn.Sigmoid()
         
         def forward(self, x):
@@ -78,7 +75,6 @@ def test_logistic_regression():
 
     lr_net = LR()    ## 实例化逻辑回归模型
 
-
     #==================损失函数=======================
 
     loss_fn = nn.BCELoss()   # 二分类的交叉熵函数
@@ -86,39 +82,38 @@ def test_logistic_regression():
     #==================优化器========================
 
     lr = 1e-2   # 学习率
-
     optimizer = torch.optim.SGD(lr_net.parameters(), lr=lr, momentum=0.9)
-
 
     #================模型训练=========================
 
-    for epoch in range(2):
+    for epoch in range(100):
 
+        ori_w = lr_net.features.weight.clone()  # 了解下深拷贝： 新的tensor充当中间变量，会保留在计算图中，参与梯度计算（回传叠加），但是一般不会保留自身梯度
+        ori_b = lr_net.features.bias.clone()
 
-        print("epoch: {} train_x: {} w0: {} b0: {}".format(epoch, train_x, lr_net.features.weight, lr_net.features.bias))
+        print("epoch: {} train_x: {} w0: {} w0 shape:{} b0: {} b0 shape:{}".format(epoch, train_x, lr_net.features.weight, lr_net.features.weight.shape, lr_net.features.bias, lr_net.features.bias.shape))
         # 前向传播
         y_pred = lr_net(train_x)   #这里对象是自动调用了forward(self, x) ? 返回：20 * 1 结果
 
         print("==" * 20)
 
         #计算loss
-        loss = loss_fn(y_pred.squeeze(), train_y)
-        print("y_pred: {}  y_pred shape: {} squeeze: {}, loss: {}".format(y_pred, y_pred.shape, y_pred.squeeze(), loss))
-
-        loss1 = binary_cross_entropy(train_y, y_pred.squeeze())
-
-        print("loss1: {}".format(loss1))
-
-        # 手动计算了：逻辑回归的反向传播   参考：https://blog.csdn.net/chosen1hyj/article/details/93176560
-        print("==" * 20)
-        t1 = torch.mm(train_x, lr_net.features.weight.t())
-        t2 = torch.add(t1, lr_net.features.bias)
-        t3 = sigmod_fun(t2)
-        t4 = t3 - train_y.unsqueeze(dim = 1)
-        t5 = torch.mul(train_x, t4)
-
+        loss = loss_fn(y_pred.squeeze(), train_y)  # 第1个参数：预测值 ()  第2个参数：label
         
-        print("t1 : {}  t2: {} t3: {} t4:{} t4 mean=db:{} t5 : {} t5 mean=dw: {}".format(t1, t2, t3, t4, t4.mean(), t5, torch.mean(t5, dim = 0)))
+        loss1 = binary_cross_entropy(train_y, y_pred.squeeze())  # 自己实现的二分类较差熵损失函数，来验证上面计算的loss
+
+        print("y_pred: {}  y_pred shape: {} squeeze: {}, loss: {} loss1: {}".format(y_pred, y_pred.shape, y_pred.squeeze(), loss, loss1))
+
+
+        # 手动计算了：逻辑回归的反向传播  主要是w b 的梯度  参考：https://blog.csdn.net/chosen1hyj/article/details/93176560
+        print("==" * 20)
+        t1 = torch.mm(train_x, lr_net.features.weight.t())  # 20 * 1  X*W^T  W : 1 * 2 -> 2 * 1  矩阵乘法
+        t2 = torch.add(t1, lr_net.features.bias) #  z = X*W^T + b
+        t3 = sigmod_fun(t2) # 20 * 1  a = sigmod(z)
+        t4 = t3 - train_y.unsqueeze(dim = 1)   # train_y是20  变成 20 * 1 的相同维度;  a - y 也是： 20 * 1 
+        t5 = torch.mul(train_x, t4)  # x * (a - y)  对位乘; dL/dw0 = x0 * (a - y)  dL/dw1 = x1 * (a - y)  dL/db = (a - y)
+
+        print("t1 : {}  t2: {} t3: {} t4:{} t5 : {} t4 mean=db:{} t5 mean=dw: {}".format(t1, t2, t3, t4, t5, t4.mean(), torch.mean(t5, dim = 0))) # 最终的梯度是所有样本的的均值
 
         optimizer.zero_grad()  #  在反向传播之前，需要清空原来的梯度，不然上个epoch的梯度会累积起来
 
@@ -129,21 +124,16 @@ def test_logistic_regression():
         for name, params in lr_net.named_parameters():
             print("loss name: {} grad: {}".format(name, params.grad))
 
-     
-
         # 更新参数
         optimizer.step()
 
-
         # 模型更新完w b 的梯度后
 
-        print("after backward: w= {} b= {}".format(lr_net.features.weight, lr_net.features.bias))
-
-
+        print("after backward: ori_w = {}, w= {}  ori_b = {}, b= {}".format(ori_w, lr_net.features.weight, ori_b, lr_net.features.bias))
 
         # 绘图看效果
-        if  iteration % 5 == 0:
-            mask = y_pred.ge(0.5).float().squeeze()  # 以0.5为阈值进行分类, 大于0.5的变成1.(浮点数),同时降维 100 * 1 -》 100
+        if  epoch % 10 == 0:
+            mask = y_pred.ge(0.5).float().squeeze()  # 以0.5为阈值进行分类, 大于0.5的变成1.(浮点数),同时降维 20 * 1 -> 20
 
             correct = (mask == train_y).sum()  # 张量中，对位元素相同的个数统计;torch.int64 的标量;预测为1/0且实际为1/0的个数,也就是预测正确的个数
 
@@ -154,12 +144,11 @@ def test_logistic_regression():
             plt.scatter(x0.data.numpy()[:, 0],x0.data.numpy()[:, 1], c = 'r', label = "class 0") # 两个维度特征(x1, x2),标注到xy坐标系上
             plt.scatter(x1.data.numpy()[:, 0],x1.data.numpy()[:, 1], c = 'b', label = "class 1")
 
-            print("==" * 40)
+            # print("==" * 40)
 
-            print("self.features: {} type:{}".format(lr_net.features.weight, lr_net.features.weight.shape))  # weight: 1 * 2
-            print("self.features: {} type:{}".format(lr_net.features.weight[0], lr_net.features.weight[0].shape))
-
-            print("self.features: {} type:{} bias:{}".format(lr_net.features.bias, lr_net.features.bias.shape, lr_net.features.bias[0]))
+            # print("self.features: {} type:{}".format(lr_net.features.weight, lr_net.features.weight.shape))  # weight: 1 * 2
+            # print("self.features: {} type:{}".format(lr_net.features.weight[0], lr_net.features.weight[0].shape))
+            # print("self.features: {} type:{} bias:{}".format(lr_net.features.bias, lr_net.features.bias.shape, lr_net.features.bias[0]))
             
             print("==" * 40)
 
@@ -172,7 +161,7 @@ def test_logistic_regression():
 
             plot_x = np.arange(-6, 6, 0.1)  # range 和 arange 区别： 都不包含end，arrange步长支持小数
 
-            plot_y = (-w0 * plot_x - plot_b) / w1  ## 这条线，画出来？ 是什么原理？
+            plot_y = (-w0 * plot_x - plot_b) / w1  ## 这条线，画出来？ 是什么原理？ w0*x0 + w1*x1 + b = 0
 
             # 画线参考：https://blog.csdn.net/weixin_43772533/article/details/100974008
 
@@ -183,7 +172,7 @@ def test_logistic_regression():
 
             plt.text(-5, 5, 'loss: %.4f' % loss.data.numpy(), fontdict={'size': 20, 'color': 'red'})
 
-            plt.title("iteration: {}\n w0:{:.2f}, w1:{:.2f}, b:{:.2f}, acc:{:.2f}".format(iteration, w0, w1, plot_b, acc))
+            plt.title("epoch: {}\n w0:{:.2f}, w1:{:.2f}, b:{:.2f}, acc:{:.2f}".format(epoch, w0, w1, plot_b, acc))
 
             plt.legend()
             plt.show()
@@ -192,13 +181,13 @@ def test_logistic_regression():
             if acc > 0.99:
                 break
             
+
 def lesson01_05():
 
     test_logistic_regression()
 
     return
 
-    
 
 if __name__ == '__main__':
 
