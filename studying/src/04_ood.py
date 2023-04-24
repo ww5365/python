@@ -199,6 +199,11 @@ self  cls
 
 区别可以参考：
 https://blog.csdn.net/helloxiaozhe/article/details/79940321
+
+1. 定义时， 不需要self， classmethod用cls
+2. 在类的方法实现过程中，要调用类的属性和方法
+   staticmethod ： 类名.属性 类名.方法
+   classmethod : cls.属性 cls().方法 实列化对象并调用实例方法
 '''
 
 
