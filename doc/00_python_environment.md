@@ -113,6 +113,18 @@ conda install nb_conda
 
 
 
+### 环境配置的思考
+pip 和 conda 安装的包放在哪里？
+
+import sys
+sys.path  #当前包的搜索路径列表
+sys.prefix  #当前使用的 $path_prefix
+
+
+
+pip 默认安装在：$PREFIX/lib/pythonXX/site-packages/pip
+conda包安装：D:\Tools\anaconda\Anaconda3\Lib\site-packages
+
 
 
 

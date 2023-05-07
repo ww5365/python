@@ -157,7 +157,7 @@ def lesson02():
     print("type1: {} type2:{}".format(type(torch.tensor(1)), type(torch.tensor([1]))))
 
 
-	'''
+    '''
     矩阵运算
 
     torch.mul(input, other)

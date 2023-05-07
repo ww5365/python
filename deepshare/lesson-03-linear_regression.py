@@ -4,11 +4,13 @@
 
 import torch
 import numpy as np
+import os
 
 import matplotlib.pyplot as plt
 
 torch.manual_seed(10)  # 设置了随机数种子，下次再次运行本py文件，torch.rand生成的数是一样的;这样多次运行可以复现
 
+os.environ['KMP_DUPLICATE_LIB_OK']='True'
 
 def linear_regression():
 
@@ -26,18 +28,18 @@ def linear_regression():
     b = torch.zeros(1, requires_grad=True)
 
     print("w: {} w.shape: {}".format(w, w.shape))
-
+    print("b: {} b.shape: {}".format(b, b.shape, b.numel()))
     
     lr = 1e-2
 
     for epoch in range(2000):
 
         if w.grad is not None:
-            print("before w grad: {}".format(w.grad))
+            # print("before w grad: {}".format(w.grad))
             w.grad.zero_()  # 把上轮的梯度清空
 
         if b.grad is not None:
-            print("before b grad: {}".format(b.grad))
+            # print("before b grad: {}".format(b.grad))
             b.grad.zero_()
 
         # 前向
@@ -55,8 +57,8 @@ def linear_regression():
 
         # 参数更新，梯度下降
 
-        print("w grad: {}".format(w.grad))
-        print("b grad: {}".format(b.grad))
+        # print("w grad: {}".format(w.grad))
+        # print("b grad: {}".format(b.grad))
     
         w.data.sub_(w.grad * lr)
         b.data.sub_(b.grad * lr)
@@ -76,10 +78,10 @@ def linear_regression():
         # print("w grad: {}".format(w.grad))
         # print("b grad: {}".format(b.grad))
 
-        print("w : {}".format(w))
-        print("b : {}".format(b))
+        # print("w : {}".format(w))
+        # print("b : {}".format(b))
 
-        print("epoch: {} loss : {}".format(epoch, loss))
+        # print("epoch: {} loss : {}".format(epoch, loss))
 
  
         
