@@ -11,23 +11,44 @@ import os
 import random
 from PIL import Image
 from torch.utils.data import Dataset
+from torch.utils.data import IterableDataset
 
 random.seed(1)
 rmb_label = {"1": 0, "100": 1}
 
 
-class RMBDataset(Dataset):
-    def __init__(self, data_dir, transform=None) -> object:
+class RMBDataset(Dataset):  # 继承Dataset类
+    def __init__(self, data_dir, transform = None) -> object:
+
         """
         rmb面额分类任务的Dataset
         :param data_dir: str, 数据集所在路径
         :param transform: torch.transform，数据预处理
+
+        数据读取机制：pytorch
+
+        Dataset  ->  DataLoader -> DataLoderIter
+
+        Dataset 是个抽象类，只能用于继承,主要实现以下方法：
+        __init__
+        __getitem__
+        __len__
+
+        比较适用：数据量较少，全部数据都加载进内存里
+
+        IterableDataSet 和 Dataset 的区别：
+
+        当数据量特别大，无法一次性load进内存时，Pytorch里的Dataset就无法胜任了，此时需要使用IterableDataset.
+
+        IterableDataset
+        
         """
+
         self.label_name = {"1": 0, "100": 1}
-        self.data_info = self.get_img_info(data_dir)  # data_info存储所有图片路径和标签，在DataLoader中通过index读取样本
+        self.data_info = self.get_img_info(data_dir)  # data_info存储所有图片路径和标签，在DataLoader中通过index读取样本 ：./deepshare/data/rmb_split
         self.transform = transform
 
-    def __getitem__(self, index):
+    def __getitem__(self, index):  # index 必选参数，根据index获取数据
         path_img, label = self.data_info[index]
         img = Image.open(path_img).convert('RGB')     # 0~255
 
@@ -46,7 +67,7 @@ class RMBDataset(Dataset):
             # 遍历类别
             for sub_dir in dirs:
                 img_names = os.listdir(os.path.join(root, sub_dir))
-                img_names = list(filter(lambda x: x.endswith('.jpg'), img_names))
+                img_names = list(filter(lambda x: x.endswith('.jpg'), img_names))  # 过滤出以.jpg结尾的文件
 
                 # 遍历图片
                 for i in range(len(img_names)):
