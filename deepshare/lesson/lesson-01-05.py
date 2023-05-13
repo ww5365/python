@@ -31,11 +31,12 @@ def test_backward():
     v = torch.add(w, 1)
     y = torch.mul(u, v)
 
-    # y.backward(retain_graph=True)  #反向传播
+    y.backward(retain_graph=True)  #反向传播
+    w.grad.zero_()  # 原位操作  
+    y.backward()  # 再次执行报错，计算图被释放了，可以设置retain_graph为true 但如果真的再次运行的话，两次运行的偏导值会累加起来;可以先用w.grade.zero_()清零
 
-    # y.backward()  # 再次执行报错，计算图被释放了，可以设置retain_graph为true 但如果真的再次运行的话，两次运行的偏导值会累加起来
 
-    # print("w对y的偏导数: {}".format(w.grad))  # 2w + x + 1 : 5
+    print("w对y的偏导数: {}".format(w.grad))  # 2w + x + 1 : 5
     # print("x对y的偏导数: {}".format(x.grad))  # w + 1 : 2
 
 
@@ -81,7 +82,7 @@ def test_grad():
     x = torch.tensor([3.], requires_grad=True)
     y = torch.pow(x, 2)
 
-    grad1 = torch.autograd.grad(y, x, create_graph=True)
+    grad1 = torch.autograd.grad(y, x, create_graph = True)
 
     print("grad1: {}, grad1[0]: {}".format(grad1, grad1[0]))
 
@@ -90,11 +91,65 @@ def test_grad():
     print("grad2: {}, grad2[0]: {}".format(grad2, grad2[0]))
 
 
+def test_grad_tips():
+
+    '''
+    autograd 的三个小tips：
+
+    1. 梯度不会自动清
+       代码：test_grad中有体现，多次backward会将w的梯度累加起来
+       w.grad.zero_()  ： 原位操作，主动清零
+
+    2. 依赖于叶子节点的节点，requires_grad默认为True
+       比如：例子中：y = u * v = （x+w）* (w+1)  中间节点，u v ，u.requires_grad 均为true
+
+    3. 叶子节点不可执行原位操作：in-place
+       
+       从计算图中理解，dy/du = w + 1  如果反向传播前对w进行了原位操作，那么计算图中的 w+1 使用地址取w时就不是原来的w+1了
+       
+
+    '''
+
+    w = torch.tensor([1.], requires_grad=True)
+    x = torch.tensor([2.], requires_grad=True)
+
+    u = torch.add(w, x)
+    v = torch.add(w, 1)
+    y = torch.mul(u, v) 
+
+    # w.add_(1) ## 报错， 叶子节点执行了原位操作， 反向传播时
+    y.backward()
+    print("w gradient: {}".format(w.grad))
+
+
+def test_logistic_regression():
+    '''
+    逻辑回归：
+    
+    机器学习模型训练的步骤：
+
+    数据
+
+    模型
+
+    损失函数
+
+    优化器
+
+    迭代训练
+
+    '''
+
+
+
+
 def lesson01_05():
 
     # test_backward()
 
-    test_grad()
+    # test_grad()
+
+    test_grad_tips()
 
     return
 
