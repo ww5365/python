@@ -33,25 +33,22 @@ assert os.path.exists(path_lenet), "{}not exisits, please put lenet.py file to {
 assert os.path.exists(path_tools), "{}not exisits, please put common_tools.py to {}".format(path_tools, os.path.dirname(path_tools))
 
 
-
 import sys
 WORK_DIR = os.path.abspath(os.path.dirname(__file__)+ os.path.sep + "..") #\deepshare\  直接算出上层目录是啥了   
 WORK_DIR2 = os.path.join(BASE_DIR, "..")  #\deepshare\lesson\..
 sys.path.append(WORK_DIR)
 
-
 from model.lenet import LeNet
 from tools.my_dataset import RMBDataset
-from tools.common_tools import set_seed
-
+from tools.common_tools import transform_invert, set_seed
 
 set_seed()  # 设置随机种子
 rmb_label = {"1": 0, "100": 1}
 
 # 参数设置
 MAX_EPOCH = 10
-# BATCH_SIZE = 16
-BATCH_SIZE = 2
+BATCH_SIZE = 16
+# BATCH_SIZE = 2
 LR = 0.01
 log_interval = 10
 val_interval = 1
@@ -92,8 +89,9 @@ Normalize: 标准化，加快训练模型的收敛速度 和 提高泛化能力
 train_transform = transforms.Compose([
     transforms.Resize((32, 32)),
     transforms.RandomCrop(32, padding=4),
+    transforms.RandomGrayscale(p=0.9),  # 红色的一百元不能正确分类，因为红色和训练数据中1元的纸币看起来的像，所以使用灰度图来训练，弱化色彩的干扰
     transforms.ToTensor(),  # 转化成张量，并且把0~255数据进行归一化处理，除以255归一化
-    # transforms.Normalize(norm_mean, norm_std),   # 对数据进行逐channel的标准化  (x - mean) /std
+    transforms.Normalize(norm_mean, norm_std),   # 对数据进行逐channel的标准化  (x - mean) /std
 ])
 
 valid_transform = transforms.Compose([
@@ -114,10 +112,10 @@ print("-----------------------")
 
 for data, label in train_loader:
 
-    print("data: {} data shape: {} label: {}".format(data, data.shape,label))
+    print("data shape: {} label: {}".format(data.shape,label))
 
 
-exit(0)
+# exit(0)
 
 # ============================ step 2/5 模型 ============================
 
@@ -129,7 +127,7 @@ criterion = nn.CrossEntropyLoss()                                               
 
 # ============================ step 4/5 优化器 ============================
 optimizer = optim.SGD(net.parameters(), lr=LR, momentum=0.9)                        # 选择优化器
-scheduler = torch.optim.lr_scheduler.StepLR(optimizer, step_size=10, gamma=0.1)     # 设置学习率下降策略
+scheduler = torch.optim.lr_scheduler.StepLR(optimizer, step_size=10, gamma=0.1)     # 设置学习率下降策略 ？
 
 # ============================ step 5/5 训练 ============================
 train_curve = list()
@@ -146,7 +144,7 @@ for epoch in range(MAX_EPOCH):
 
         # forward
         inputs, labels = data
-        outputs = net(inputs)
+        outputs = net(inputs)   # 进入nn.Module 中__call__函数,会调用forward函数 
 
         # backward
         optimizer.zero_grad()
@@ -215,8 +213,10 @@ plt.show()
 
 # ============================ inference ============================
 
-BASE_DIR = os.path.dirname(os.path.abspath(__file__))
-test_dir = os.path.join(BASE_DIR, "test_data")
+# BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+# test_dir = os.path.join(BASE_DIR, "test_data")
+
+test_dir = os.path.abspath(os.path.join(BASE_DIR, "..", "data", "inference_data"))
 
 test_data = RMBDataset(data_dir=test_dir, transform=valid_transform)
 valid_loader = DataLoader(dataset=test_data, batch_size=1)
@@ -229,3 +229,11 @@ for i, data in enumerate(valid_loader):
 
     rmb = 1 if predicted.numpy()[0] == 0 else 100
     print("模型获得{}元".format(rmb))
+
+    img_tensor = inputs[0, ...]  # C H W
+    img = transform_invert(img_tensor, train_transform)
+    plt.imshow(img)
+    plt.title("LeNet got {} Yuan".format(rmb))
+    plt.show()
+    plt.pause(0.5)
+    plt.close()
