@@ -8,6 +8,7 @@
 
 import os
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+os.environ["KMP_DUPLICATE_LIB_OK"]="true"
 import numpy as np
 import torch
 import torch.nn as nn

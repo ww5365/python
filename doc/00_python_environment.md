@@ -60,7 +60,7 @@ channels:
   - https://mirrors.tuna.tsinghua.edu.cn/anaconda/cloud/msys2/
   - https://mirrors.tuna.tsinghua.edu.cn/anaconda/cloud/conda-forge
   - https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/free/
-
+ssl_verify: false
 ```
 
 
@@ -124,6 +124,13 @@ sys.prefix  #当前使用的 $path_prefix
 
 pip 默认安装在：$PREFIX/lib/pythonXX/site-packages/pip
 conda包安装：D:\Tools\anaconda\Anaconda3\Lib\site-packages
+
+
+# pytorch 安装使用
+
+参考：
+https://blog.csdn.net/weixin_44904136/article/details/123285884
+
 
 
 
