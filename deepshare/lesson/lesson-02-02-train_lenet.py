@@ -8,7 +8,6 @@
 
 import os
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
-os.environ["KMP_DUPLICATE_LIB_OK"]="true"
 import numpy as np
 import torch
 import torch.nn as nn
@@ -47,11 +46,11 @@ set_seed()  # 设置随机种子
 rmb_label = {"1": 0, "100": 1}
 
 # 参数设置
-MAX_EPOCH = 10
-BATCH_SIZE = 16
-# BATCH_SIZE = 2
+MAX_EPOCH = 2
+# BATCH_SIZE = 16
+BATCH_SIZE = 2
 LR = 0.01
-log_interval = 10
+log_interval = 1
 val_interval = 1
 
 # ============================ step 1/5 数据 ============================
@@ -111,9 +110,10 @@ valid_loader = DataLoader(dataset=valid_data, batch_size=BATCH_SIZE)
 
 print("-----------------------")
 
-for data, label in train_loader:
+for data, label in train_loader:  # 每轮循环，包含样本的个数是：batchsize个
 
     print("data shape: {} label: {}".format(data.shape,label))
+    print(data)
 
 
 # exit(0)
@@ -136,6 +136,8 @@ valid_curve = list()
 
 for epoch in range(MAX_EPOCH):
 
+    print("epoch --------------------------{}".format(epoch))
+
     loss_mean = 0.
     correct = 0.
     total = 0.
@@ -155,31 +157,56 @@ for epoch in range(MAX_EPOCH):
         # update weights
         optimizer.step()
 
+        print("第{}batch图片训练----".format(i))
+        print(i)
+        print(outputs.data)
+        print(torch.max(outputs.data, 1))
+
+        print("-------------------------")
+
+
         # 统计分类情况
-        _, predicted = torch.max(outputs.data, 1)
+        _, predicted = torch.max(outputs.data, 1)  # 取出每行的最大值和对应的索引位置， predicted是当前行最大值的列的索引位置
+
+        '''
+        torch.max(input, dim, keepdim=False) → output tensors (max, max_indices)
+
+        参数：
+        input：输入的 tensor。
+        dim：按什么维度求最大值（2D中，0代表按列求最大值，1代表按行求最大值）
+        keepdim：是否保持 input tensor 的维度，True 代表 out tensor 与 input tensor 的维度相同，False 代表 out tensor 与 input tensor 的维度不同。
+
+        '''
+
+        print("predicted: {}".format(predicted))
+
         total += labels.size(0)
+
         correct += (predicted == labels).squeeze().sum().numpy()
 
         # 打印训练信息
         loss_mean += loss.item()
-        train_curve.append(loss.item())
-        if (i+1) % log_interval == 0:
-            loss_mean = loss_mean / log_interval
+        train_curve.append(loss.item())  # 每个batch的损失
+        if (i + 1) % log_interval == 0:
+            loss_mean = loss_mean / log_interval   # 每隔log_interval次计算一下损失的平均值
             print("Training:Epoch[{:0>3}/{:0>3}] Iteration[{:0>3}/{:0>3}] Loss: {:.4f} Acc:{:.2%}".format(
-                epoch, MAX_EPOCH, i+1, len(train_loader), loss_mean, correct / total))
+                epoch, MAX_EPOCH, i + 1, len(train_loader), loss_mean, correct / total))
             loss_mean = 0.
 
     scheduler.step()  # 更新学习率
 
     # validate the model
-    if (epoch+1) % val_interval == 0:
+    if (epoch + 1) % val_interval == 0:
 
         correct_val = 0.
         total_val = 0.
         loss_val = 0.
         net.eval()
+
+        print("valid model: {}".format(len(valid_loader)))
+
         with torch.no_grad():
-            for j, data in enumerate(valid_loader):
+            for j, data in enumerate(valid_loader): # 总共有64个样本，batchsize为2, len(valid_loader) 为32
                 inputs, labels = data
                 outputs = net(inputs)
                 loss = criterion(outputs, labels)
@@ -190,18 +217,25 @@ for epoch in range(MAX_EPOCH):
 
                 loss_val += loss.item()
 
-            loss_val_epoch = loss_val / len(valid_loader)
+            loss_val_epoch = loss_val / len(valid_loader)  # 记录整个epoch样本的loss，取了平均
             valid_curve.append(loss_val_epoch)
             # valid_curve.append(loss.item())    # 20191022改，记录整个epoch样本的loss，注意要取平均
             print("Valid:\t Epoch[{:0>3}/{:0>3}] Iteration[{:0>3}/{:0>3}] Loss: {:.4f} Acc:{:.2%}".format(
-                epoch, MAX_EPOCH, j+1, len(valid_loader), loss_val_epoch, correct_val / total_val))
+                epoch, MAX_EPOCH, j + 1, len(valid_loader), loss_val_epoch, correct_val / total_val))
 
+print("train_curve: size: {}  data: {}".format(len(train_curve), train_curve))
+print("total valid: {}".format(total_val))
+print("valid_curve: size: {}  data: {}".format(len(valid_curve), valid_curve)) # 2 ..
 
-train_x = range(len(train_curve))
+train_x = range(len(train_curve))  # 4
 train_y = train_curve
 
-train_iters = len(train_loader)
-valid_x = np.arange(1, len(valid_curve)+1) * train_iters*val_interval # 由于valid中记录的是epochloss，需要对记录点进行转换到iterations
+train_iters = len(train_loader)  # 2
+
+valid_x = np.arange(1, len(valid_curve)+1) * train_iters * val_interval # 由于valid中记录的是epoch loss，需要对记录点进行转换到iterations
+
+print("np.arange: {}".format(np.arange(1, 1 + len(valid_curve) * train_iters)))
+
 valid_y = valid_curve
 
 plt.plot(train_x, train_y, label='Train')
@@ -211,6 +245,9 @@ plt.legend(loc='upper right')
 plt.ylabel('loss value')
 plt.xlabel('Iteration')
 plt.show()
+
+
+exit(0)
 
 # ============================ inference ============================
 
@@ -238,3 +275,4 @@ for i, data in enumerate(valid_loader):
     plt.show()
     plt.pause(0.5)
     plt.close()
+
