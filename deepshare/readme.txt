@@ -181,7 +181,7 @@ hello pytorch
 1.  lesson-02-02-train_lenet.py
 LeNet 类中 
 __init__ :nn.Conv2d  nn.Linear  使用?
-initialize_weights: 不同的子网络weight初始化方法，m.weight, m.bias
+initialize_weights: 不同的子网络weight初始化方法，xavier_normal_ m.weight.data.fill_(1)  m.bias.data.zero_()
 
 
 
