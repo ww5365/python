@@ -23,12 +23,35 @@ def transform_invert(img_, transform_train):
     :return: PIL image
     """
     if 'Normalize' in str(transform_train):
-        norm_transform = list(filter(lambda x: isinstance(x, transforms.Normalize), transform_train.transforms))
+        norm_transform = list(filter(lambda x : isinstance(x, transforms.Normalize), transform_train.transforms))
         mean = torch.tensor(norm_transform[0].mean, dtype=img_.dtype, device=img_.device)
         std = torch.tensor(norm_transform[0].std, dtype=img_.dtype, device=img_.device)
-        img_.mul_(std[:, None, None]).add_(mean[:, None, None])
+        img_.mul_(std[:, None, None]).add_(mean[:, None, None])   # add_ mul_ pytorch中带_的都是原位操作
+
+    '''
+    str: 类对象 
+    str(OBJECT):
+    '''
+
+    print("str(object) : {}  ".format(str(transform_train)))
+
 
     img_ = img_.transpose(0, 2).transpose(0, 1)  # C*H*W --> H*W*C
+
+    '''
+    torch.transpose(input, dim0, dim1, out=None) → Tensor
+
+    input (Tensor) – 输入张量，必填
+    dim0 (int) – 转置的第一维，默认0，可选
+    dim1 (int) – 转置的第二维，默认1，可选
+
+    注意：
+    1. dim 不区分数的大小  transpose(0, 2) 等价 transpose(2, 0)
+    2. 只操作2个维度的数据交换，torch.transpose(x)合法， x.transpose()合法
+    2. 返回值，是copy新数返回，不是原位的操作
+
+    '''
+
     if 'ToTensor' in str(transform_train) or img_.max() < 1:
         img_ = img_.detach().numpy() * 255
 
@@ -57,10 +80,3 @@ def get_memory_info():
     memory_info = "Usage Memory：{:.2f} G，Percentage: {:.1f}%，Free Memory：{:.2f} G".format(
         used_memory, memory_percent, free_memory)
     return memory_info
-
-
-
-
-
-
-
