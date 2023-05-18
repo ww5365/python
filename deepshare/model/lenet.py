@@ -51,7 +51,7 @@ class LeNet(nn.Module):
         # _modules ： 在conv1子网络属性，没有子网络了，所以是空的
 
         self.conv2 = nn.Conv2d(6, 16, 5)
-        # 构建子网络时, 先判断赋值的数据类型
+        # 类属性的赋值，会被拦截：构建子网络时, 先判断赋值的数据类型
         # 是nn.parameter类型，存储到parameters有序字典中；
         # 是nn.Module类，会被存储到LeNet这个网络的modules有序字典属性中, 这里是 conv1: Conv2d()  conv2: Con2d()
         #  
@@ -78,6 +78,13 @@ class LeNet(nn.Module):
         for m in self.modules():
             if isinstance(m, nn.Conv2d):
                 nn.init.xavier_normal_(m.weight.data)
+                '''
+                xavier: 权重初始化
+                目的：避免梯度的消失或爆炸
+
+                适用：激活函数是tanh， 激活函数关于0对称，且主要针对于全连接神经网络
+                参考：https://www.cnblogs.com/wangguchangqing/p/11013698.html
+                '''
                 if m.bias is not None:
                     m.bias.data.zero_()
             elif isinstance(m, nn.BatchNorm2d):
@@ -162,8 +169,3 @@ class LeNet_bn(nn.Module):
             elif isinstance(m, nn.Linear):
                 nn.init.normal_(m.weight.data, 0, 1)
                 m.bias.data.zero_()
-
-
-
-
-
