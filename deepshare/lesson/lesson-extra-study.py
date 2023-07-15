@@ -5,6 +5,7 @@ import numpy as np
 import os
 import shutil  # shutil模块是对os模块的补充，主要针对文件的拷贝、删除、移动、压缩和解压操作
 import random  # 使用random.shuffle(x)
+import numpy as np
 
 from torch.utils.data import IterableDataset
 
@@ -117,6 +118,7 @@ def lesson03_extra():
 
 
 
+
 if __name__ == '__main__':
 
     # lesson02_extra()
@@ -129,4 +131,45 @@ if __name__ == '__main__':
 
     print("t3: {}".format(t3 + 0.0843))
 
+    # 列表表达式
+    li = ["test.jpg", "test2.doc", "test3.xml"]
+    print(li)
+    li2 = list(filter(lambda x : x.endswith(".jpg"), li))
+    print(li2)
 
+    for i in range(3):
+        print("range: {}".format(i))
+
+    print(np.arange(1, 3))
+    print(np.arange(1, 3) * 2)
+    
+    # transpose  转置操作
+
+    '''
+    torch.transpose(input, dim0, dim1, out=None) → Tensor
+
+    input (Tensor) – 输入张量，必填
+    dim0 (int) – 转置的第一维，默认0，可选
+    dim1 (int) – 转置的第二维，默认1，可选
+
+    注意：
+    1. dim 不区分数的大小  transpose(0, 2) 等价 transpose(2, 0)
+    2. 只操作2个维度的数据交换，torch.transpose(x)合法， x.transpose()合法
+    2. 返回值，是copy新数返回，不是原位的操作
+    '''
+
+    x = torch.randn(2,3,1)
+    print("x tensor: {}".format(x))
+    x1 = x.transpose(2,0)  # 0维和2维 交换数据 2 * 3 * 1 -》 1 * 3 * 2
+    x2 = x.transpose(0,2)
+    print("x1 tensor: {}".format(x1))
+    print("x2 tensor: {}".format(x2))
+
+    t = torch.randn(size=(2,2,3,4))
+    print("t tesnsor: {}".format(t))  # 2*2*3*4
+
+    t1 = t[0:1, 0:2, ...]
+    print("t1 tesnsor: {} shape:{}".format(t1, t1.shape))  # 1*2*3*4
+    
+    t2 = t[0, 0:2, ...]
+    print("t2 tesnsor: {} shape:{}".format(t2, t2.shape))  # 2*3*4 会自动的squeeze()

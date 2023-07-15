@@ -6,6 +6,7 @@ import types
 from collections import Iterable
 
 '''
+python中的语法糖，推导式：
 
 列表(list)推导式
 字典(dict)推导式
@@ -68,7 +69,7 @@ yield :  使用
 
 1、函数f中使用yield  -》 generator function
    f : 生成器函数 
-   f(VAR): 返回生成器对象：iterable对象
+   f(VAR): 返回迭代器对象：iterable对象
    iterable对象：有next()函数，如果被用在for循环中，next会自动调用
    
    程序执行逻辑： 遇到yield, 中断，返回迭代值；下一轮调用，会从中断初开始执行；
@@ -129,11 +130,17 @@ if __name__ == '__main__':
 
     # fab判断是否为： 生成器类型？迭代器对象？
 
-    print("fab types: ", isinstance(fab, types.GeneratorType))
-    print("fab(2) types: ", isinstance(fab(2), types.GeneratorType))
+    print("fab types: ", isinstance(fab, types.GeneratorType))  #False
+    print("fab(2) types: ", isinstance(fab(2), types.GeneratorType)) #True
 
-    print("fab instance: ", isinstance(fab, Iterable))
-    print("fab(2) instance: ", isinstance(fab(2), Iterable))
+    print("fab instance: ", isinstance(fab, Iterable)) #False
+    print("fab(2) instance: ", isinstance(fab(2), Iterable)) # True
 
+    print("fab返回迭代器对象---\n")
+
+    for val in fab(5):
+        print(val)
+    
+    print("fab返回迭代器对象---\n")
     # 测试迭代器对象的使用
     test_iterable()
