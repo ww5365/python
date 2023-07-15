@@ -27,6 +27,7 @@ from matplotlib import pyplot as plt
 #         import ..api.api
 print(BASE_DIR)
 
+exit(0)
 path_lenet = os.path.abspath(os.path.join(BASE_DIR, "..", "model", "lenet.py"))
 path_tools = os.path.abspath(os.path.join(BASE_DIR, "..", "tools", "common_tools.py"))
 assert os.path.exists(path_lenet), "{}not exisits, please put lenet.py file to {}".format(path_lenet, os.path.dirname(path_lenet))
