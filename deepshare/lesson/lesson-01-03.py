@@ -2,6 +2,7 @@
 
 import torch
 import numpy as np
+import math
 
 
 def lesson02():
@@ -273,3 +274,7 @@ def torch_multiply():
 if __name__ == '__main__':
 
     lesson02()
+    
+    
+    t1 = torch.tensor([0,math.pi/4, math.pi/2, math.pi])
+    print("t1: {} sin: {} ".format(t1, torch.sin(t1)))
