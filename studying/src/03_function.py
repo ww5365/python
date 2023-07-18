@@ -174,6 +174,37 @@ def fun(arg1, *arg2, **arg3):
     print(arg2)
     print(arg3)
 
+def test_arg_use():
+      
+   ## python函数传参中*, ** 含义？
+
+    '''
+    * : 解引用元组
+    ** ： 解引用字典
+    
+    test_args:
+    函数调用过程中，会把(2,3)封装成元组 name,age参数封装成dict，传到test_args函数中
+    *args， **kwargs 接受多个参数; 支持了函数的形参个数可变
+
+    test_args2:
+    反过来，多个数据也可以封装成元组或词典，传到有多个参数的函数中; 支持了函数形参个数固定，假设为n
+    正好元组或字典中有n个值，可以直接用1个参数把所有的值传到函数中
+    *args, **kwargs 对元组和字典的解引用
+    '''
+
+    def test_args(arg, *args, **kwargs):
+
+        print("arg: ", arg)
+        print("*args: ", args, " type: ", type(args))
+        print("**kwargs: ", kwargs, " type: ", type(kwargs))
+    
+    test_args(1,2,3, name = 'wa', age = 12)
+
+    def test_args2(arg1, arg2, arg3):
+        print("arg1: {} arg2: {} args3: {}".format(arg1, arg2, arg3))
+    dict1 = {'arg2' : "ww", 'arg1' : 13, 'arg3' : "male"}
+
+    test_args2(**dict1)
 
 if __name__ == '__main__':
 
