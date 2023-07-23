@@ -201,7 +201,7 @@ def lesson02():
 
     t19 = torch.rand(2,4)
     t20 = torch.rand(4,3) ###维度也要对应才可以乘  矩阵乘法
-    print(torch.matmul(t19,t20),'\n',torch.matmul(t19,t20).size())
+    print("t19,t20", torch.matmul(t19,t20),'\n',torch.matmul(t19,t20).size())
 
 
     t21 = torch.ceil(torch.rand(4) * 10)  # 1d 向量： 4个元素
@@ -276,5 +276,19 @@ if __name__ == '__main__':
     lesson02()
     
     
+    print("--" * 30)
+    
+    torch_multiply()
+    
+    
     t1 = torch.tensor([0,math.pi/4, math.pi/2, math.pi])
     print("t1: {} sin: {} ".format(t1, torch.sin(t1)))
+    
+    t2 = torch.tensor([[1,2,3]])
+    t3 = torch.tensor([[1,1],[2,2],[3,3]])
+    
+    print("t2 * t3 : ", torch.matmul(t2, t3), torch.mm(t2,t3))
+    
+    t4 = torch.tensor([1.0])
+    
+    print("tensor -> numpy: {} type: {}".format(t4.data.numpy() > 1.5, t4.data.numpy().shape))
