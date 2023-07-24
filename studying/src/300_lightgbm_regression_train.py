@@ -20,9 +20,6 @@ callbacks = [log_evaluation(period=1), early_stopping(stopping_rounds=10)]
 #其中period=1指每迭代1次打印一次log；stopping_rounds=15指如果验证集的误差在15次迭代内没有降低，则停止迭代。
 
 dataDelimiter='\t'
-#data_dir = "D:\Disk_F\work\工作内容\\202210-202212\时效性\泛时效性\分档预测\\"
-# data_dir = "D:\Disk_F\work\工作内容\工具脚本\SparkleSearchTool\SparkleSearchTool\onlineDebug\output2\\"
-
 
 root_path = os.path.dirname(os.path.abspath(__file__))
 print("root_path: {}".format(root_path))
