@@ -20,6 +20,9 @@ callbacks = [log_evaluation(period=1), early_stopping(stopping_rounds=10)]
 #其中period=1指每迭代1次打印一次log；stopping_rounds=15指如果验证集的误差在15次迭代内没有降低，则停止迭代。
 
 dataDelimiter='\t'
+#data_dir = "D:\Disk_F\work\工作内容\\202210-202212\时效性\泛时效性\分档预测\\"
+# data_dir = "D:\Disk_F\work\工作内容\工具脚本\SparkleSearchTool\SparkleSearchTool\onlineDebug\output2\\"
+
 
 root_path = os.path.dirname(os.path.abspath(__file__))
 print("root_path: {}".format(root_path))
@@ -49,7 +52,7 @@ Y_test = Y_test.reset_index(drop=True)
 
 print(len(X_train), len(X_test))
 
-
+# scikit-learning API
 lgb_model = lgb.LGBMRegressor(
     objective='regression',
     metric='rmse',
@@ -60,27 +63,27 @@ lgb_model = lgb.LGBMRegressor(
     bagging_seed=66,
     feature_fraction_seed=66,
     boosting='gbdt',
-    n_jobs=25,
+    n_jobs=25,  #并发进程数
     verbose=0,
-    early_stopping_rounds=50
+    early_stopping_rounds=50  #评估指标，连续50轮不变化，提前停止模型训练
 )
 
 
 param_dict = {
-    "num_leaves": sp_randint(5, 40),
+    "num_leaves": sp_randint(5, 40),  # randint 返回[200, 600)中每个整数的概率分布,均匀分布；RandomizedSearchCV 方法要求传入的数据为一个分布或列表;整数;
     "min_data_in_leaf": sp_randint(5, 64),
-    "min_sum_hessian_in_leaf": np.linspace(0, 10, 30),
+    "min_sum_hessian_in_leaf": np.linspace(0, 10, 30),  # 是float小数
     "feature_fraction": np.linspace(0.55, 1, 30),
     'lambda_l1': np.linspace(0, 10, 30),
     'lambda_l2': np.linspace(0, 10, 30),
     "min_gain_to_split": np.linspace(0., 1, 30),
-    "n_estimators": sp_randint(200, 600)   # 返回[200, 600)中每个整数的概率分布,均匀分布；RandomizedSearchCV 方法要求传入的数据为一个分布或列表
+    "n_estimators": sp_randint(200, 600)   # 为了确定估计器的数目，也就是boosting迭代的次数，也可以说是残差树的数目，参数名为n_estimators/num_iterations/num_round/num_boost_round。我们可以先将该参数设成一个较大的数，然后在cv结果中查看最优的迭代次数
 }
 
 random_search = RandomizedSearchCV(
     lgb_model,
     param_distributions=param_dict,
-    n_iter=30,
+    n_iter=30,  # n_iter 参数指定了要搜索的随机参数组合的数量
     cv=5,
     verbose=1,
     n_jobs=-1
