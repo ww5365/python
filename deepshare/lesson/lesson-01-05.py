@@ -51,6 +51,7 @@ def test_backward():
 
     grad_tensor = torch.tensor([0.2, 0.8])  # loss包含两种loss分函数，并且这两种函数的对于整体损失的影响，比重还不一样，可以使用grad_tensors计算不同比重情况下损失之和
 
+    w.grad.zero_()
     loss.backward(gradient=grad_tensor)
 
     print("w对loss的偏导数: {}".format(w.grad))   # 0.2 * 5 + 0.8 * 2
@@ -145,9 +146,9 @@ def test_logistic_regression():
 
 def lesson01_05():
 
-    # test_backward()
+    test_backward()
 
-    # test_grad()
+    test_grad()
 
     test_grad_tips()
 

@@ -9,6 +9,11 @@ import torch
 
 
 if __name__ == '__main__':
+    
+    # torch.log默认的底数是? e
+    
+    print("tensor log: ", torch.log(torch.tensor([4.])))
+    
 
     # 前4或8位是否在dict的key中
     

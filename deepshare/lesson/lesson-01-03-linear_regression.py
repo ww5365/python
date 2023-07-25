@@ -32,7 +32,7 @@ def linear_regression():
     
     lr = 1e-2
 
-    for epoch in range(20):
+    for epoch in range(2000):
 
         # print("w.grade {}".format(w.grad))
         if w.grad is not None:
@@ -62,6 +62,8 @@ def linear_regression():
         # print("w grad: {}".format(w.grad))
         # print("b grad: {}".format(b.grad))
     
+    
+        print("the type of w.grad: {} shape: {}".format(type(w.grad), w.grad.shape))
 
         
         w.data.sub_(w.grad * lr)   # 可以
@@ -107,7 +109,7 @@ def linear_regression():
 
         
         print("loss data: {} type: {}  {}".format(loss.data.numpy(), type(loss.data), type(loss.data.numpy())))
-        print("address: {}  {}".format(id(loss), id(loss.data)))
+        # print("address: {}  {}".format(id(loss), id(loss.data)))
         if loss.data.numpy() < 0.5:
             plt.scatter(x.data.numpy(), y.data.numpy())
             plt.plot(x.data.numpy(), y_pred.data.numpy(), 'b-', lw=3)

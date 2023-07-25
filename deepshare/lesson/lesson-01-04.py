@@ -11,7 +11,7 @@ def lesson01_04() -> None:
 
     is_leaf: 是否为叶子节点，计算图中，叶子节点很关键
 
-    grad:  记录了张量的梯度
+    grad:  记录了张量的梯度   类型也是个张量
 
     grad_fn: 记录了张量被创建时，所用到的加减乘除法
 
@@ -31,14 +31,14 @@ def lesson01_04() -> None:
     y1 = y.tanh
 
 
-
+ 
     a.retain_grad()
     y.backward()
 
     # 查看叶子节点
     print("is leaf: \n", w.is_leaf, w.is_leaf, a.is_leaf, b.is_leaf, y.is_leaf)  # True True False False False
 
-    #  反向传播后, 张量是否还保留梯度? 非叶子节点没有了; 
+    #  反向传播后, 张量是否还保留梯度? 非叶子节点没有了
     #  想保留非叶子节点的梯度，怎么办？  a.retain_grad()
     print("grad: \n", w.grad , x.grad, a.grad, b.grad, y.grad)  
     # y = (w + x) * (w + 1)  w对y的梯度 x对y的梯度  tensor([5.]) tensor([2.]) tensor([2.]) None None
