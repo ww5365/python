@@ -10,7 +10,7 @@ torch.manual_seed(10)
 
 def binary_cross_entropy(y, y_pred):
 
-    t1 = y * torch.log(y_pred) + (1 - y) * torch.log(1 - y_pred)
+    t1 = -(y * torch.log(y_pred) + (1 - y) * torch.log(1 - y_pred))
     
     return t1.mean()
 
@@ -61,7 +61,7 @@ def test_logistic_regression():
         def __init__(self):
             super(LR, self).__init__()   # super() 是调用父类的方法 python2: super(自己类名，self) python3: super()
             self.features = nn.Linear(2, 1)  
-            # 输入特征数为2，输出特征数为1  Y = X * W +  b
+            # 输入特征数为2，输出特征数为1  Y = X * W^T +  b
             # 查看模型参数
             # for param in self.features.parameters():
             #   print(param)
@@ -86,12 +86,49 @@ def test_logistic_regression():
 
     #================模型训练=========================
 
-    for epoch in range(100):
+    for epoch in range(2):
 
-        ori_w = lr_net.features.weight.clone()  # 了解下深拷贝： 新的tensor充当中间变量，会保留在计算图中，参与梯度计算（回传叠加），但是一般不会保留自身梯度
+
+        '''
+        clone : 深拷贝： 可以返回一个完全相同的tensor,新的tensor开辟新的内存，但是仍然留在计算图中。
+                不共享数据内存的同时支持梯度回溯，所以常用在神经网络中某个单元需要重复使用的场景下。
+        
+        参考：https://zhuanlan.zhihu.com/p/344458484 关键看下clone()的梯度回传
+
+        x = torch.tensor([1.], requires_grad=False)
+        x_clone = x.clone()   # 张量x的requires_grad=False, 想通过x_clone进行梯度回溯
+        x_clone.requires_grad_() 
+        y = x_clone ** 2
+        y.backward()
+        print(x.grad, x_clone.grad) # 梯度穿向clone的向量x_clone
+
+
+        inplace原位操作：
+        torch.add(x,y, out=y)
+        y.add_(x)
+        y += x
+        y[:] = y + x
+
+        会开辟新内存空间：y最后指向新内存空间
+        y = y + x  
+
+
+        torch.Tensor():  类的构造函数,深拷贝，使用全局默认值构造张量torch.get_default_dtype()
+        torch.tensor():  工厂函数, 深拷贝，根据输入推断数据类型dtype
+
+        torch.from_numpy(): 从ndarray中构造张量，浅拷贝，共享内存
+        torch.as_tensor():  从python数据结构中构造张量，强拷贝，共享内存
+        '''
+
+        ori_w = lr_net.features.weight.clone() 
         ori_b = lr_net.features.bias.clone()
 
-        print("epoch: {} train_x: {} w0: {} w0 shape:{} b0: {} b0 shape:{}".format(epoch, train_x, lr_net.features.weight, lr_net.features.weight.shape, lr_net.features.bias, lr_net.features.bias.shape))
+        print("---- epoch: {} train_x: {}  x shape:{} \n ".format(epoch, train_x, train_x.shape))
+        print("---- w0: {} w0 shape:{} b0: {} b0 shape:{}".format(lr_net.features.weight, lr_net.features.weight.shape, lr_net.features.bias, lr_net.features.bias.shape))
+
+        for para in lr_net.features.parameters():
+            print("---- pargmeter: {}".format(para))
+
         # 前向传播
         y_pred = lr_net(train_x)   #这里对象是自动调用了forward(self, x) ? 返回：20 * 1 结果
 
@@ -102,7 +139,7 @@ def test_logistic_regression():
         
         loss1 = binary_cross_entropy(train_y, y_pred.squeeze())  # 自己实现的二分类较差熵损失函数，来验证上面计算的loss
 
-        print("y_pred: {}  y_pred shape: {} squeeze: {}, loss: {} loss1: {}".format(y_pred, y_pred.shape, y_pred.squeeze(), loss, loss1))
+        print("y_pred: {}  y_pred shape: {} loss: {} loss1: {}".format(y_pred, y_pred.shape, loss, loss1))
 
 
         # 手动计算了：逻辑回归的反向传播  主要是w b 的梯度  参考：https://blog.csdn.net/chosen1hyj/article/details/93176560
@@ -111,7 +148,7 @@ def test_logistic_regression():
         t2 = torch.add(t1, lr_net.features.bias) #  z = X*W^T + b
         t3 = sigmod_fun(t2) # 20 * 1  a = sigmod(z)
         t4 = t3 - train_y.unsqueeze(dim = 1)   # train_y是20  变成 20 * 1 的相同维度;  a - y 也是： 20 * 1 
-        t5 = torch.mul(train_x, t4)  # x * (a - y)  对位乘; dL/dw0 = x0 * (a - y)  dL/dw1 = x1 * (a - y)  dL/db = (a - y)
+        t5 = torch.mul(train_x, t4)  # (20 * 2) * (20 * 1) =>  x * (a - y)  对位乘; dL/dw0 = x0 * (a - y)  dL/dw1 = x1 * (a - y)  dL/db = (a - y)
 
         print("t1 : {}  t2: {} t3: {} t4:{} t5 : {} t4 mean=db:{} t5 mean=dw: {}".format(t1, t2, t3, t4, t5, t4.mean(), torch.mean(t5, dim = 0))) # 最终的梯度是所有样本的的均值
 
@@ -120,6 +157,7 @@ def test_logistic_regression():
         # 反向传播
         loss.backward()
 
+        # pytorch平台计算梯度：w,b 对 loss的
         # 模型的反向传播的w和b的梯度，保存在：named_parameters() 返回tuple：参数名  参数的具体值
         for name, params in lr_net.named_parameters():
             print("loss name: {} grad: {}".format(name, params.grad))
@@ -127,9 +165,13 @@ def test_logistic_regression():
         # 更新参数
         optimizer.step()
 
-        # 模型更新完w b 的梯度后
+        # 模型更新完w b 的梯度后 ： w = w - lr * w.grad
 
-        print("after backward: ori_w = {}, w= {}  ori_b = {}, b= {}".format(ori_w, lr_net.features.weight, ori_b, lr_net.features.bias))
+        ww = ori_w - (lr * lr_net.features.weight.grad)   # 手动计算
+        bb = ori_b - (lr * lr_net.features.bias.grad)
+        print("manual w : {}".format(ww))
+        print("manual b : {}".format(bb))
+        print("backward grad: ori_w = {}, w= {}  ori_b = {}, b= {}".format(ori_w, lr_net.features.weight, ori_b, lr_net.features.bias))
 
         # 绘图看效果
         if  epoch % 10 == 0:
@@ -210,4 +252,3 @@ if __name__ == '__main__':
     sum = (x1==x2).sum()   
 
     print("x1 == x2: {}  sum: {} type:{}".format(x1.size(), (x1==x2).sum(), sum.dtype))
-
