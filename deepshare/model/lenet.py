@@ -7,6 +7,7 @@
 """
 import torch.nn as nn
 import torch.nn.functional as F
+from collections import OrderedDict
 
 '''
 lesson 3-1
@@ -51,7 +52,7 @@ class LeNet(nn.Module):
         # _modules ： 在conv1子网络属性，没有子网络了，所以是空的
 
         self.conv2 = nn.Conv2d(6, 16, 5)
-        # 类属性的赋值，会被拦截：构建子网络时, 先判断赋值的数据类型
+        # 类属性的赋值，会被setattr拦截：构建子网络时, 先判断赋值的数据类型
         # 是nn.parameter类型，存储到parameters有序字典中；
         # 是nn.Module类，会被存储到LeNet这个网络的modules有序字典属性中, 这里是 conv1: Conv2d()  conv2: Con2d()
         #  
@@ -105,6 +106,20 @@ class LeNet2(nn.Module):
             nn.ReLU(),
             nn.MaxPool2d(2, 2)
         )
+
+        # 上面这种方式构建完nn.Sequential后，__module字典参数中子模块的key是1,2,3..
+        # 下面这种方式构建完成后，key是conv1,...可以用名称来索引访问
+
+
+        self.features2 = nn.Sequential(
+            OrderedDict({'conv1': nn.Conv2d(3, 6, 5),
+                        'relu1': nn.ReLU(), 
+                        'pool1': nn.MaxPool2d(2,2), 
+                        'conv2': nn.Conv2d(3, 6, 5), 
+                        'relu2': nn.ReLU(), 
+                        'pool2': nn.MaxPool2d(2,2)})
+        )
+
         self.classifier = nn.Sequential(
             nn.Linear(16*5*5, 120),
             nn.ReLU(),
@@ -114,10 +129,14 @@ class LeNet2(nn.Module):
         )
 
     def forward(self, x):
-        x = self.features(x)
+        x = self.features(x)  
+        # Sequential类也是Module，所以也会调用Module中有__call__函数，会调用Sequential中的forward,自带; 
+        # container.forward中循环调用封装的子模型forward函数；注意：顺序执行，上一层的输出是下一层的输入，注意形状
+        # Sequential.modules中的key是：1,2,3...  
         x = x.view(x.size()[0], -1)
         x = self.classifier(x)
         return x
+
 
 class LeNet_bn(nn.Module):
     def __init__(self, classes):
