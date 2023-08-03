@@ -3,12 +3,13 @@ import os
 import sys
 import types
 
-from collections import Iterable
+from collections.abc import Iterable
+from collections.abc import Iterator
 
 '''
 python中的语法糖，推导式：
 
-列表(list)推导式
+列表(list)推导式`
 字典(dict)推导式
 集合(set)推导式
 ref: https://www.jianshu.com/p/0a269715a742
@@ -89,7 +90,25 @@ def fab(max: int):
 
 '''
 
-迭代器对象： Iterable
+Iterable: 可迭代对象
+
+作用于for循环的对象都是Iterable类型
+list、dict、str虽然是Iterable，却不是Iterator，可以使用iter()函数变成迭代器Iterator
+可迭代对象可用于 for 循环 及各种 以 iterable 为形参的函数/方法 中 (如 zip()、map()、enumerate() 等)
+for 循环的本质即：对可迭代对象调用 iter() 返回一个关于该对象的迭代器，然后不断调用 next() 迭代/遍历元素
+
+判断是否为可迭代对象
+isinstance([], Iterable)
+
+
+
+
+Iterator 迭代器
+
+迭代器 (iterator) 是一种用于表示 一连串数据流 的对象
+迭代器对象要求支持 迭代器协议 —— 对象须同时支持/实现 __iter__() 方法和 __next__() 方法
+
+迭代器必为可迭代对象但可迭代对象不一定是迭代器, 换言之，只有迭代器有 __next__() 方法，而可迭代对象没有
 
 1、普通的可迭代的数据类型：转成迭代器对象
 iter(object[, sentinel])
@@ -97,7 +116,7 @@ iter(object[, sentinel])
 object - - 支持迭代的集合对象。
 sentinel - - 如果传递了第二个参数，则参数 object 必须是一个可调用的对象（如，函数），此时，iter 创建了一个迭代器对象，每次调用这个迭代器对象的__next__()方法时，都会调用 object。
 打开模式
-返回值 ： 迭代器对象。
+返回值 ： 迭代器。
 
 2、next()函数：
 
@@ -122,6 +141,14 @@ def test_iterable():
         except StopIteration:
             #  遇到StopIteration退出循环
             break
+    
+    # 迭代器必定是可迭代对象，但可迭代对象，不一定是迭代器，因为没有next()
+
+    print(isinstance(lst, Iterable), isinstance(lst, Iterator))  # lst 是可迭代对象, 但还不是迭代器  (True, False) 
+    
+    iterator = iter(lst)  # 返回可迭代对象 lst 的迭代器, 并由变量 iterator 指向/保存该迭代器
+    
+    print(isinstance(iterator, Iterable), isinstance(iterator, Iterator))  # iterator 既是可迭代对象, 也是迭代器 True True
 
 
 if __name__ == '__main__':
