@@ -184,6 +184,13 @@ __init__ :nn.Conv2d  nn.Linear  使用?
 initialize_weights: 不同的子网络weight初始化方法，xavier_normal_ m.weight.data.fill_(1)  m.bias.data.zero_()
 
 
+蚂蚁和蜜蜂 二分类fintune的预训练model和训练数据：
+
+https://download.pytorch.org/tutorial/hymenoptera_data.zip
+https://download.pytorch.org/models/resnet18-5c106cde.pth
+
+
+
 
 
 
