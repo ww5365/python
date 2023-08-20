@@ -116,20 +116,54 @@ def lesson03_extra():
     print("output:{} \n".format(output))
     print(output.shape)
 
+    # view 改变shape 共享内存
+    t1 = torch.tensor([1.,2.,3.,4.,5.,6.]) # [6, ] 
+    t1_view = t1.view(t1.size()[0], -1) # shape : [6, 1] 
+    t1_view[0][0] += 10
+    print("tensort: t: {} view: {} shape: {} {}".format(t1, t1_view, t1_view.shape, t1_view.size()))
+
+    # flatten 拉平维度
+    t2 = torch.randn(2,4,2)
+    t22 = torch.flatten(t2)
+    
+    print("t2: {} t22:{}".format(t2.shape, t22.shape)) # [2,4,2] -> [16,]
 
 
+def lesson06_extra():
+
+    # torch.linespace 生成的数的维度
+    t1 = torch.linspace(-1,1,10).unsqueeze_(dim=1)  #  linspace返回[10,] unsqueeze后得到[10, 1]
+    print("tensor t1: {} shape: {}".format(t1, t1.shape))
+
+
+    # Modulist
+
+    net = nn.ModuleList([nn.Linear(10, 10) for i in range(3)])
+
+    for idx, m in enumerate(net.modules()):
+
+        print("idx: {} module:{}".format(idx, m))  # 总共4个模型 nn.ModuleList 1, nn.Linear: 3
 
 if __name__ == '__main__':
 
     # lesson02_extra()
-    lesson03_extra()
+    # lesson03_extra()
+
+    # lesson06_extra()
+
+
+
+    # exit(0)
 
     t1 = torch.tensor([-1.5256, -0.7502, -0.6540])
     t2 = torch.tensor([-0.3065,  0.1698, -0.1667])
 
-    t3 = torch.matmul(t1, t2)
+    # 向量内积  
+    t3 = torch.dot(t1, t2)
+    t33 = torch.matmul(t1, t2)
+    t333 = t1 * t2   # 所有元素并行运算,相当于 torch.mul(t1, t2)  对位相乘
 
-    print("t3: {}".format(t3 + 0.0843))
+    print("t3: {}  t33: {} t333: {}".format(t3, t33, t333))
 
     # 列表表达式
     li = ["test.jpg", "test2.doc", "test3.xml"]
@@ -173,3 +207,31 @@ if __name__ == '__main__':
     
     t2 = t[0, 0:2, ...]
     print("t2 tesnsor: {} shape:{}".format(t2, t2.shape))  # 2*3*4 会自动的squeeze()
+
+    arr = np.array([[ 0.1103, -2.2590,  0.6067, -0.1383],
+        [ 0.8310, -0.2477, -0.8029,  0.2366],
+        [ 0.2857,  0.6898, -0.6331,  0.8795]])
+
+    print("mean: {}".format(np.mean(arr)))
+
+    print("std: {}".format(np.std(arr)))
+
+    weight = np.array([[ 1.8793, -0.0721,  0.1578, -0.7735],
+        [ 0.1991,  0.0457,  0.1530, -0.4757],
+        [-0.1110,  0.2927, -0.1578, -0.0288],
+        [ 2.3571, -1.0373,  1.5748, -0.6298]])
+
+    print("weight mean: {}".format(np.mean(weight)))
+
+    print("weight std: {}".format(np.std(weight)))
+
+    print("矩阵乘法: {}".format(np.dot(arr, weight.T)))
+
+    li3 = [-2,1,-2,1,-1.8,1.1,-2.2,1.3]
+    np1 = np.array(li3)
+
+    print("np1 mean: {}  var: {}".format(np.mean(np1), np.var(np1)))    
+
+
+
+    
