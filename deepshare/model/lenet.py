@@ -65,11 +65,13 @@ class LeNet(nn.Module):
 
 
     def forward(self, x):  # 拼接子模块 
-        out = F.relu(self.conv1(x))
-        out = F.max_pool2d(out, 2)
-        out = F.relu(self.conv2(out))
-        out = F.max_pool2d(out, 2)
+        out = F.relu(self.conv1(x)) # batch * 6*28*28
+        out = F.max_pool2d(out, 2)  # batch * 6*14*14
+        out = F.relu(self.conv2(out)) # batch * 16*10*10
+        out = F.max_pool2d(out, 2)   # batch * 16*5*5
+        # print("========before: out shape: {}".format(out.shape))
         out = out.view(out.size(0), -1)
+        # print("========after: out shape: {}".format(out.shape))
         out = F.relu(self.fc1(out))
         out = F.relu(self.fc2(out))
         out = self.fc3(out)
@@ -188,3 +190,8 @@ class LeNet_bn(nn.Module):
             elif isinstance(m, nn.Linear):
                 nn.init.normal_(m.weight.data, 0, 1)
                 m.bias.data.zero_()
+
+
+
+
+
