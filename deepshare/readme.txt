@@ -190,6 +190,10 @@ https://download.pytorch.org/tutorial/hymenoptera_data.zip
 https://download.pytorch.org/models/resnet18-5c106cde.pth
 
 
+pytorch常见报错的文档：
+https://shimo.im/docs/PvgHytYygPVGJ8Hv
+
+
 
 
 
