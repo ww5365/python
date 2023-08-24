@@ -189,6 +189,8 @@ initialize_weights: 不同的子网络weight初始化方法，xavier_normal_ m.w
 https://download.pytorch.org/tutorial/hymenoptera_data.zip
 https://download.pytorch.org/models/resnet18-5c106cde.pth
 
+rnn demo 训练需要的数据
+https://download.pytorch.org/tutorial/data.zip
 
 pytorch常见报错的文档：
 https://shimo.im/docs/PvgHytYygPVGJ8Hv
