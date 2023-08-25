@@ -192,6 +192,9 @@ https://download.pytorch.org/models/resnet18-5c106cde.pth
 rnn demo 训练需要的数据
 https://download.pytorch.org/tutorial/data.zip
 
+Rnn基础参考的wiki：
+https://dennybritz.com/posts/wildml/recurrent-neural-networks-tutorial-part-1/
+
 pytorch常见报错的文档：
 https://shimo.im/docs/PvgHytYygPVGJ8Hv
 
