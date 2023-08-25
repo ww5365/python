@@ -6,18 +6,19 @@ import os
 import shutil  # shutil模块是对os模块的补充，主要针对文件的拷贝、删除、移动、压缩和解压操作
 import random  # 使用random.shuffle(x)
 import numpy as np
+import torch.optim as optim
 
 from torch.utils.data import IterableDataset
-
 from torch.utils.data import DataLoader
-
-
 import torch.nn as nn
+import torch.nn.functional as F
+import string 
+import unicodedata
+
 
 torch.manual_seed(1)
 
 # random.seed(1)
-
 
 def lesson02_extra():
 
@@ -125,7 +126,6 @@ def lesson03_extra():
     # flatten 拉平维度
     t2 = torch.randn(2,4,2)
     t22 = torch.flatten(t2)
-    
     print("t2: {} t22:{}".format(t2.shape, t22.shape)) # [2,4,2] -> [16,]
 
 
@@ -144,6 +144,96 @@ def lesson06_extra():
 
         print("idx: {} module:{}".format(idx, m))  # 总共4个模型 nn.ModuleList 1, nn.Linear: 3
 
+def lesson07_extra():
+
+    # maxpool2d 使用
+    t1 = torch.tensor([[[1.,1.,2.,4.],[5.,6.,7.,8.],[3.,2.,1.,0.],[1.,2.,3.,4.]]])
+    print(t1, t1.shape)
+    maxPool = nn.MaxPool2d(2,2)   # 主要验证以下的两种参数设置方式有什么不同？ 从现在看结果都是一致的
+    maxPool3 = nn.MaxPool2d((2,2))
+    t2 = maxPool(t1)
+    t3 = maxPool3(t1)
+    print(t2)
+    print(t3)
+
+    # 张量切片
+    print("省略号: {}".format(t1[0,...]))  # 省略号的作用? 切片出第1个维度的所有值
+
+    # torch.max 使用
+    print("max: {}".format(torch.max(t1, 1))) #  返回两组tensor,第1组：按照dim = 1，每行的最大值；第2组：每行最大值的索引位置
+
+    # tensor变脸直接计算sum
+    print(t1[0,...].sum())  # 计算所有元素的和，并返回tensor值
+    print(t1[0,...].sum().numpy())  # 将tensor转为numpy, 共享内存的
+
+    # np.argsort
+
+    li = [5, 4, 8, 1]
+    li2 = np.argsort(li)[::-1] # 值从大到小的下标索引[3,1,0,2]
+    li2_str = ",".join(map(str, li2)) # 把list中所有整数值转成字符串，并使用“,”拼接
+    print("li2: {} {}".format(li2, li2_str))
+
+    # 创建一个大小为（1, 1, 4, 4）的张量
+    x = torch.tensor([[
+        [[1, 2, 0, 3], [2, 1, 1, 0], [0, 1, 2, 1], [0, 1, 0, 2]]
+        ]])
+
+    x = x.to(torch.float32)
+
+    # 使用大小为（2, 2）的池化窗口进行最大池化
+    pool = F.max_pool2d(x, kernel_size=2)
+    print("shape: {} {} pool: {}".format(x.shape, pool.shape, pool))
+
+    pool2 = pool.view(pool.size()[0], -1)
+
+    print("pool2: {} {}".format(pool2, pool2.shape))
+
+
+
+def lesson08_extra():
+
+    # string.ascii_letters string.digits
+    str_letter = string.ascii_letters + string.digits
+    print("all chars and digitals: {}".format(str_letter))
+
+    # 文件名.扩展名 把扩展名取出来
+    path = r"c:\test\file1.txt"
+    print("path: {} {} ".format(path, os.path.basename(path)))
+    print("ext name: {}".format(os.path.splitext(os.path.basename(path))[1]))
+    
+    # unicodedata.normalize 把UNICODE字符串转换为普通格式的字符串，具体格式支持NFC、NFKC、NFD和NFKD格式
+    #  aä 实际是等价表述，不同的码表示，normalize之后，归一a
+    print(unicodedata.normalize('NFD', u'aあä').encode('ascii', 'ignore'))  # aa
+
+    title = u"Klüft skräms inför på fédéral électoral große"
+    print(unicodedata.normalize('NFKD', title))
+
+
+    #\xa0、\u3000等字符的解释及去除
+    s = 'T-shirt\xa0\xa0短袖圆领衫,\u3000体恤衫\xa0买一件\t吧'
+    print(unicodedata.normalize('NFKD', s)) # T-shirt  短袖圆领衫, 体恤衫 买一件 吧 
+
+    # unicodedata.category(chr) 判断字符类型
+    print(unicodedata.category('四'))  #Lo  letter other
+    print(unicodedata.category('8')) #Nd  Number, Decimal Digit
+    print(unicodedata.category('a')) #Ll    Letter, Lowercase
+
+    # 负对数似然损失函数（Negative Log Likelihood）
+    t1 = torch.tensor([[1.,1.,1.],[2.,3.,4.],[5.,1.,3.]])
+    nl1 = nn.NLLLoss(reduction="sum")  # softmax(x) + log(x) + nn.NLLLoss ====> nn.CrossEntropyLoss
+    loss = nl1(t1,torch.tensor([1, 0, 2]))  # -(1, 2, 3)/3
+
+    print("loss: {}".format(loss))
+
+    print(random.randint(0, 3))
+    
+    # tensor的topk
+
+    t2 = torch.tensor([2., 1.2, 3., 4.])
+
+    print(t2.topk(1))  # 返回两个tensor，(values=tensor([4.]),indices=tensor([3])) 第1个是最大值的张量，第2个是最大值下标的张量
+
+
 if __name__ == '__main__':
 
     # lesson02_extra()
@@ -151,9 +241,12 @@ if __name__ == '__main__':
 
     # lesson06_extra()
 
+    # lesson07_extra()
+
+    lesson08_extra()
 
 
-    # exit(0)
+    exit(0)
 
     t1 = torch.tensor([-1.5256, -0.7502, -0.6540])
     t2 = torch.tensor([-0.3065,  0.1698, -0.1667])
