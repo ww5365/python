@@ -3,6 +3,7 @@
 import torch
 import numpy as np
 import os
+import sys
 import shutil  # shutil模块是对os模块的补充，主要针对文件的拷贝、删除、移动、压缩和解压操作
 import random  # 使用random.shuffle(x)
 import numpy as np
@@ -220,12 +221,12 @@ def lesson08_extra():
 
     # 负对数似然损失函数（Negative Log Likelihood）
     t1 = torch.tensor([[1.,1.,1.],[2.,3.,4.],[5.,1.,3.]])
-    nl1 = nn.NLLLoss(reduction="sum")  # softmax(x) + log(x) + nn.NLLLoss ====> nn.CrossEntropyLoss
-    loss = nl1(t1,torch.tensor([1, 0, 2]))  # -(1, 2, 3)/3
+    nl1 = nn.NLLLoss(reduction="mean")  # softmax(x) + log(x) + nn.NLLLoss ====> nn.CrossEntropyLoss
+    loss = nl1(t1,torch.tensor([1, 0, 2]))  # reduction="mean" -(1, 2, 3)/3  "sum": -6
 
     print("loss: {}".format(loss))
 
-    print(random.randint(0, 3))
+    print(random.randint(0, 3)) #random.randint(m,n) 产生[m,n] 是闭区间的随机值
     
     # tensor的topk
 
@@ -235,6 +236,13 @@ def lesson08_extra():
 
 
 if __name__ == '__main__':
+
+
+    cur_file_dir = os.path.dirname(os.path.abspath(__file__))
+
+    print("获取当前文件所在目录，绝对路径:{}".format(cur_file_dir))
+
+    sys.path.append(cur_file_dir)
 
     # lesson02_extra()
     # lesson03_extra()
