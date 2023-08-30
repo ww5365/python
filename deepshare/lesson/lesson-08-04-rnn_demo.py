@@ -136,7 +136,10 @@ class RNN(nn.Module):
         self.v = nn.Linear(hidden_size, output_size)
 
         self.tanh = nn.Tanh()
-        self.softmax = nn.LogSoftmax(dim=1)  # 先求softmax 再求了log
+        # 先求softmax 再求了log, 思考本例中为什么这样处理？
+        # softmax后概率越大，越可能是这个类别；取log后，单调性不变，越大，还是越可能是这种类别，但是是负值表示-x；
+        # 直接用NLLLoss损失函数，即-(-x) , -x概率越大，x值越小，损失越小
+        self.softmax = nn.LogSoftmax(dim=1)  
 
     def forward(self, inputs, hidden):
 
@@ -165,11 +168,17 @@ def train(category_tensor, line_tensor):
     for i in range(line_tensor.size()[0]):  # 维度：字符串长度; 每个字母是one-hot表征;
         output, hidden = rnn(line_tensor[i], hidden)
 
-    loss = criterion(output, category_tensor)
+    loss = criterion(output, category_tensor)  
+    # output: 1*18 : [[-0.23, - 0.12, -0.45,...]] 18种分类, 1 * 18  category_tensor:[2] 取-(-0.45)作为损失
+
+    print("output: {} category: {} loss: {}".format(output, category_tensor, loss))
+
     loss.backward()
 
     # Add parameters' gradients to their values, multiplied by learning rate
     for p in rnn.parameters():
+
+        print("rnn parameters: {}".format(p))
         p.data.add_(-learning_rate, p.grad.data)
 
     return output, loss.item()
@@ -220,7 +229,7 @@ if __name__ == "__main__":
 
     # step 3 loss
     # 负对数似然损失函数（Negative Log Likelihood）
-    criterion = nn.NLLLoss()  # nn.LogSoftmax(dim = 1) 取绝对值，再取对应label索引位置上的值，拿出来求平均值。
+    criterion = nn.NLLLoss()
 
     # step 4 optimize by hand
 
@@ -230,6 +239,8 @@ if __name__ == "__main__":
     start = time.time()
     for iter in range(1, n_iters + 1):
         # sample  从某个语种中选择某个姓名, 语种类别向量category_tensor: 正确label标签  line_tensor: 某个姓名的one-hot表示
+        # category: English line:Napper category_tensor:tensor([4]) line_tensor:tensor: 6 * 1 * 57
+
         category, line, category_tensor, line_tensor = randomTrainingExample()
 
         # line_tensor : <line_length x 1 x n_letters>  one-hot表示
@@ -266,6 +277,3 @@ predict('Yue tingsong')
 predict('yutingsong')
 
 predict('test your name')
-
-
-
