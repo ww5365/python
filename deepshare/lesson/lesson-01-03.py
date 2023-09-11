@@ -2,10 +2,9 @@
 
 import torch
 import numpy as np
-import math
 
 
-def lesson02():
+def lesson03():
 
     '''
     张量拼接
@@ -40,6 +39,15 @@ def lesson02():
     print("t5: {}  t5.shape: {} ".format(t5, t5.shape))
     print("t6: {}  t6.shape: {} ".format(t6, t6.shape))
 
+    num0 = torch.tensor(1)   #标量
+    num1 = torch.tensor([3])
+    print("num0 shape:{} ".format(num0.shape))  
+    print("tnum0 num0:{} ".format(num0))
+
+    # tnu = torch.stack([num0, num1])  #标量不能和张量拼接 
+
+    # print("tnum shape:{} ".format(tnu.shape))
+    # print("tnum: {}".format(tnu))
 
 
     '''
@@ -77,163 +85,14 @@ def lesson02():
 
     功能：在dim上，按照index索引数据
     
-    torch.masked_select(input, mask, output)
-    功能：按照msak中的true进行索引选择
-    返回：一维张量
-    
-    '''
-    t7 = torch.randint(0, 9, (3,3))
-    idx = torch.tensor([0,2])
-    t77 = torch.index_select(t7, dim=0, index=idx)
-    print("t7:{}, t77 size:{} t77:{}".format(t7, t77.shape, t77))
-    
-    mask = t7.ge(5)  # t7中大于等于5的mask
-    t777 = torch.masked_select(t7, mask)  # 返回一维张量
-    print("mask:{}, t777:{}".format(mask, t777))
-    
-    
-    '''
-    张量的变换：
-    
-    torch.reshape(input, shape)    
-    返回值：和原数值共享变量
-    
-    torch.transpose(input, dim0=, dim1= )
-    dim0 和 dim1  是要交换的两个维度
-    
-    
-    矩阵的转置：transpose的简化
-    
-    torch.t(input)  等价 ： torch.transpose(input, dim0 = 0, dim1=1)
-    
-    
-    '''
-    
-    t8 = torch.randperm(10)
-    t88 = torch.reshape(t8, (-1,5)) # 自己计算行数，每列是5个元素
-    print("t8: {} t88: {}".format(t8, t88))
-    print("t8 id: {}, t88 id:{}".format(id(t8.data), id(t88.data)))  
-    
-    
-    t9 = torch.randint(low = 0, high=10, size =(2,2,3))
-    t99 = torch.transpose(t9, dim0 = 0, dim1= 1)
-    print("t9:{}, \n t99:{}".format(t9, t99))
-    
-    
-    '''
-    torch.squeenze(input, dim=)
-    压缩长度为1的维度
-    
-    
-    '''
-    
-    t10 = torch.randint(10, size=(1,2,3))
-    t10_1 = torch.squeeze(t10)
-    t10_2 = torch.squeeze(t10, dim=1)
-    
-    print("t10: {}, t10_1: {} t10_2:{}".format(t10, t10_1, t10_2.shape))
-    
-    
-    '''
-    torch.add(input, other=, alpha=)
-    
-    input + alpha * other
-    
-    torch.mul(input=, other=)
-    input * other : 对位乘
-    '''
-
-    
-    t11 = torch.randint(10, size=(2,3))
-    t12 = torch.randint(10, size=(2,3))
-    t12_1 = torch.mul(t11, t12)
-    t12_2 = t11 * t12
-    print("t11: {}, \n t12: {} \n t12_1:{} \n t12_2:{}".format(t11, t12, t12_1, t12_2))
-    
-    t13 = torch.tensor([3.])
-    
-    print("t13: {} size:{}".format((t13 < 13), t13.shape))
-    
-    print("type1: {} type2:{}".format(torch.tensor(1), torch.tensor([1])))
-    print("type1: {} type2:{}".format(type(torch.tensor(1)), type(torch.tensor([1]))))
 
 
     '''
-    矩阵运算
-
-    torch.mul(input, other)
-    对位乘法： 点乘
-    
-    torch.mm(input, mat2)
-    矩阵乘法
-
-    torch.matmul(input, other)
 
 
-    torch.add(input=, other=, alpha = )
 
-    功能：input + other * alpha 
+   
 
-    '''
-
-    t11 = torch.randint(10, (2, 3))
-
-    t12 = torch.randint(5, (2,3))
-
-    t13 = torch.mul(t11, t12)  # t11, t12的维度必须相同
-
-    print("t11: {} \n t12:{}\n t13:{}".format(t11, t12, t13))
-
-
-    t12_1 = t12.t()
-    t14 = torch.mm(t11, t12_1)  # t11的列，必须和t12的行相同： m * n  n * q => m * q
-
-    print("t11: {} \n t12_1:{}\n t14:{}".format(t11, t12_1, t14))
-
-
-    t15 = torch.ceil(torch.rand(3) * 10)  # 1d 向量： 2个元素
-    t16 = torch.ceil(torch.rand(3) * 10) 
-    t17 = torch.randint(10, size=(1,2))  # 矩阵： 1*2
-
-    t18 = torch.matmul(t15, t16)  # 向量的点积  标量
-
-    print("t15: {} \n t15 size:{}\n t16:{} t16 size:{} t18:{} t18 size:{}".format(t15, t15.shape, t16,  t16.shape, t18, t18.shape))
-
-    t19 = torch.rand(2,4)
-    t20 = torch.rand(4,3) ###维度也要对应才可以乘  矩阵乘法
-    print("t19,t20", torch.matmul(t19,t20),'\n',torch.matmul(t19,t20).size())
-
-
-    t21 = torch.ceil(torch.rand(4) * 10)  # 1d 向量： 4个元素
-    t22 = torch.ceil(torch.rand(4, 3) * 10)   # 2d 矩阵
-    t23 = torch.matmul(t21, t22)
-
-    ### python 中的广播机制，处理一些维度不同的tensor结构进行相乘操作， 1d * 2d 处理过程如下：
-    ### 扩充x =>(,4) 
-    ### 相乘x(,4) * y(4,3) =>(,3) 
-    ### 去掉1D =>(3)
-
-    print("t21: {} \n t21 size:{}\n t22:{} t22 size:{} t23:{} t23 size:{}".format(t21, t21.shape, t22,  t22.shape, t23, t23.shape))
-
-
-    t24 = torch.ceil(torch.rand(4, 3) * 10)  # 2d 矩阵： 4 * 3
-    t25 = torch.ceil(torch.rand(3) * 10)   # 1d 向量 
-    t26 = torch.matmul(t24, t25)  ## 进行点积运算，4个元素的向量
-
-    print("t24: {} \n t24 size:{}\n t25:{} t25 size:{} t26:{} t26 size:{}".format(t24, t24.shape, t25,  t25.shape, t26, t26.shape))
-
-
-    t27 = torch.rand((2, 3))
-
-    t28 = torch.rand((2,3))
-
-    t29 = torch.add(t27, t28, alpha= 2)
-
-    
-    print("t27: {} \n t27 size:{}\n t28:{} t28 size:{} t29:{} t29 size:{}".format(t27, t27.shape, t28,  t28.shape, t29, t29.shape))
-
-    
-    
 def torch_multiply():
 
     '''
@@ -271,24 +130,107 @@ def torch_multiply():
 
 
 
+    '''
+    矩阵运算
+
+    torch.mul(input, other)
+    对位乘法： 点乘
+    
+    torch.mm(input, mat2)
+    矩阵乘法,仅针对二维矩阵的乘法
+
+
+    torch.bmm(input, mat2)
+
+    针对3维度矩阵：m * s * t , n * t * q  =>  m * s * q
+    从第2个维度开始执行类似torch.mm的矩阵乘法
+
+    torch.matmul(input, other)
+
+    扩充torch中乘法运算：def torch_multiply()
+
+
+    torch.add(input=, other=, alpha = )
+
+    功能：input + other * alpha 
+
+    '''
+
+    t11 = torch.randint(10, (2, 3))
+
+    t12 = torch.randint(5, (2,3))
+
+    t13 = torch.mul(t11, t12)  # t11, t12的维度必须相同
+
+    print("t11: {} \n t12:{}\n t13:{}".format(t11, t12, t13))
+
+
+    t12_1 = t12.t()
+    t14 = torch.mm(t11, t12_1)  # t11的列，必须和t12的行相同： m * n  n * q => m * q
+
+    print("t11: {} \n t12_1:{}\n t14:{}".format(t11, t12_1, t14))
+
+
+    t15 = torch.ceil(torch.rand(3) * 10)  # 1d 向量： 2个元素
+    t16 = torch.ceil(torch.rand(3) * 10) 
+    t17 = torch.randint(10, size=(1,2))  # 矩阵： 1*2
+
+    t18 = torch.matmul(t15, t16)  # 向量的点积  标量
+
+    print("t15: {} \n t15 size:{}\n t16:{} t16 size:{} t18:{} t18 size:{}".format(t15, t15.shape, t16,  t16.shape, t18, t18.shape))
+
+    t19 = torch.rand(2,4)
+    t20 = torch.rand(4,3) ###维度也要对应才可以乘  矩阵乘法
+    print(torch.matmul(t19,t20),'\n',torch.matmul(t19,t20).size())
+
+
+    t21 = torch.ceil(torch.rand(4) * 10)  # 1d 向量： 4个元素
+    t22 = torch.ceil(torch.rand(4, 3) * 10)   # 2d 矩阵
+    t23 = torch.matmul(t21, t22)
+
+    ### python 中的广播机制，处理一些维度不同的tensor结构进行相乘操作， 1d * 2d 处理过程如下：
+    ### 扩充x =>(,4) 
+    ### 相乘x(,4) * y(4,3) =>(,3) 
+    ### 去掉1D =>(3)
+
+    print("t21: {} \n t21 size:{}\n t22:{} t22 size:{} t23:{} t23 size:{}".format(t21, t21.shape, t22,  t22.shape, t23, t23.shape))
+
+    t24 = torch.ceil(torch.rand(4, 3) * 10)  # 2d 矩阵： 4 * 3
+    t25 = torch.ceil(torch.rand(3) * 10)   # 1d 向量 
+    t26 = torch.matmul(t24, t25)  ## 进行点积运算，4个元素的向量
+
+    print("t24: {} \n t24 size:{}\n t25:{} t25 size:{} t26:{} t26 size:{}".format(t24, t24.shape, t25,  t25.shape, t26, t26.shape))
+
+    t27 = torch.rand((2, 3))
+
+    t28 = torch.rand((2,3))
+
+    t29 = torch.add(t27, t28, alpha= 2)
+    print("t27: {} \n t27 size:{}\n t28:{} t28 size:{} t29:{} t29 size:{}".format(t27, t27.shape, t28,  t28.shape, t29, t29.shape))
+
+    ## torch.bmm 使用  第1个维度相同，第2,3维度类似torch.mm运算
+    t30 = torch.tensor([[[1, 2],[3, 4]], [[5,6],[7,8]],[[9, 10],[11,12]]]) # 3 * 2 * 2
+    t31 = torch.tensor([[[1],[4]], [[5],[7]],[[9],[11]]]) # 3 * 2 * 1
+    print("t30: {}  t31: {}".format(t30.size(), t31.size()))
+    t32 = torch.bmm(t30, t31)
+    print("t32: {}  t32: {}".format(t32, t32.size()))
+
+
+
+def test_dot():
+    
+    t1 = torch.tensor([-1.5256, -0.7502, -0.6540])
+    t2 = torch.tensor([-0.3065,  0.1698, -0.1667])
+    # 向量内积  
+    t3 = torch.dot(t1, t2)
+    t33 = torch.matmul(t1, t2)
+    t333 = t1 * t2   # 所有元素并行运算,相当于 torch.mul(t1, t2)  对位相乘
+    print("t3: {}  t33: {} t333: {}".format(t3, t33, t333))
+    
+
+
 if __name__ == '__main__':
 
-    lesson02()
-    
-    
-    print("--" * 30)
-    
-    torch_multiply()
-    
-    
-    t1 = torch.tensor([0,math.pi/4, math.pi/2, math.pi])
-    print("t1: {} sin: {} ".format(t1, torch.sin(t1)))
-    
-    t2 = torch.tensor([[1,2,3]])
-    t3 = torch.tensor([[1,1],[2,2],[3,3]])
-    
-    print("t2 * t3 : ", torch.matmul(t2, t3), torch.mm(t2,t3))
-    
-    t4 = torch.tensor([1.0])
-    
-    print("tensor -> numpy: {} type: {}".format(t4.data.numpy() > 1.5, t4.data.numpy().shape))
+    lesson03()
+
+    # torch_multiply()
