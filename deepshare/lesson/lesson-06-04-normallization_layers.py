@@ -17,8 +17,8 @@ from tools.common_tools import set_seed
 set_seed(1)  # 设置随机种子
 
 # ======================================== nn.layer norm
-# flag = 1
-flag = 0
+flag = 1
+# flag = 0
 if flag:
     batch_size = 2
     num_features = 3
@@ -40,14 +40,44 @@ if flag:
     feature_maps_bs[0:1,0:1,0:1,0:1] = 5
     output = ln(feature_maps_bs)
 
+    ## NLP任务中：seq_len * batch_size * dim
+
+    corpus = [[[1,3],[2,3]],[[2,4],[2,4]],[[2,3],[5,6]]]  # 3 * 2 * 2
+
+    x = torch.tensor(corpus).to(torch.float32)
+
+    ln = nn.LayerNorm(2)  # 按照最后一个维度2，即2个元素进行规范化
+    # ([[[-1.0000,  1.0000],
+    #          [-1.0000,  1.0000]],
+
+    #         [[-1.0000,  1.0000],
+    #          [-1.0000,  1.0000]],
+
+    #         [[-1.0000,  1.0000],
+    #          [-1.0000,  1.0000]]]
+
+    # ln = nn.LayerNorm([2,2])   # 按照 2*2的维度，4个元素整体进行规范化
+
+    # ([[[-1.5075,  0.9045],
+    #      [-0.3015,  0.9045]],
+
+    #     [[-1.0000,  1.0000],
+    #      [-1.0000,  1.0000]],
+
+    #     [[-1.2649, -0.6325],
+    #      [ 0.6325,  1.2649]]]
+
+    print("test layerNorm\n: {}".format(ln(x)))
+
+
     print("Layer Normalization")
     print(ln.weight.shape)
     print(feature_maps_bs[0, ...])
     print(output[0, ...])
 
 # ======================================== nn.instance norm 2d
-flag = 1
-# flag = 0
+# flag = 1
+flag = 0
 if flag:
 
     batch_size = 2
@@ -78,8 +108,8 @@ if flag:
 
 
 # ======================================== nn.grop norm
-flag = 1
-# flag = 0
+# flag = 1
+flag = 0
 if flag:
 
     batch_size = 2
