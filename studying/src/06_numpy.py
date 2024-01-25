@@ -127,4 +127,23 @@ if __name__ == '__main__':
     print(np.linalg.norm(num3))
     print(np.linalg.norm(num2, axis=0))  # 保留行维度，按照列计算范数
 
+    '''
+    6、np.hstack将参数元组的元素数组按水平方向进行叠加
+    '''
+
+    # 矩阵 
+    arr1 = np.array([[1,3], [2,4] ])
+    arr2 = np.array([[1,4], [2,6] ])
+    res = np.hstack((arr1, arr2))
+    print (res)
+    #[[1 3 1 4]
+    #[2 4 2 6]]
+
+    # 向量
+    vec1 = [1, 2, 3]
+    vec2 = [4, 5, 6]
+    res = np.hstack((vec1, vec2))
+    print(res)
+
+
     print(dot_res2 / (np.linalg.norm(num2) * np.linalg.norm(num3)))
