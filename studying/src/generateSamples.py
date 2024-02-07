@@ -49,7 +49,7 @@ def forward(x_pre, h_pre, c_pre, Wi, Wc, Wf, Wo, Bi, Bc, Bf, Bo):  # 传入行�
     
     xh = np.column_stack((x_pre, h_pre))  # 行矩阵合并为行
 
-    print("forward xh: {}".format(xh))
+    print("forward xh: {} shape: {} \n".format(xh, xh.shape))
 
     # ft = xh.dot(Wf) + Bf
     # ft = ft+forget_bias
@@ -58,7 +58,9 @@ def forward(x_pre, h_pre, c_pre, Wi, Wc, Wf, Wo, Bi, Bc, Bf, Bo):  # 传入行�
     # np.dot(a,b) 一维向量是内积运算; 矩阵的话是举证乘积运算
 
     ft = sigmoid(xh.dot(Wf) + Bf + forget_bias)
-    print("wf: {}  bf: {}  ft: {}".format(Wf, Bf, ft))
+    print("wf: {}  shape: {} \n".format(Wf, Wf.shape))
+    print("bf: {}  shape: {}\n".format(Bf, Bf.shape))
+    print("ft: {}  shape: {}".format(ft, ft.shape)) # 1*3
 
     it = sigmoid(xh.dot(Wi) + Bi)
     ot = sigmoid(xh.dot(Wo) + Bo)
@@ -67,7 +69,16 @@ def forward(x_pre, h_pre, c_pre, Wi, Wc, Wf, Wo, Bi, Bc, Bf, Bo):  # 传入行�
     # np.multiply() 和 * : 两个数组进行对应位置的乘积（element-wise product）输出的结果与参与运算的数组或者矩阵的大小一致
 
     ct = np.multiply(ft, c_pre) + np.multiply(it, ct_)
+
+    print("c_pre: {}  shape: {} \n".format(c_pre, c_pre.shape))
+    print("it: {}  shape: {}\n".format(it, it.shape))
+    print("ct_: {}  shape: {}".format(ct_, ct_.shape))
+    print("ct: {}  shape: {}".format(ct, ct.shape))  # 1*3
+
     ht = np.multiply(ot, tanh(ct))
+    
+    print("ot: {}  shape: {}".format(ot, ot.shape))
+    print("ht: {}  shape: {}".format(ht, ht.shape))  # 1*3
 
 
     return ct, ht
@@ -100,10 +111,15 @@ for i in range(X.shape[0]):
     x_pre = np.array([X[i, 2, :]])
     c2, h2 = forward(x_pre, h2, c2, Wi, Wc, Wf, Wo, Bi, Bc, Bf, Bo)
     ratio = 1.0
+
+    print("==================================")
+    print("\n c2: {}  h2: {}\n".format(c2, h2))   # c2: 1 * 3   h2: 1 * 3  二维
+
+
     if h2[0, 0] > ratio * (h2[0, 1] + h2[0, 2]):
-        samples_X.append(X[i].tolist())
-        val_list.append(h2[0].tolist())
-        label_list.append([0])
+        samples_X.append(X[i].tolist())  # 已选样本数 * 3 * 4  代表3个时间序列，每个时间序列输入的维度是：4
+        val_list.append(h2[0].tolist())  # 已选样本数 * 3
+        label_list.append([0])  # 已选样本数 * 1
         ch0 = ch0 + 1
 
     elif h2[0, 1] > ratio * (h2[0, 0] + h2[0, 2]):
@@ -118,9 +134,25 @@ for i in range(X.shape[0]):
         val_list.append(h2[0].tolist())
         ch2 = ch2 + 1
 
+
+
+print("samples: {}".format(samples_X))
+print("val list: {}".format(val_list))
+print("label list: {}".format(label_list))
+
+
 plt.figure()
 plt.plot(label_list, marker='*', c='r', alpha=0.2)  # 点之间画直线 【划线不能有参数s，alpha为透明通道1为不透明，接近0则更透明】
 plt.show()
 print('ch0,ch1,ch2', ch0, ch1, ch2)
 print(val_list[0:2])
-np.savez('Samples.npz', x=samples_X, y=label_list, y_val=val_list)
+
+
+# def savez(file, *args, **kwds):
+# savez()函数：以未压缩的.npz格式将多个数组保存到单个文件中。
+# .npz格式：以压缩打包的方式存储文件，可以用压缩软件解压。
+# savez()函数：第一个参数是文件名，其后的参数都是需要保存的数组，也可以使用关键字参数为数组起一个名字，非关键字参数传递的数组会自动起名为arr_0, arr_1, …。
+# savez()函数：输出的是一个压缩文件（扩展名为.npz），其中每个文件都是一个save()保存的.npy文件，文件名对应于数组名。
+# load()自动识别.npz文件，并且返回一个类似于字典的对象，可以通过数组名作为关键字获取数组的内容。
+
+np.savez(r'.\Samples.npz', x=samples_X, y=label_list, y_val=val_list)
