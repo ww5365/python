@@ -89,7 +89,7 @@ def forward(x_pre, h_pre, c_pre, Wi, Wc, Wf, Wo, Bi, Bc, Bf, Bo):  # 传入行�
 # dn表格每个维度
 # 返回值为指定维度的array
 
-N = 1  # 30000
+N = 3000  # 30000
 
 X = np.random.randn(N, 3, 4)
 label_list = []
@@ -156,3 +156,5 @@ print(val_list[0:2])
 # load()自动识别.npz文件，并且返回一个类似于字典的对象，可以通过数组名作为关键字获取数组的内容。
 
 np.savez(r'.\Samples.npz', x=samples_X, y=label_list, y_val=val_list)
+
+print("the samples_x len: {}".format(len(samples_X)))
