@@ -6,24 +6,33 @@
 
 ## pip 源
 
-windows 配置pip源 
+#### windows配置pip源 
 
 C:\Users\用户名\pip\pip.ini
 
 ```
 [global]
-trusted-host=cmc-cd-mirror.rnd.huawei.com
-index-url=http://cmc-cd-mirror.rnd.huawei.com/pypi/simple/
+trusted-host=cmc-cd-mirror.rnd.***.com
+index-url=http://cmc-cd-mirror.rnd.****.com/pypi/simple/
 ```
 
 
-C:\Users\YuZhe\pip.ini    pip的源，清华的
+C:\Users\***\pip.ini    pip的源，清华的
 
 [global]
 	index-url = https://pypi.tuna.tsinghua.edu.cn/simple
 [install]
     trusted-host=mirrors.aliyun.com
 
+### 查看pip3安装依赖包路径
+
+where pip3  # 查看pip3安装路径
+pip3 list
+pip3 --version
+
+
+pip3 show 安装的包名  # 这个有用能看到location安装路径
+    Location: c:\users\****\appdata\local\programs\python\python310\lib\site-packages
 
 
 ## Anaconda和安装pytorch
