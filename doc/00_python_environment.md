@@ -6,7 +6,7 @@
 
 ## pip 源
 
-#### windows配置pip源 
+### windows配置pip源 
 
 C:\Users\用户名\pip\pip.ini
 
