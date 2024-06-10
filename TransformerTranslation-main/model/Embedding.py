@@ -46,7 +46,7 @@ class TokenEmbedding(nn.Module):
         self.embedding = nn.Embedding(vocab_size, emb_size)
         self.emb_size = emb_size
 
-    """
+        """
         :param tokens: shape : [len, batch_size]
         :return: shape: [len, batch_size, emb_size]
         """
