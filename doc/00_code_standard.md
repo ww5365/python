@@ -108,5 +108,3 @@ def load_batch(fpath):
 
 
 ## 参考
-
-1、<<华为python语言通用编程规范>>

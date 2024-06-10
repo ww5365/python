@@ -5,7 +5,12 @@ import torch
 import torch.nn as nn
 import torch.nn.functional as F
 
+from collections import Counter
+
 import copy
+
+from torchtext.vocab import  vocab
+from torchtext.data.utils import get_tokenizer
 
 
 def torch_use():
@@ -251,6 +256,13 @@ def test_loss_funtion():
     # x_input:shape是 3*3  y_target: [3] 多分类的真值(索引值,类别值)
     print('crossentropyloss_output:\n',crossentropyloss_output)
 
+    # ignore_index ? 忽略某个类别(类别值), 具体以target中的值为准
+
+    crossentropyloss2 = torch.nn.CrossEntropyLoss(ignore_index=0)
+    y2 = crossentropyloss2(x_input,y_target)
+    print('crossentropyloss_output2:\n', y2)
+
+
 
 def test_data_loader():
 
@@ -259,18 +271,81 @@ def test_data_loader():
 
     return
 
+def test_torch_text():
+    ## 构建词表, 给每个token-》id的词表
+    testStr = "我爱中国 i love china"
+    # test = ['<unk>', '<pad>', '<bos>', '<eos>', '.', '爱', '中'
+
+    tokenizer = get_tokenizer('spacy', language = 'en_core_web_sm')
+
+    test = tokenizer(testStr)
+
+    print("tokenizer result: {}".format(test))
+    specials = ['bos','<pad>']
+    
+    counter = Counter()
+    counter.update(test)  # test是个list，把整个单词作为token
+
+    # for elem in test:
+    #     counter.update(elem)  # 把每个单词的每个字母作为token
+    #     print(elem)
+    
+    print("counter type: {}  {}".format(type(counter),counter))
+    vb = vocab(counter, specials=specials, min_freq = 1)
+
+    print("vb type: {}  {} ".format(type(vb), vb.get_stoi()))
+    
+    vb.set_default_index(0)
+    print("vb['u']  {}".format(vb['u']))  # 需要set_default_index不然会报错 oov  词典中内容不变
+    print("vb type: {}  {} ".format(type(vb), vb.get_stoi()))
+
+def test_rnn_padding():
+
+    ## test pad_sequence
+    from torch.nn.utils.rnn import pad_sequence
+    test1 = torch.tensor([1,2])
+    test2 = torch.tensor([1,2,3])
+    test3 = torch.tensor([1,2,3,4])
+    li = [test1, test2, test3] # 0行2个元素，1行3个元素
+    res = pad_sequence(li, padding_value= -1)  # 转成tensor列: 4 * 3
+    print("padding : {}".format(res))
+
+    ## test torch.cat
+    test4 = torch.tensor([1,2,3])
+    test5 = torch.tensor([4,5,6])
+
+    print("tensor shape: {}".format(test4.size()))
+
+    test6 = torch.cat((torch.tensor([-1]),test4, test5, torch.tensor([0])), dim=0)
+
+    print("test6: {}".format(test6))
+
+
+
+def test_tensor_splice():
+
+    ## 张量的一些操作
+    test1 = torch.randn([4,1,7])
+    test2 = test1[:test1.size(0), :]  #   张量切片，开辟新内存了  4*1*7
+    print("id1: {}  id2: {}".format(id(test1), id(test2))) ## 4 * 1 * 7  
+    print("test1: {} \n test2{}".format(test1, test2)) ## 4 * 1 * 7  
+    print(test1.shape[-1])
+
+    ## reshape(-1) 是啥情况
+
+    test3 = torch.randint(10, size=(3,4,2))
+    print("test3: {}".format(test3))
+    test4 = test3.reshape(-1)
+    print("test3 reshape: {}".format(test4))
+
+
 
 
 
 if __name__ == "__main__":
 
-    test1 = torch.randn([4,1,7])
-
-    test2 = test1[:test1.size(0), :]  #   张量切片，开辟新内存了
-    print("id1: {}  id2: {}  test2: {}".format(id(test1), id(test2), test2)) ## 4 * 1 * 7  
-
-    print(test1.shape[-1])
-
+    # test_torch_text()
+    # test_tensor_splice()
 
     # test_nn_embedding()
 
@@ -284,4 +359,8 @@ if __name__ == "__main__":
 
     # test_deep_copy_model()
 
-    test_loss_funtion()
+    # test_loss_funtion()
+
+    test_rnn_padding()
+
+    

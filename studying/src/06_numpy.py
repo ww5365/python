@@ -64,6 +64,7 @@ if __name__ == '__main__':
         np.random.randint
         np.random.random
         np.random.uniform
+        np.random.randn
     '''
 
     # randint(low=x, high=y, size=z or (m,n), d) 产出[low, high)之间的随机值，产出个数z或（m,n）
@@ -80,6 +81,17 @@ if __name__ == '__main__':
 
     print("np.random.random: ", tmp1)
     print("np.random.uniform: ", tmp2)
+
+
+    X = np.random.randn(30, 3, 4)
+    print("np random X shape: ", X.shape)
+    print("np random X: ", X)
+    for i in range(X.shape[0]):
+        x_pre = np.array([X[i, 0, :]])
+        # x_pre = X[i, 0, :]
+        print("x_pre i: ", i)
+        print("x_pre: ", x_pre, x_pre.shape)
+
 
     '''
     2、numpy类型数组，转为ctypes类型
@@ -128,3 +140,40 @@ if __name__ == '__main__':
     print(np.linalg.norm(num2, axis=0))  # 保留行维度，按照列计算范数
 
     print(dot_res2 / (np.linalg.norm(num2) * np.linalg.norm(num3)))
+
+
+    '''
+    6、np.hstack将参数元组的元素数组按水平方向进行叠加
+    '''
+
+    # 矩阵 
+    arr1 = np.array([[1,3], [2,4] ])
+    arr2 = np.array([[1,4], [2,6] ])
+    res = np.hstack((arr1, arr2))
+    print (res)
+    #[[1 3 1 4]
+    #[2 4 2 6]]
+
+    # 向量
+    vec1 = [1, 2, 3]
+    vec2 = [4, 5, 6]
+    res = np.hstack((vec1, vec2))
+    print(res)
+
+
+    '''
+    np.shape
+    np.matrix
+    '''
+
+    k = np.matrix([[1, 2, 3, 4],
+             [5, 6, 7, 8],
+             [9, 10, 11, 12]])
+
+    print(k)
+    print(np.shape(k))       # 输出（3，4）表示矩阵为3行4列
+    print(k.shape[0])        # shape[0]输出3，为矩阵的行数
+    print(k.shape[1])        # 同理shape[1]输出列数
+
+
+

@@ -3,6 +3,29 @@
 import os
 import sys
 
+def str_split():
+
+    # 体育，政府，新闻  ，取A_intent_nlu_final
+    intent_dict = {"体育", "新闻", "政府"}
+    intent_nlu_str = "test:0.8|体育:0.6"
+    intent_nlu_vec = intent_nlu_str.split("|")
+
+    for elem in intent_nlu_vec:
+        if elem != "":
+            print(elem)
+        (tag,val) = elem.split(":")
+        print(tag, val)
+        if tag in intent_dict and float(val) > 0.5:
+            print("hit-----")
+    
+    str1 = '3","Fears for T N pension after talks","Unions representing workers at Turner Newall say they are \'disappointed\' after talks with stricken parent firm Federal Mogul."'
+
+    res1 = str1.split('","')
+    res2 = str1.split('","')[-1]  # 取最后1个子串
+    res = str1.split('","')[-1][:-2] # 取最后1个子串的从头到倒数第2个字符
+    print("the result: {} \n {} \n {}".format(res1, res2 , res))
+
+
 if __name__ == '__main__':
 
     # 汉字字符串长度
