@@ -176,4 +176,17 @@ if __name__ == '__main__':
     print(k.shape[1])        # 同理shape[1]输出列数
 
 
+    '''
+    计算范数：L1 L2
+    np.linalg.norm(x)
+    '''
+
+    vec = np.array([3,4, 5])
+    res = np.linalg.norm(vec)
+    print("Normal : {}".format(res))  # 7.07107 sqrt(a^2 + b^2 + c^2 + ...)
+    
+
+
+
+
 
