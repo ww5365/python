@@ -1,0 +1,27 @@
+langchain==0.0.354
+# Successfully installed langchain-0.0.354 langchain-community-0.0.20 langchain-core-0.1.23 langsmith-0.0.87
+
+langchain-openai==0.0.6
+
+## ! When this bug is caught:
+## ModuleNotFoundError: No module named 'pwd'
+## ! Solution:
+# pip uninstall langchain-community
+# pip install langchain-community==0.0.19
+
+jupyterlab==4.1.2
+
+python-dotenv==1.0.1
+sentence-transformers==2.4.0
+
+## if you want to use gpu torch
+## example: CUDA11.8 version
+# pip3 install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu118
+## Successfully installed torch-2.2.1+cu118 torchaudio-2.2.1+cu118 torchvision-0.17.1+cu118
+
+faiss-cpu==1.7.4
+datasets==2.17.1
+ragas==0.1.3
+openpyxl==3.1.2
+pypdf==4.0.2
+rank_bm25==0.2.2
