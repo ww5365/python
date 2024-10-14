@@ -2,6 +2,25 @@
 import os
 import json
 
+class MyClass:
+    pass
+
+class YourClass:
+    pass
+
+def fun_isinstance():
+    '''
+    判断某个对象是否为某个类的实例
+
+    '''
+    
+    obj = MyClass()
+    res = isinstance(obj, YourClass)
+
+    print("res : {}".format(res))
+
+
+
 if __name__ == '__main__':
 
 
@@ -12,3 +31,5 @@ if __name__ == '__main__':
     json.dump() ： 将python的数据结构，存成json格式的str，并存入file中
     
     '''
+
+    fun_isinstance(
