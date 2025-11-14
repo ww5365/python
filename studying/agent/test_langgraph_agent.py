@@ -11,7 +11,7 @@ import datetime
 from typing import List, Dict, Any
 
 # 设置环境变量（可选）
-os.environ["OPENAI_API_KEY"] = ""
+os.environ["OPENAI_API_KEY"]=
 
 os.environ["DDG_USER_AGENT"] = "Mozilla/5.0"
 os.environ["REQUESTS_CA_BUNDLE"] = ""  # 禁用 SSL 验证（仅用于测试）
