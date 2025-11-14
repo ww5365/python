@@ -1,3 +1,4 @@
+import time
 ''' 
 python 闭包机制 使用场景，装饰器
 
@@ -11,7 +12,7 @@ def time_decorator(func):
 		time1 = time.time()
 		ret = func(*args)
 		time2 = time.time()
-		print('funciton: %s  time: %0.3f ret: %s', func.__name__, time2 - time1, ret)
+		print(f'funciton: {func.__name__}  time: {time2 - time1} ret: {ret}')
 		return ret
 
 	print("33333333333")
@@ -32,5 +33,5 @@ if __name__ == "__main__":
 33333333333
 22222222 34
 34
-funciton: %s  time: %0.3f ret: %s fun 0.0005075931549072266 34
+funciton: fun  time: 0.0 ret: 34
 '''
