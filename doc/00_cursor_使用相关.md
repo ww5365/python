@@ -21,7 +21,9 @@
 ### 文档
 
 * api文档生成： md文件中写prompt，把源文件路径，规则，写清楚  -> @md文件  -> query：生成api文档
-* 
+* 本地文件，博客等网站，代码库： cursor可以参考来进行代码编写
+  cursor setting -> indexing&Docs -> Docs(add Doc)
+  
 
 
 git 自动提交工具？
