@@ -21,8 +21,9 @@
 ### 文档
 
 * api文档生成： md文件中写prompt，把源文件路径，规则，写清楚  -> @md文件  -> query：生成api文档
-* 本地文件，博客等网站，代码库： cursor可以参考来进行代码编写
+* 本地文件，博客等网站，代码库： cursor可以参考来进行代码编写： **这个功能很重要**
   cursor setting -> indexing&Docs -> Docs(add Doc)
+  加下对这个库中代码的参考：https://github.com/NVIDIA/recsys-examples/tree/main/corelib/dynamicemb
   
 
 
