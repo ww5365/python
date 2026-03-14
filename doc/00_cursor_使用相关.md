@@ -24,7 +24,16 @@
 * 本地文件，博客等网站，代码库： cursor可以参考来进行代码编写： **这个功能很重要**
   cursor setting -> indexing&Docs -> Docs(add Doc)
   加下对这个库中代码的参考：https://github.com/NVIDIA/recsys-examples/tree/main/corelib/dynamicemb
-  
+
+### @的使用
+
+手动**添加上下文**的方式	用法示例	目的
+@Files （引用文件）	“参照 **@src/utils/helper.ts** 的写法，创建一个新的日志工具函数。”	让AI精确读取某个或多个文件，避免它“猜”错文件。
+@Code / @Symbols （引用代码/符号）	“帮我解释一下 ** @calculateTotal **这个函数的逻辑。”	当你只想关注某个特定的函数或类，而不是整个文件时使用，更加精准。
+@Folders （引用文件夹）	“检查一下 **@components** 文件夹下所有组件的 props 命名是否规范。”	一次性为整个目录下的文件提供上下文，适合做全局性的审查或重构。
+@Web （联网搜索）	**“@Web 最新版的 React 19 有哪些新特性？**”	让 AI 突破知识截止日期，联网查找最新信息。
+@Git （引用Git信息）	“**根据 @git 中暂存的更改，帮我写一份提交信息。**”	让 AI 分析你的代码变更记录，辅助代码审查或生成提交信息。
+
 
 
 git 自动提交工具？
