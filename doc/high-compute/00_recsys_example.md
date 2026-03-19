@@ -42,7 +42,9 @@ feature_id space 不是特征个数，是特征取值的总数。
 
 
 
-## 
+## MindSpeed Megatron-LM  torchrec  torch-npu  大模型组件
+
+[deepseek参考](https://chat.deepseek.com/a/chat/s/e3059fd5-a995-43f7-ae26-0aa1efe94318)
 
 | 组件名称 | 核心定位 | 一句话描述 |
 | :--- | :--- | :--- |
