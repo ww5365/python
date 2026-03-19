@@ -4,6 +4,7 @@
 ## feature_id space
 
 推荐平台的feature_id space 的理解？
+咨询chatgpt：https://chatgpt.com/c/69b7be9e-c338-8323-aefd-6e4f531021ed
 
 feature_id space 不是特征个数，是特征取值的总数。
 
@@ -16,6 +17,10 @@ feature_id space 不是特征个数，是特征取值的总数。
 | feature value    | token    |
 | feature_id       | token 编号 |
 | feature_id space | token总数  |
+
+
+这张表这么大，我该怎么处理？高效的支持推荐系统模型的训推。
+
 
 
 
@@ -34,6 +39,17 @@ feature_id space 不是特征个数，是特征取值的总数。
 出现了dynamic embedding(动态embedding缓存) 方案，核心思想：
 * 只把热点 embedding 放到gpu   : L1 cache
 * 冷数据放cpu/ssd             : L2 storage
+
+
+
+## 
+
+| 组件名称 | 核心定位 | 一句话描述 |
+| :--- | :--- | :--- |
+| **MindSpeed** | 华为昇腾NPU的大模型训练加速库 | 专为昇腾打造，让Megatron-LM等框架能在NPU上高效训练大模型。 |
+| **Megatron-LM** | NVIDIA GPU的大模型训练框架 | 由NVIDIA推出，定义了大规模分布式训练的标准，是行业标杆。 |
+| **TorchRec** | PyTorch的推荐系统专用库 | 专注于解决推荐系统中大规模嵌入表（稀疏特征）的训练痛点。 |
+| **torch-npu** | 华为昇腾NPU的PyTorch插件 | 作为一个桥梁，让PyTorch能够识别和调用昇腾NPU进行计算。 |
 
 
 
