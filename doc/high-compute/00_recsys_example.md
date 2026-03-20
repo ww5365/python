@@ -121,4 +121,90 @@ sequence = [
 ]
 ```
 
+## dynamic 执行流程
+这个模块是 NVIDIA RecSys Examples 中最重要的子系统之一，用于在 GPU 上实现动态 embedding 表管理（支持缓存、淘汰策略、分布式训练等）
+下面给你画一张 真正基于源码结构的完整执行路径图（从 Python → C++ → CUDA → GPU 内存）
 
+                       ┌──────────────────────────────┐
+                       │  Training / Inference Model  │
+                       │ examples/hstu/modules        │
+                       │ embedding.py                 │
+                       └───────────────┬──────────────┘
+                                       │
+                                       │
+                       ┌───────────────▼────────────────┐
+                       │ PyTorch Interface Layer        │
+                       │                                │
+                       │ BatchedDynamicEmbeddingTablesV2│
+                       │ dynamicemb/batched_dynamic_... │
+                       └───────────────┬────────────────┘
+                                       │
+                                       │
+                       ┌───────────────▼────────────────┐
+                       │ Config Layer                   │
+                       │ DynamicEmbTableOptions        │
+                       │ dynamicemb_config.py          │
+                       │                                │
+                       │  - cache size                  │
+                       │  - eviction strategy           │
+                       │  - initializer                 │
+                       └───────────────┬────────────────┘
+                                       │
+                                       │
+                       ┌───────────────▼────────────────┐
+                       │ Table Management Layer         │
+                       │                                │
+                       │ KeyValueTable                  │
+                       │ key_value_table.py             │
+                       │                                │
+                       │  - insert(key,value)           │
+                       │  - lookup(key)                 │
+                       │  - delete(key)                 │
+                       └───────────────┬────────────────┘
+                                       │
+                                       │
+                       ┌───────────────▼────────────────┐
+                       │ Hash Table Backend             │
+                       │                                │
+                       │ HKVVariable                    │
+                       │ src/hkv_variable.h             │
+                       │                                │
+                       │ GPU/CPU hierarchical hash map  │
+                       └───────────────┬────────────────┘
+                                       │
+                                       │
+                       ┌───────────────▼────────────────┐
+                       │ Dynamic Variable Base          │
+                       │                                │
+                       │ dynamic_variable_base.h        │
+                       │                                │
+                       │ embedding storage manager      │
+                       └───────────────┬────────────────┘
+                                       │
+                                       │
+                ┌──────────────────────▼─────────────────────┐
+                │ Storage Layer                               │
+                │                                             │
+                │ GPU HBM cache (hot embeddings)              │
+                │ Host DRAM storage (cold embeddings)         │
+                │                                             │
+                │ eviction policy: LRU / LFU                  │
+                └──────────────────────┬─────────────────────┘
+                                       │
+                                       │
+                ┌──────────────────────▼─────────────────────┐
+                │ CUDA Kernel Layer                           │
+                │                                             │
+                │ embedding_lookup_kernel                     │
+                │ hash_lookup_kernel                          │
+                │ embedding_pooling_kernel                    │
+                │                                             │
+                │ parallel lookup + fused ops                 │
+                └──────────────────────┬─────────────────────┘
+                                       │
+                                       │
+                           ┌───────────▼───────────┐
+                           │ GPU Memory (HBM)      │
+                           │ embedding cache       │
+                           │ optimizer states      │
+                           └───────────────────────┘
