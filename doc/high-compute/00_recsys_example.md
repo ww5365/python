@@ -208,3 +208,215 @@ sequence = [
                            │ embedding cache       │
                            │ optimizer states      │
                            └───────────────────────┘
+
+
+## 理解EmbeddingCollection功能和jagged tensor 
+
+
+### 一、准备：定义 embedding 表
+
+我们有 3 个特征：
+
+| feature | table      | vocab大小 | dim |
+| ------- | ---------- | ------- | --- |
+| user_id | user_table | 1000    | 2   |
+| item_id | item_table | 1000    | 3   |
+| tag（多值） | tag_table  | 100     | 2   |
+
+---
+
+#### 假设 embedding 权重（手写出来）
+
+##### user_table（dim=2）
+
+```text
+id : embedding
+1  → [0.1, 0.2]
+2  → [0.3, 0.4]
+```
+
+---
+
+##### item_table（dim=3）
+
+```text
+10 → [1.0, 1.1, 1.2]
+20 → [2.0, 2.1, 2.2]
+30 → [3.0, 3.1, 3.2]
+```
+
+---
+
+##### tag_table（dim=2）
+
+```text
+5 → [0.5, 0.5]
+6 → [0.6, 0.6]
+7 → [0.7, 0.7]
+```
+
+---
+
+### 二、输入数据（KeyedJaggedTensor 逻辑结构）
+
+假设 batch_size = 2：
+
+```text
+样本1:
+  user_id = 1
+  item_id = 10
+  tag = [5, 6]
+
+样本2:
+  user_id = 2
+  item_id = 20
+  tag = [7]
+```
+
+---
+
+#### 转成 KJT 的逻辑表示：
+
+```python
+{
+  "user_id": [1, 2]
+  "item_id": [10, 20]
+  "tag": [
+    [5, 6],   # sample1
+    [7]       # sample2
+  ]
+}
+```
+
+👉 tag 是 **变长（Jagged）**
+
+---
+
+### 三、Step 1：EmbeddingCollection 查表（lookup）
+
+#### 1️⃣ user_id lookup
+
+```text
+[1, 2]
+↓
+[[0.1, 0.2],
+ [0.3, 0.4]]
+```
+
+shape:
+
+```text
+[2, 2]
+```
+
+---
+
+#### 2️⃣ item_id lookup
+
+```text
+[10, 20]
+↓
+[[1.0, 1.1, 1.2],
+ [2.0, 2.1, 2.2]]
+```
+
+shape:
+
+```text
+[2, 3]
+```
+
+---
+
+#### 3️⃣ tag lookup（注意：还没 pooling）
+
+```text
+sample1: [5,6] → [[0.5,0.5], [0.6,0.6]]
+sample2: [7]   → [[0.7,0.7]]
+```
+
+---
+
+### 四、Step 2：Pooling（关键）
+
+EmbeddingCollection 默认会对 jagged 特征做 pooling（如 sum）
+
+---
+
+#### tag pooling（sum）
+
+##### sample1
+
+```text
+[0.5,0.5] + [0.6,0.6]
+= [1.1, 1.1]
+```
+
+---
+
+##### sample2
+
+```text
+[0.7,0.7]
+```
+
+---
+
+#### pooling 后结果：
+
+```text
+[[1.1, 1.1],
+ [0.7, 0.7]]
+```
+
+shape:
+
+```text
+[2, 2]
+```
+
+---
+
+### 五、Step 3：输出（KeyedTensor）
+
+EmbeddingCollection 输出：
+
+```python
+{
+  "user_id": tensor([
+    [0.1, 0.2],
+    [0.3, 0.4]
+  ]),
+
+  "item_id": tensor([
+    [1.0, 1.1, 1.2],
+    [2.0, 2.1, 2.2]
+  ]),
+
+  "tag": tensor([
+    [1.1, 1.1],
+    [0.7, 0.7]
+  ])
+}
+```
+
+---
+
+### 六、Step 4：如果进入推荐模型（关键连接）
+
+通常会做：
+
+```python
+# 拼接
+x = concat([
+  user_emb,   # [2,2]
+  item_emb,   # [2,3]
+  tag_emb     # [2,2]
+])
+```
+
+得到：
+
+```text
+shape = [2, 7]
+```
