@@ -84,6 +84,12 @@ def lambda_use():
     1、lambda 表达式： 创建匿名函数
     lambda [arg1 [,arg2,.....argn]]:expression
 
+    lambda 是 Python 里的匿名函数，用来快速定义一个小函数。
+
+    语法：lambda 参数: 表达式
+    特点：只能写一个表达式，表达式结果就是返回值（不写 return）
+    典型用途：当函数很短、只用一次时，作为参数传给别的函数（如 sorted、map、filter、default_factory）
+
     2、函数：
     def fun():
         statement
