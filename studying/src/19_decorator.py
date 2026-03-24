@@ -35,25 +35,25 @@ def fun(num):
 '''
 
 class User:
-    def __init__(self, age: int):
-        self.age = age  # 会走下面的 setter
+	def __init__(self, age: int):
+		self.age = age  # 会走下面的 setter
 
-    @property
-    def age(self) -> int:
-        return self._age
+	@property
+	def age(self) -> int:
+		return self._age
 
-    @age.setter
-    def age(self, value: int):
-        if value < 0:
-            raise ValueError("age must be >= 0")
-        self._age = value
+	@age.setter
+	def age(self, value: int):
+		if value < 0:
+			raise ValueError("age must be >= 0")
+		self._age = value
 
 if __name__ == "__main__":
 	fun("34")
 
-    u = User(18)
-    u.age = 20  # OK
-    # u.age = -1    # ValueError
+	u = User(18)
+	u.age = 20  # OK
+	# u.age = -1    # ValueError
 
 
 '''
