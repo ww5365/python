@@ -32,6 +32,7 @@ def fun(num):
 对外保持“字段式”接口，内部可加计算/校验
 只读属性（不提供 setter）
 需要时加 setter 做赋值检查
+
 '''
 
 class User:
