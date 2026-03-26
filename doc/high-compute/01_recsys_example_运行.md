@@ -10,7 +10,7 @@
 #!/bin/bash
 
 
-# 加载昇腾的环境：npu工具链和运行环境 
+# 加载昇腾的环境：npu工具链和运行环境 ： cann-9.0.0
 source /usr/local/Ascend/ascend-toolkit/set_env.sh
 
 # 如果是arm架构，比如鲲鹏服务器，需要加载openMP，做并行处理的
