@@ -35,6 +35,21 @@ pip3 show 安装的包名  # 这个有用能看到location安装路径
     Location: c:\users\****\appdata\local\programs\python\python310\lib\site-packages
 
 
+
+### pip的命令使用说明
+
+#### pip install --no-deps --no-build-isolation -e .
+
+pip install：pip 的安装命令，用于安装 Python 包。
+
+-e（或 --editable）：以可编辑模式安装。这意味着**包不会复制到 site-packages 中，而是通过链接的方式指向当前目录**。对源代码的任何修改都会立即生效，无需重新安装，常用于本地开发调试。
+
+--no-deps：不安装包的依赖项。即使项目的 setup.py 或 pyproject.toml 中声明了依赖，此命令也只会安装包本身，而忽略所有依赖。适合在已经手动安装了依赖或明确不希望自动处理依赖的场景。
+
+--no-build-isolation：禁用构建隔离。默认情况下，pip 在构建包时会创建一个隔离的虚拟环境，并在其中安装构建所需的依赖（如 setuptools、wheel 等）。使用此选项后，构建过程将直接使用当前 Python 环境中的工具和库，不会创建临时隔离环境。这可以加快构建速度，但要求当前环境已具备所有构建依赖。
+
+
+
 ## Anaconda和安装pytorch
 
 
