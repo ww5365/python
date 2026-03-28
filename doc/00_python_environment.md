@@ -4,6 +4,10 @@
 # python 环境搭建
 
 
+## python 环境查询
+
+查看当前 Python 环境的 site-packages 路径：python -m site
+
 ## pip 源
 
 ### windows配置pip源 
