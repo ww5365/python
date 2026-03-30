@@ -443,29 +443,72 @@ ids -> internal index
 
 #### 模拟输入数据示例
 
-* batch数据，两个样本：
-  sample0:
-    user_id    = [1001]
-    item_id    = [11, 12]
-    keyword_id = [5, 6, 7]
+* 样本：batch size = 2
+sample0:
+  user_id = [1001]
+  item_id = [201, 202]
+  tag_id  = [7, 8, 9]
 
-  sample1:
-    user_id    = [1002]
-    item_id    = [13]
-    keyword_id = [8]
+sample1:
+  user_id = [1002]
+  item_id = [203]
+  tag_id  = [10]
 
-* 转成indices和offsets
-  user_id:
-  indices = [1001, 1002]
-  offsets = [0, 1, 2]
+* bag顺序
+bag0 -> user_id sample0
+bag1 -> user_id sample1
+bag2 -> item_id sample0
+bag3 -> item_id sample1
+bag4 -> tag_id  sample0
+bag5 -> tag_id  sample1
 
-  item_id:
-  indices = [11, 12, 13]
-  offsets = [0, 2, 3]
+* 统一压平：
+all_indices = [1001, 1002, 201, 202, 203, 7, 8, 9, 10]
+all_offsets = [0, 1, 2, 4, 5, 8, 9]
+bag_table_names = [
+    "user_id",
+    "user_id",
+    "item_id",
+    "item_id",
+    "tag_id",
+    "tag_id",
 
-  tag_id:
-  indices = [5, 6, 7, 8]
-  offsets = [0, 3, 4]
+]
+
+bag0 = all_indices[0:1] = [1001]
+bag1 = all_indices[1:2] = [1002]
+bag2 = all_indices[2:4] = [201, 202]
+bag3 = all_indices[4:5] = [203]
+bag4 = all_indices[5:8] = [7, 8, 9]
+bag5 = all_indices[8:9] = [10]
+
+* 为什么需要unique？
+item_id indices = [201, 202, 201, 203, 202]
+怎么减少202重复查询？
+unique_indices = [201, 202, 203]
+inverse = [0, 1, 0, 2, 1]
+
+只 lookup 一次 unique ids
+    ↓
+再按 inverse 恢复原顺序
+    ↓
+再做 pooling
+
+
+* lookup 动态查表
+raw_embs = self.tables["user_id"].lookup(indices)
+key_to_slot = {}
+vectors = []
+1001 -> 不存在 -> 分配 slot 0
+1002 -> 不存在 -> 分配 slot 1
+key_to_slot = {
+    1001: 0,
+    1002: 1,
+}
+slot0 -> [e1001]
+slot1 -> [e1002]
+
+动态性体现在，没有id映射的情况下，会新分配slot/index构建内部映射表。
 
 * 模拟送入模型的代码：
 
