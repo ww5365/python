@@ -432,7 +432,7 @@ gitcode上的代码：https://gitcode.com/Ascend/RecSDK/blob/develop/training/to
 
 #### 处理流程
 * 输入：
-(indices, offsets)
+**(indices, offsets)**
 * 处理：
 ids -> internal index
 不存在则动态创建
@@ -441,18 +441,18 @@ ids -> internal index
 * 输出：
 每张表 / 每个样本 对应的 embedding 表示
 
-#### 数据示例
+#### 模拟输入数据示例
 
 * batch数据，两个样本：
-sample0:
-  user_id    = [1001]
-  item_id    = [11, 12]
-  keyword_id = [5, 6, 7]
+  sample0:
+    user_id    = [1001]
+    item_id    = [11, 12]
+    keyword_id = [5, 6, 7]
 
-sample1:
-  user_id    = [1002]
-  item_id    = [13]
-  keyword_id = [8]
+  sample1:
+    user_id    = [1002]
+    item_id    = [13]
+    keyword_id = [8]
 
 * 转成indices和offsets
   user_id:
@@ -466,6 +466,32 @@ sample1:
   tag_id:
   indices = [5, 6, 7, 8]
   offsets = [0, 3, 4]
+
+* 模拟送入模型的代码：
+  ``` python
+model = BatchedDynamicEmbeddingTablesV2({
+    "user_id": 4,
+    "item_id": 4,
+})
+
+inputs = {
+    "user_id": {
+        "indices": user_indices,
+        "offsets": user_offsets,
+    },
+    "item_id": {
+        "indices": item_indices,
+        "offsets": item_offsets,
+    }
+}
+
+outputs = model(inputs)
+
+print("user_id output shape:", outputs["user_id"].shape)
+print(outputs["user_id"])
+print("item_id output shape:", outputs["item_id"].shape)
+print(outputs["item_id"])
+  ```
 
   
 
