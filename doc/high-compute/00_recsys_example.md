@@ -430,6 +430,7 @@ gitcode上的代码：https://gitcode.com/Ascend/RecSDK/blob/develop/training/to
 
 多表、多 bag、多 id 的动态 embedding 查表执行器
 
+#### 处理流程
 * 输入：
 (indices, offsets)
 * 处理：
@@ -439,6 +440,38 @@ ids -> internal index
 可选 pooling / unique 优化
 * 输出：
 每张表 / 每个样本 对应的 embedding 表示
+
+#### 数据示例
+
+* batch数据，两个样本：
+sample0:
+  user_id    = [1001]
+  item_id    = [11, 12]
+  keyword_id = [5, 6, 7]
+
+sample1:
+  user_id    = [1002]
+  item_id    = [13]
+  keyword_id = [8]
+
+* 转成indices和offsets
+  user_id:
+  indices = [1001, 1002]
+  offsets = [0, 1, 2]
+
+  item_id:
+  indices = [11, 12, 13]
+  offsets = [0, 2, 3]
+
+  tag_id:
+  indices = [5, 6, 7, 8]
+  offsets = [0, 3, 4]
+
+  
+
+  
+  
+
 
 
 
