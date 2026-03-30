@@ -420,3 +420,28 @@ x = concat([
 ```text
 shape = [2, 7]
 ```
+
+## 理解：recSdk中的BatchedDynamicEmbeddingTablesV2
+
+gitcode上的代码：https://gitcode.com/Ascend/RecSDK/blob/develop/training/torch_rec_v2/dynamic_emb/dynamic_emb/distributed/batched_dynamicemb_table.py
+
+
+### 总结
+
+多表、多 bag、多 id 的动态 embedding 查表执行器
+
+* 输入：
+(indices, offsets)
+* 处理：
+ids -> internal index
+不存在则动态创建
+批量查 embedding
+可选 pooling / unique 优化
+* 输出：
+每张表 / 每个样本 对应的 embedding 表示
+
+
+
+
+
+
