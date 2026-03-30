@@ -468,8 +468,8 @@ ids -> internal index
   offsets = [0, 3, 4]
 
 * 模拟送入模型的代码：
-  ``` python
-model = BatchedDynamicEmbeddingTablesV2({
+  ```python
+  model = BatchedDynamicEmbeddingTablesV2({
     "user_id": 4,
     "item_id": 4,
 })
