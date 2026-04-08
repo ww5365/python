@@ -48,6 +48,21 @@ if __name__ == '__main__':
     for i, val in enumerate(li):
         print("序号：%s   值：%s" % (i + 1, val))
 
+    # dd
+    test_li = [2, 3]
+    test_li2 = [i
+    for i, val in enumerate(test_li)
+    for _ in range(val)
+    ]
+    print("test_li2: ", test_li2)
+
+    ## ddx
+
+    for i in range(0, 13, 3):
+        print(f"range: {i}")
+
+
+
     # 删除list中元素
     print("befor del list: ", li)
 
