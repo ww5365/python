@@ -444,6 +444,7 @@ ids -> internal index
 #### 模拟输入数据示例
 
 * 样本：batch size = 2
+```
 sample0:
   user_id = [1001]
   item_id = [201, 202]
@@ -453,16 +454,18 @@ sample1:
   user_id = [1002]
   item_id = [203]
   tag_id  = [10]
-
+```
 * bag顺序
+```
 bag0 -> user_id sample0
 bag1 -> user_id sample1
 bag2 -> item_id sample0
 bag3 -> item_id sample1
 bag4 -> tag_id  sample0
 bag5 -> tag_id  sample1
-
+```
 * 统一压平：
+```
 all_indices = [1001, 1002, 201, 202, 203, 7, 8, 9, 10]
 all_offsets = [0, 1, 2, 4, 5, 8, 9]
 bag_table_names = [
@@ -472,7 +475,6 @@ bag_table_names = [
     "item_id",
     "tag_id",
     "tag_id",
-
 ]
 
 bag0 = all_indices[0:1] = [1001]
@@ -481,7 +483,7 @@ bag2 = all_indices[2:4] = [201, 202]
 bag3 = all_indices[4:5] = [203]
 bag4 = all_indices[5:8] = [7, 8, 9]
 bag5 = all_indices[8:9] = [10]
-
+```
 * 为什么需要unique？
 item_id indices = [201, 202, 201, 203, 202]
 怎么减少202重复查询？
@@ -496,6 +498,8 @@ inverse = [0, 1, 0, 2, 1]
 
 
 * lookup 动态查表
+
+```
 raw_embs = self.tables["user_id"].lookup(indices)
 key_to_slot = {}
 vectors = []
@@ -507,6 +511,7 @@ key_to_slot = {
 }
 slot0 -> [e1001]
 slot1 -> [e1002]
+```
 
 动态性体现在，没有id映射的情况下，会新分配slot/index构建内部映射表。
 

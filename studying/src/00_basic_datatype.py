@@ -3,6 +3,12 @@
 
 if __name__ == "__main__":
 
+
+    val = 2 ** 3   # 指数运算： x^a
+    print(f"val:{val}")
+
+
+
     b = 0b0101  # 0b  二进制
     c = 0o17  # 0o  八进制
     d = 0x1e  # 0x 十六进制
