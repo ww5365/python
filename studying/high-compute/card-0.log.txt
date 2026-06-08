@@ -1,0 +1,707 @@
+rank=0 日志文件: ./logs/training_rank_0.log
+========================================================================
+训练配置
+========================================================================
+  bs = 10
+  embedding_dim = 2
+  Iters = 10
+  num_npus = 8
+  uplicate_rate = 0.6
+  conbiner = 1
+  use_pooling_in_pull = False
+  USE_MERGED_TABLE = True
+  all2all_slot_len = 100
+all2all_slot: list len=100
+  all2all_slot[0]: shape=(), dtype=int64, values=[1]
+  all2all_slot[1]: shape=(), dtype=int64, values=[1]
+  all2all_slot[2]: shape=(), dtype=int64, values=[4000]
+  all2all_slot[3]: shape=(), dtype=int64, values=[32]
+  all2all_slot[4]: shape=(), dtype=int64, values=[1]
+  all2all_slot[5]: shape=(), dtype=int64, values=[1]
+  all2all_slot[6]: shape=(), dtype=int64, values=[1]
+  all2all_slot[7]: shape=(), dtype=int64, values=[1]
+  all2all_slot[8]: shape=(), dtype=int64, values=[54]
+  all2all_slot[9]: shape=(), dtype=int64, values=[1]
+  all2all_slot[10]: shape=(), dtype=int64, values=[94]
+  all2all_slot[11]: shape=(), dtype=int64, values=[13]
+  all2all_slot[12]: shape=(), dtype=int64, values=[100]
+  all2all_slot[13]: shape=(), dtype=int64, values=[1]
+  all2all_slot[14]: shape=(), dtype=int64, values=[8]
+  all2all_slot[15]: shape=(), dtype=int64, values=[25]
+  all2all_slot[16]: shape=(), dtype=int64, values=[19]
+  all2all_slot[17]: shape=(), dtype=int64, values=[1]
+  all2all_slot[18]: shape=(), dtype=int64, values=[24]
+  all2all_slot[19]: shape=(), dtype=int64, values=[16]
+  all2all_slot[20]: shape=(), dtype=int64, values=[1]
+  all2all_slot[21]: shape=(), dtype=int64, values=[36]
+  all2all_slot[22]: shape=(), dtype=int64, values=[1]
+  all2all_slot[23]: shape=(), dtype=int64, values=[1]
+  all2all_slot[24]: shape=(), dtype=int64, values=[36]
+  all2all_slot[25]: shape=(), dtype=int64, values=[1]
+  all2all_slot[26]: shape=(), dtype=int64, values=[1]
+  all2all_slot[27]: shape=(), dtype=int64, values=[4000]
+  all2all_slot[28]: shape=(), dtype=int64, values=[1]
+  all2all_slot[29]: shape=(), dtype=int64, values=[1]
+  all2all_slot[30]: shape=(), dtype=int64, values=[1]
+  all2all_slot[31]: shape=(), dtype=int64, values=[1]
+  all2all_slot[32]: shape=(), dtype=int64, values=[18]
+  all2all_slot[33]: shape=(), dtype=int64, values=[1]
+  all2all_slot[34]: shape=(), dtype=int64, values=[19]
+  all2all_slot[35]: shape=(), dtype=int64, values=[1]
+  all2all_slot[36]: shape=(), dtype=int64, values=[1]
+  all2all_slot[37]: shape=(), dtype=int64, values=[2]
+  all2all_slot[38]: shape=(), dtype=int64, values=[2]
+  all2all_slot[39]: shape=(), dtype=int64, values=[38]
+  all2all_slot[40]: shape=(), dtype=int64, values=[1]
+  all2all_slot[41]: shape=(), dtype=int64, values=[1]
+  all2all_slot[42]: shape=(), dtype=int64, values=[1]
+  all2all_slot[43]: shape=(), dtype=int64, values=[1]
+  all2all_slot[44]: shape=(), dtype=int64, values=[6]
+  all2all_slot[45]: shape=(), dtype=int64, values=[47]
+  all2all_slot[46]: shape=(), dtype=int64, values=[1]
+  all2all_slot[47]: shape=(), dtype=int64, values=[1]
+  all2all_slot[48]: shape=(), dtype=int64, values=[1]
+  all2all_slot[49]: shape=(), dtype=int64, values=[1]
+  all2all_slot[50]: shape=(), dtype=int64, values=[1]
+  all2all_slot[51]: shape=(), dtype=int64, values=[25]
+  all2all_slot[52]: shape=(), dtype=int64, values=[44]
+  all2all_slot[53]: shape=(), dtype=int64, values=[1]
+  all2all_slot[54]: shape=(), dtype=int64, values=[1]
+  all2all_slot[55]: shape=(), dtype=int64, values=[26]
+  all2all_slot[56]: shape=(), dtype=int64, values=[1]
+  all2all_slot[57]: shape=(), dtype=int64, values=[1]
+  all2all_slot[58]: shape=(), dtype=int64, values=[125]
+  all2all_slot[59]: shape=(), dtype=int64, values=[1]
+  all2all_slot[60]: shape=(), dtype=int64, values=[1]
+  all2all_slot[61]: shape=(), dtype=int64, values=[1]
+  all2all_slot[62]: shape=(), dtype=int64, values=[1]
+  all2all_slot[63]: shape=(), dtype=int64, values=[1]
+  all2all_slot[64]: shape=(), dtype=int64, values=[25]
+  all2all_slot[65]: shape=(), dtype=int64, values=[57]
+  all2all_slot[66]: shape=(), dtype=int64, values=[1]
+  all2all_slot[67]: shape=(), dtype=int64, values=[6]
+  all2all_slot[68]: shape=(), dtype=int64, values=[30]
+  all2all_slot[69]: shape=(), dtype=int64, values=[1]
+  all2all_slot[70]: shape=(), dtype=int64, values=[1]
+  all2all_slot[71]: shape=(), dtype=int64, values=[12]
+  all2all_slot[72]: shape=(), dtype=int64, values=[4]
+  all2all_slot[73]: shape=(), dtype=int64, values=[1]
+  all2all_slot[74]: shape=(), dtype=int64, values=[31]
+  all2all_slot[75]: shape=(), dtype=int64, values=[44]
+  all2all_slot[76]: shape=(), dtype=int64, values=[43]
+  all2all_slot[77]: shape=(), dtype=int64, values=[1]
+  all2all_slot[78]: shape=(), dtype=int64, values=[35]
+  all2all_slot[79]: shape=(), dtype=int64, values=[1]
+  all2all_slot[80]: shape=(), dtype=int64, values=[5]
+  all2all_slot[81]: shape=(), dtype=int64, values=[11]
+  all2all_slot[82]: shape=(), dtype=int64, values=[39]
+  all2all_slot[83]: shape=(), dtype=int64, values=[47]
+  all2all_slot[84]: shape=(), dtype=int64, values=[1]
+  all2all_slot[85]: shape=(), dtype=int64, values=[1]
+  all2all_slot[86]: shape=(), dtype=int64, values=[16]
+  all2all_slot[87]: shape=(), dtype=int64, values=[1]
+  all2all_slot[88]: shape=(), dtype=int64, values=[73]
+  all2all_slot[89]: shape=(), dtype=int64, values=[1]
+  all2all_slot[90]: shape=(), dtype=int64, values=[5]
+  all2all_slot[91]: shape=(), dtype=int64, values=[1]
+  all2all_slot[92]: shape=(), dtype=int64, values=[34]
+  all2all_slot[93]: shape=(), dtype=int64, values=[1]
+  all2all_slot[94]: shape=(), dtype=int64, values=[3]
+  all2all_slot[95]: shape=(), dtype=int64, values=[1]
+  all2all_slot[96]: shape=(), dtype=int64, values=[26]
+  all2all_slot[97]: shape=(), dtype=int64, values=[1]
+  all2all_slot[98]: shape=(), dtype=int64, values=[1]
+  all2all_slot[99]: shape=(), dtype=int64, values=[1]
+local_vocabulary_size: list len=100
+  local_vocabulary_size[0]: shape=(), dtype=int64, values=[244]
+  local_vocabulary_size[1]: shape=(), dtype=int64, values=[9]
+  local_vocabulary_size[2]: shape=(), dtype=int64, values=[197592]
+  local_vocabulary_size[3]: shape=(), dtype=int64, values=[112439]
+  local_vocabulary_size[4]: shape=(), dtype=int64, values=[210]
+  local_vocabulary_size[5]: shape=(), dtype=int64, values=[88]
+  local_vocabulary_size[6]: shape=(), dtype=int64, values=[212]
+  local_vocabulary_size[7]: shape=(), dtype=int64, values=[238]
+  local_vocabulary_size[8]: shape=(), dtype=int64, values=[189740]
+  local_vocabulary_size[9]: shape=(), dtype=int64, values=[33]
+  local_vocabulary_size[10]: shape=(), dtype=int64, values=[330288]
+  local_vocabulary_size[11]: shape=(), dtype=int64, values=[45679]
+  local_vocabulary_size[12]: shape=(), dtype=int64, values=[351370]
+  local_vocabulary_size[13]: shape=(), dtype=int64, values=[40]
+  local_vocabulary_size[14]: shape=(), dtype=int64, values=[28110]
+  local_vocabulary_size[15]: shape=(), dtype=int64, values=[87843]
+  local_vocabulary_size[16]: shape=(), dtype=int64, values=[66761]
+  local_vocabulary_size[17]: shape=(), dtype=int64, values=[102]
+  local_vocabulary_size[18]: shape=(), dtype=int64, values=[84329]
+  local_vocabulary_size[19]: shape=(), dtype=int64, values=[56220]
+  local_vocabulary_size[20]: shape=(), dtype=int64, values=[31]
+  local_vocabulary_size[21]: shape=(), dtype=int64, values=[126494]
+  local_vocabulary_size[22]: shape=(), dtype=int64, values=[240]
+  local_vocabulary_size[23]: shape=(), dtype=int64, values=[168]
+  local_vocabulary_size[24]: shape=(), dtype=int64, values=[126494]
+  local_vocabulary_size[25]: shape=(), dtype=int64, values=[4]
+  local_vocabulary_size[26]: shape=(), dtype=int64, values=[134]
+  local_vocabulary_size[27]: shape=(), dtype=int64, values=[445894]
+  local_vocabulary_size[28]: shape=(), dtype=int64, values=[13]
+  local_vocabulary_size[29]: shape=(), dtype=int64, values=[126]
+  local_vocabulary_size[30]: shape=(), dtype=int64, values=[196]
+  local_vocabulary_size[31]: shape=(), dtype=int64, values=[199]
+  local_vocabulary_size[32]: shape=(), dtype=int64, values=[63247]
+  local_vocabulary_size[33]: shape=(), dtype=int64, values=[69]
+  local_vocabulary_size[34]: shape=(), dtype=int64, values=[66761]
+  local_vocabulary_size[35]: shape=(), dtype=int64, values=[218]
+  local_vocabulary_size[36]: shape=(), dtype=int64, values=[131]
+  local_vocabulary_size[37]: shape=(), dtype=int64, values=[7028]
+  local_vocabulary_size[38]: shape=(), dtype=int64, values=[7028]
+  local_vocabulary_size[39]: shape=(), dtype=int64, values=[133521]
+  local_vocabulary_size[40]: shape=(), dtype=int64, values=[93]
+  local_vocabulary_size[41]: shape=(), dtype=int64, values=[214]
+  local_vocabulary_size[42]: shape=(), dtype=int64, values=[197]
+  local_vocabulary_size[43]: shape=(), dtype=int64, values=[179]
+  local_vocabulary_size[44]: shape=(), dtype=int64, values=[21083]
+  local_vocabulary_size[45]: shape=(), dtype=int64, values=[165144]
+  local_vocabulary_size[46]: shape=(), dtype=int64, values=[158]
+  local_vocabulary_size[47]: shape=(), dtype=int64, values=[238]
+  local_vocabulary_size[48]: shape=(), dtype=int64, values=[77]
+  local_vocabulary_size[49]: shape=(), dtype=int64, values=[115]
+  local_vocabulary_size[50]: shape=(), dtype=int64, values=[238]
+  local_vocabulary_size[51]: shape=(), dtype=int64, values=[87843]
+  local_vocabulary_size[52]: shape=(), dtype=int64, values=[154603]
+  local_vocabulary_size[53]: shape=(), dtype=int64, values=[245]
+  local_vocabulary_size[54]: shape=(), dtype=int64, values=[26]
+  local_vocabulary_size[55]: shape=(), dtype=int64, values=[91357]
+  local_vocabulary_size[56]: shape=(), dtype=int64, values=[153]
+  local_vocabulary_size[57]: shape=(), dtype=int64, values=[93]
+  local_vocabulary_size[58]: shape=(), dtype=int64, values=[439213]
+  local_vocabulary_size[59]: shape=(), dtype=int64, values=[239]
+  local_vocabulary_size[60]: shape=(), dtype=int64, values=[184]
+  local_vocabulary_size[61]: shape=(), dtype=int64, values=[96]
+  local_vocabulary_size[62]: shape=(), dtype=int64, values=[74]
+  local_vocabulary_size[63]: shape=(), dtype=int64, values=[75]
+  local_vocabulary_size[64]: shape=(), dtype=int64, values=[87843]
+  local_vocabulary_size[65]: shape=(), dtype=int64, values=[200281]
+  local_vocabulary_size[66]: shape=(), dtype=int64, values=[181]
+  local_vocabulary_size[67]: shape=(), dtype=int64, values=[21083]
+  local_vocabulary_size[68]: shape=(), dtype=int64, values=[105411]
+  local_vocabulary_size[69]: shape=(), dtype=int64, values=[9]
+  local_vocabulary_size[70]: shape=(), dtype=int64, values=[151]
+  local_vocabulary_size[71]: shape=(), dtype=int64, values=[42165]
+  local_vocabulary_size[72]: shape=(), dtype=int64, values=[14055]
+  local_vocabulary_size[73]: shape=(), dtype=int64, values=[26]
+  local_vocabulary_size[74]: shape=(), dtype=int64, values=[108925]
+  local_vocabulary_size[75]: shape=(), dtype=int64, values=[154603]
+  local_vocabulary_size[76]: shape=(), dtype=int64, values=[151090]
+  local_vocabulary_size[77]: shape=(), dtype=int64, values=[213]
+  local_vocabulary_size[78]: shape=(), dtype=int64, values=[122980]
+  local_vocabulary_size[79]: shape=(), dtype=int64, values=[225]
+  local_vocabulary_size[80]: shape=(), dtype=int64, values=[17569]
+  local_vocabulary_size[81]: shape=(), dtype=int64, values=[38651]
+  local_vocabulary_size[82]: shape=(), dtype=int64, values=[137035]
+  local_vocabulary_size[83]: shape=(), dtype=int64, values=[165144]
+  local_vocabulary_size[84]: shape=(), dtype=int64, values=[122]
+  local_vocabulary_size[85]: shape=(), dtype=int64, values=[166]
+  local_vocabulary_size[86]: shape=(), dtype=int64, values=[56220]
+  local_vocabulary_size[87]: shape=(), dtype=int64, values=[20]
+  local_vocabulary_size[88]: shape=(), dtype=int64, values=[256501]
+  local_vocabulary_size[89]: shape=(), dtype=int64, values=[202]
+  local_vocabulary_size[90]: shape=(), dtype=int64, values=[17569]
+  local_vocabulary_size[91]: shape=(), dtype=int64, values=[124]
+  local_vocabulary_size[92]: shape=(), dtype=int64, values=[119466]
+  local_vocabulary_size[93]: shape=(), dtype=int64, values=[109]
+  local_vocabulary_size[94]: shape=(), dtype=int64, values=[10542]
+  local_vocabulary_size[95]: shape=(), dtype=int64, values=[9]
+  local_vocabulary_size[96]: shape=(), dtype=int64, values=[91357]
+  local_vocabulary_size[97]: shape=(), dtype=int64, values=[171]
+  local_vocabulary_size[98]: shape=(), dtype=int64, values=[165]
+  local_vocabulary_size[99]: shape=(), dtype=int64, values=[51]
+========================================================================
+静态输入样本 (模块加载时生成)
+========================================================================
+========================================================================
+[Step init] 1. 输入数据 (feed_dict)
+========================================================================
+labels: shape=(10, 1), dtype=float32, values=[1.0, 0.0, 1.0, 0.0, 1.0, 0.0, 0.0, 0.0, 1.0, 1.0]
+  slot 总数: 100
+  input_slot_0: shape=(10, 1), dtype=int64, values=[1721, 1496, 156, 135, 22, 1496, 461, 1721, 50, 643]
+  input_slot_1: shape=(10, 1), dtype=int64, values=[1950, 1997, 2001, 1988, 1994, 1995, 1960, 1988, 2007, 1997]
+  input_slot_2: shape=(10, 4000), dtype=int64, values=[1386399, 834833, 128597, 1079602, 182810, 812460, 523260, 280942, 243546, 1228983, 351401, 174563, 196711, 1311190, 879133, 321763, 1083727, 1339664, 624521, 1125966, 1385289, 501575, 1538759, 9399, 1354699, 1137697, 528061, 144221, 805458, 967226, 1449481, 1474958, 460781, 264890, 1323399, 1421647, 123792, 1536494, 1016047, 286844, 1113084, 1184881, 824266, 137454, 426966, 1546984, 1201056, 44259, 558490, 274088, 1341207, 361170, 897645, 833243, 1095914, 991684, 1310468, 1517624, 534139, 637290, 500673, 1541180, 1350390, 640886, ... (+39936 more)]
+  input_slot_3: shape=(10, 32), dtype=int64, values=[1964244, 2439021, 2004650, 1749036, 1869881, 2389167, 2179508, 1937598, 2265442, 2265442, 1718211, 1749036, 1869881, 1989385, 2101929, 2130407, 2011237, 2130407, 2389167, 2367718, 2004650, 2304647, 1749036, 2265442, 1937598, 2179508, 1658168, 2130407, 2068699, 2389167, 2004650, 2004650, 1658168, 1937598, 1937598, 1658168, 1964244, 1937598, 1692995, 2474904, 2474904, 1718211, 2367718, 1869881, 2068699, 2136502, 1658168, 2474904, 2439021, 2389167, 2004650, 1718211, 2004650, 2130407, 2395476, 2389167, 2136502, 1937598, 1718211, 1757192, 2474904, 2179508, 2395476, 2263946, ... (+256 more)]
+  input_slot_4: shape=(10, 1), dtype=int64, values=[2483532, 2482255, 2482494, 2482805, 2482255, 2483065, 2482494, 2483706, 2483099, 2483248]
+  ... 其余 95 个 slot 仅记录 shape
+  input_slot_5: shape=(10, 1), dtype=int64
+  input_slot_6: shape=(10, 1), dtype=int64
+  input_slot_7: shape=(10, 1), dtype=int64
+  input_slot_8: shape=(10, 54), dtype=int64
+  input_slot_9: shape=(10, 1), dtype=int64
+  input_slot_10: shape=(10, 94), dtype=int64
+  input_slot_11: shape=(10, 13), dtype=int64
+  input_slot_12: shape=(10, 100), dtype=int64
+  input_slot_13: shape=(10, 1), dtype=int64
+  input_slot_14: shape=(10, 8), dtype=int64
+  input_slot_15: shape=(10, 25), dtype=int64
+  input_slot_16: shape=(10, 19), dtype=int64
+  input_slot_17: shape=(10, 1), dtype=int64
+  input_slot_18: shape=(10, 24), dtype=int64
+  input_slot_19: shape=(10, 16), dtype=int64
+  input_slot_20: shape=(10, 1), dtype=int64
+  input_slot_21: shape=(10, 36), dtype=int64
+  input_slot_22: shape=(10, 1), dtype=int64
+  input_slot_23: shape=(10, 1), dtype=int64
+  input_slot_24: shape=(10, 36), dtype=int64
+  input_slot_25: shape=(10, 1), dtype=int64
+  input_slot_26: shape=(10, 1), dtype=int64
+  input_slot_27: shape=(10, 4000), dtype=int64
+  input_slot_28: shape=(10, 1), dtype=int64
+  input_slot_29: shape=(10, 1), dtype=int64
+  input_slot_30: shape=(10, 1), dtype=int64
+  input_slot_31: shape=(10, 1), dtype=int64
+  input_slot_32: shape=(10, 18), dtype=int64
+  input_slot_33: shape=(10, 1), dtype=int64
+  input_slot_34: shape=(10, 19), dtype=int64
+  input_slot_35: shape=(10, 1), dtype=int64
+  input_slot_36: shape=(10, 1), dtype=int64
+  input_slot_37: shape=(10, 2), dtype=int64
+  input_slot_38: shape=(10, 2), dtype=int64
+  input_slot_39: shape=(10, 38), dtype=int64
+  input_slot_40: shape=(10, 1), dtype=int64
+  input_slot_41: shape=(10, 1), dtype=int64
+  input_slot_42: shape=(10, 1), dtype=int64
+  input_slot_43: shape=(10, 1), dtype=int64
+  input_slot_44: shape=(10, 6), dtype=int64
+  input_slot_45: shape=(10, 47), dtype=int64
+  input_slot_46: shape=(10, 1), dtype=int64
+  input_slot_47: shape=(10, 1), dtype=int64
+  input_slot_48: shape=(10, 1), dtype=int64
+  input_slot_49: shape=(10, 1), dtype=int64
+  input_slot_50: shape=(10, 1), dtype=int64
+  input_slot_51: shape=(10, 25), dtype=int64
+  input_slot_52: shape=(10, 44), dtype=int64
+  input_slot_53: shape=(10, 1), dtype=int64
+  input_slot_54: shape=(10, 1), dtype=int64
+  input_slot_55: shape=(10, 26), dtype=int64
+  input_slot_56: shape=(10, 1), dtype=int64
+  input_slot_57: shape=(10, 1), dtype=int64
+  input_slot_58: shape=(10, 125), dtype=int64
+  input_slot_59: shape=(10, 1), dtype=int64
+  input_slot_60: shape=(10, 1), dtype=int64
+  input_slot_61: shape=(10, 1), dtype=int64
+  input_slot_62: shape=(10, 1), dtype=int64
+  input_slot_63: shape=(10, 1), dtype=int64
+  input_slot_64: shape=(10, 25), dtype=int64
+  input_slot_65: shape=(10, 57), dtype=int64
+  input_slot_66: shape=(10, 1), dtype=int64
+  input_slot_67: shape=(10, 6), dtype=int64
+  input_slot_68: shape=(10, 30), dtype=int64
+  input_slot_69: shape=(10, 1), dtype=int64
+  input_slot_70: shape=(10, 1), dtype=int64
+  input_slot_71: shape=(10, 12), dtype=int64
+  input_slot_72: shape=(10, 4), dtype=int64
+  input_slot_73: shape=(10, 1), dtype=int64
+  input_slot_74: shape=(10, 31), dtype=int64
+  input_slot_75: shape=(10, 44), dtype=int64
+  input_slot_76: shape=(10, 43), dtype=int64
+  input_slot_77: shape=(10, 1), dtype=int64
+  input_slot_78: shape=(10, 35), dtype=int64
+  input_slot_79: shape=(10, 1), dtype=int64
+  input_slot_80: shape=(10, 5), dtype=int64
+  input_slot_81: shape=(10, 11), dtype=int64
+  input_slot_82: shape=(10, 39), dtype=int64
+  input_slot_83: shape=(10, 47), dtype=int64
+  input_slot_84: shape=(10, 1), dtype=int64
+  input_slot_85: shape=(10, 1), dtype=int64
+  input_slot_86: shape=(10, 16), dtype=int64
+  input_slot_87: shape=(10, 1), dtype=int64
+  input_slot_88: shape=(10, 73), dtype=int64
+  input_slot_89: shape=(10, 1), dtype=int64
+  input_slot_90: shape=(10, 5), dtype=int64
+  input_slot_91: shape=(10, 1), dtype=int64
+  input_slot_92: shape=(10, 34), dtype=int64
+  input_slot_93: shape=(10, 1), dtype=int64
+  input_slot_94: shape=(10, 3), dtype=int64
+  input_slot_95: shape=(10, 1), dtype=int64
+  input_slot_96: shape=(10, 26), dtype=int64
+  input_slot_97: shape=(10, 1), dtype=int64
+  input_slot_98: shape=(10, 1), dtype=int64
+  input_slot_99: shape=(10, 1), dtype=int64
+========================================================================
+合表分组
+========================================================================
+  共 4 个大表, 100 个小表
+  merged_table_0: sub_tables=[0, 1, 4, 5, 6, 7, 9, 13, 17, 20, 22, 23, 25, 26, 28, 29, 30, 31, 33, 35, 36, 40, 41, 42, 43, 46, 47, 48, 49, 50, 53, 54, 56, 57, 59, 60, 61, 62, 63, 66, 69, 70, 73, 77, 79, 84, 85, 87, 89, 91], capacities=[244, 9, 210, 88, 212, 238, 33, 40, 102, 31, 240, 168, 4, 134, 13, 126, 196, 199, 69, 218, 131, 93, 214, 197, 179, 158, 238, 77, 115, 238, 245, 26, 153, 93, 239, 184, 96, 74, 75, 181, 9, 151, 26, 213, 225, 122, 166, 20, 202, 124], slot_sizes=[1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
+  merged_table_1: sub_tables=[3, 8, 10, 11, 12, 14, 15, 16, 18, 19, 21, 24, 32, 34, 37, 38, 39, 44, 45, 51, 52, 55, 58, 64, 65, 67, 68, 71, 72, 74, 75, 76, 78, 80, 81, 82, 83, 86, 88, 90, 92, 93, 94, 95, 96, 97, 98, 99], capacities=[112439, 189740, 330288, 45679, 351370, 28110, 87843, 66761, 84329, 56220, 126494, 126494, 63247, 66761, 7028, 7028, 133521, 21083, 165144, 87843, 154603, 91357, 439213, 87843, 200281, 21083, 105411, 42165, 14055, 108925, 154603, 151090, 122980, 17569, 38651, 137035, 165144, 56220, 256501, 17569, 119466, 109, 10542, 9, 91357, 171, 165, 51], slot_sizes=[32, 54, 94, 13, 100, 8, 25, 19, 24, 16, 36, 36, 18, 19, 2, 2, 38, 6, 47, 25, 44, 26, 125, 25, 57, 6, 30, 12, 4, 31, 44, 43, 35, 5, 11, 39, 47, 16, 73, 5, 34, 1, 3, 1, 26, 1, 1, 1]
+  merged_table_2: sub_tables=[2], capacities=[197592], slot_sizes=[4000]
+  merged_table_3: sub_tables=[27], capacities=[445894], slot_sizes=[4000]
+========================================================================
+合表创建结果
+========================================================================
+  merged_tables 数量: 4
+  sub_table_to_merged: [0, 0, 2, 1, 0, 0, 0, 0, 1, 0, 1, 1, 1, 0, 1, 1, 1, 0, 1, 1, 0, 1, 0, 0, 1, 0, 0, 3, 0, 0, 0, 0, 1, 0, 1, 0, 0, 1, 1, 1, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 1, 1, 0, 0, 1, 0, 0, 1, 0, 0, 0, 0, 0, 1, 1, 0, 1, 1, 0, 0, 1, 1, 0, 1, 1, 1, 0, 1, 0, 1, 1, 1, 1, 0, 0, 1, 0, 1, 0, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1]
+  MergedTable id=0, global_capacity=6838, embedding_dim=2, num_sub_tables=50
+  MergedTable id=1, global_capacity=4761590, embedding_dim=2, num_sub_tables=48
+  MergedTable id=2, global_capacity=197592, embedding_dim=2, num_sub_tables=1
+  MergedTable id=3, global_capacity=445894, embedding_dim=2, num_sub_tables=1
+========================================================================
+训练循环开始
+========================================================================
+  Iters=10, LOG_TRACE_ITERS=1 (前 N 步写详细 trace)
+========================================================================
+[Step 0] 1. 输入数据 (feed_dict)
+========================================================================
+labels: shape=(10, 1), dtype=float32, values=[1.0, 0.0, 1.0, 0.0, 1.0, 0.0, 0.0, 0.0, 1.0, 1.0]
+  slot 总数: 100
+  input_slot_0: shape=(10, 1), dtype=int64, values=[1721, 1496, 156, 135, 22, 1496, 461, 1721, 50, 643]
+  input_slot_1: shape=(10, 1), dtype=int64, values=[1950, 1997, 2001, 1988, 1994, 1995, 1960, 1988, 2007, 1997]
+  input_slot_2: shape=(10, 4000), dtype=int64, values=[1386399, 834833, 128597, 1079602, 182810, 812460, 523260, 280942, 243546, 1228983, 351401, 174563, 196711, 1311190, 879133, 321763, 1083727, 1339664, 624521, 1125966, 1385289, 501575, 1538759, 9399, 1354699, 1137697, 528061, 144221, 805458, 967226, 1449481, 1474958, 460781, 264890, 1323399, 1421647, 123792, 1536494, 1016047, 286844, 1113084, 1184881, 824266, 137454, 426966, 1546984, 1201056, 44259, 558490, 274088, 1341207, 361170, 897645, 833243, 1095914, 991684, 1310468, 1517624, 534139, 637290, 500673, 1541180, 1350390, 640886, ... (+39936 more)]
+  input_slot_3: shape=(10, 32), dtype=int64, values=[1964244, 2439021, 2004650, 1749036, 1869881, 2389167, 2179508, 1937598, 2265442, 2265442, 1718211, 1749036, 1869881, 1989385, 2101929, 2130407, 2011237, 2130407, 2389167, 2367718, 2004650, 2304647, 1749036, 2265442, 1937598, 2179508, 1658168, 2130407, 2068699, 2389167, 2004650, 2004650, 1658168, 1937598, 1937598, 1658168, 1964244, 1937598, 1692995, 2474904, 2474904, 1718211, 2367718, 1869881, 2068699, 2136502, 1658168, 2474904, 2439021, 2389167, 2004650, 1718211, 2004650, 2130407, 2395476, 2389167, 2136502, 1937598, 1718211, 1757192, 2474904, 2179508, 2395476, 2263946, ... (+256 more)]
+  input_slot_4: shape=(10, 1), dtype=int64, values=[2483532, 2482255, 2482494, 2482805, 2482255, 2483065, 2482494, 2483706, 2483099, 2483248]
+  ... 其余 95 个 slot 仅记录 shape
+  input_slot_5: shape=(10, 1), dtype=int64
+  input_slot_6: shape=(10, 1), dtype=int64
+  input_slot_7: shape=(10, 1), dtype=int64
+  input_slot_8: shape=(10, 54), dtype=int64
+  input_slot_9: shape=(10, 1), dtype=int64
+  input_slot_10: shape=(10, 94), dtype=int64
+  input_slot_11: shape=(10, 13), dtype=int64
+  input_slot_12: shape=(10, 100), dtype=int64
+  input_slot_13: shape=(10, 1), dtype=int64
+  input_slot_14: shape=(10, 8), dtype=int64
+  input_slot_15: shape=(10, 25), dtype=int64
+  input_slot_16: shape=(10, 19), dtype=int64
+  input_slot_17: shape=(10, 1), dtype=int64
+  input_slot_18: shape=(10, 24), dtype=int64
+  input_slot_19: shape=(10, 16), dtype=int64
+  input_slot_20: shape=(10, 1), dtype=int64
+  input_slot_21: shape=(10, 36), dtype=int64
+  input_slot_22: shape=(10, 1), dtype=int64
+  input_slot_23: shape=(10, 1), dtype=int64
+  input_slot_24: shape=(10, 36), dtype=int64
+  input_slot_25: shape=(10, 1), dtype=int64
+  input_slot_26: shape=(10, 1), dtype=int64
+  input_slot_27: shape=(10, 4000), dtype=int64
+  input_slot_28: shape=(10, 1), dtype=int64
+  input_slot_29: shape=(10, 1), dtype=int64
+  input_slot_30: shape=(10, 1), dtype=int64
+  input_slot_31: shape=(10, 1), dtype=int64
+  input_slot_32: shape=(10, 18), dtype=int64
+  input_slot_33: shape=(10, 1), dtype=int64
+  input_slot_34: shape=(10, 19), dtype=int64
+  input_slot_35: shape=(10, 1), dtype=int64
+  input_slot_36: shape=(10, 1), dtype=int64
+  input_slot_37: shape=(10, 2), dtype=int64
+  input_slot_38: shape=(10, 2), dtype=int64
+  input_slot_39: shape=(10, 38), dtype=int64
+  input_slot_40: shape=(10, 1), dtype=int64
+  input_slot_41: shape=(10, 1), dtype=int64
+  input_slot_42: shape=(10, 1), dtype=int64
+  input_slot_43: shape=(10, 1), dtype=int64
+  input_slot_44: shape=(10, 6), dtype=int64
+  input_slot_45: shape=(10, 47), dtype=int64
+  input_slot_46: shape=(10, 1), dtype=int64
+  input_slot_47: shape=(10, 1), dtype=int64
+  input_slot_48: shape=(10, 1), dtype=int64
+  input_slot_49: shape=(10, 1), dtype=int64
+  input_slot_50: shape=(10, 1), dtype=int64
+  input_slot_51: shape=(10, 25), dtype=int64
+  input_slot_52: shape=(10, 44), dtype=int64
+  input_slot_53: shape=(10, 1), dtype=int64
+  input_slot_54: shape=(10, 1), dtype=int64
+  input_slot_55: shape=(10, 26), dtype=int64
+  input_slot_56: shape=(10, 1), dtype=int64
+  input_slot_57: shape=(10, 1), dtype=int64
+  input_slot_58: shape=(10, 125), dtype=int64
+  input_slot_59: shape=(10, 1), dtype=int64
+  input_slot_60: shape=(10, 1), dtype=int64
+  input_slot_61: shape=(10, 1), dtype=int64
+  input_slot_62: shape=(10, 1), dtype=int64
+  input_slot_63: shape=(10, 1), dtype=int64
+  input_slot_64: shape=(10, 25), dtype=int64
+  input_slot_65: shape=(10, 57), dtype=int64
+  input_slot_66: shape=(10, 1), dtype=int64
+  input_slot_67: shape=(10, 6), dtype=int64
+  input_slot_68: shape=(10, 30), dtype=int64
+  input_slot_69: shape=(10, 1), dtype=int64
+  input_slot_70: shape=(10, 1), dtype=int64
+  input_slot_71: shape=(10, 12), dtype=int64
+  input_slot_72: shape=(10, 4), dtype=int64
+  input_slot_73: shape=(10, 1), dtype=int64
+  input_slot_74: shape=(10, 31), dtype=int64
+  input_slot_75: shape=(10, 44), dtype=int64
+  input_slot_76: shape=(10, 43), dtype=int64
+  input_slot_77: shape=(10, 1), dtype=int64
+  input_slot_78: shape=(10, 35), dtype=int64
+  input_slot_79: shape=(10, 1), dtype=int64
+  input_slot_80: shape=(10, 5), dtype=int64
+  input_slot_81: shape=(10, 11), dtype=int64
+  input_slot_82: shape=(10, 39), dtype=int64
+  input_slot_83: shape=(10, 47), dtype=int64
+  input_slot_84: shape=(10, 1), dtype=int64
+  input_slot_85: shape=(10, 1), dtype=int64
+  input_slot_86: shape=(10, 16), dtype=int64
+  input_slot_87: shape=(10, 1), dtype=int64
+  input_slot_88: shape=(10, 73), dtype=int64
+  input_slot_89: shape=(10, 1), dtype=int64
+  input_slot_90: shape=(10, 5), dtype=int64
+  input_slot_91: shape=(10, 1), dtype=int64
+  input_slot_92: shape=(10, 34), dtype=int64
+  input_slot_93: shape=(10, 1), dtype=int64
+  input_slot_94: shape=(10, 3), dtype=int64
+  input_slot_95: shape=(10, 1), dtype=int64
+  input_slot_96: shape=(10, 26), dtype=int64
+  input_slot_97: shape=(10, 1), dtype=int64
+  input_slot_98: shape=(10, 1), dtype=int64
+  input_slot_99: shape=(10, 1), dtype=int64
+========================================================================
+[Step 0] 2. 图内计算过程 (embedding / all2all / key_process)
+========================================================================
+  merged_0.combined_keys: shape=(500,), dtype=int64, values=[1721, 1496, 156, 135, 22, 1496, 461, 1721, 50, 643, 1950, 1997, 2001, 1988, 1994, 1995, 1960, 1988, 2007, 1997, 2483532, 2482255, 2482494, 2482805, 2482255, 2483065, 2482494, 2483706, 2483099, 2483248, 2484330, 2484120, 2484182, 2484225, 2484571, 2484225, 2484127, 2484388, 2484330, 2484357, 2484984, 2486061, 2484748, 2484774, 2485319, 2485319, 2485113, 2485778, 2484774, 2485819, 2487008, 2487185, 2486463, 2487574, 2487763, 2488194, 2487085, 2487574, 2487085, 2487100, 4006211, 4006211, 4006368, 4006346, ... (+436 more)]
+  merged_0.global_embeddings: shape=(400, 2), dtype=float32, values=[1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, ... (+736 more)]
+  merged_0.indices: shape=(500,), dtype=int64, values=[50, 0, 200, 350, 300, 0, 250, 50, 100, 150, 301, 251, 51, 201, 101, 151, 1, 201, 351, 251, 202, 352, 302, 252, 352, 52, 302, 102, 152, 2, 103, 3, 303, 53, 153, 53, 353, 203, 103, 253, 4, 254, 204, 304, 354, 354, 54, 104, 304, 154, 5, 55, 355, 305, 155, 105, 255, 305, 255, 205, 156, 156, 6, 106, ... (+436 more)]
+  merged_0.recv_embeddings: shape=(400, 2), dtype=float32, values=[1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, ... (+736 more)]
+  merged_0.recv_sizes: shape=(8,), dtype=int64, values=[50, 50, 50, 50, 50, 50, 50, 50]
+  merged_0.restored_embeddings: shape=(500, 2), dtype=float32, values=[1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, ... (+936 more)]
+  merged_0.send_sizes: shape=(8,), dtype=int64, values=[50, 50, 50, 50, 50, 50, 50, 50]
+  merged_0.slot_0.sub_table_emb_0: shape=(10, 2), dtype=float32, values=[1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0]
+  merged_0.slot_1.sub_table_emb_1: shape=(10, 2), dtype=float32, values=[1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0]
+  merged_0.slot_22.sub_table_emb_10: shape=(10, 2), dtype=float32 (values omitted)
+  merged_0.slot_23.sub_table_emb_11: shape=(10, 2), dtype=float32 (values omitted)
+  merged_0.slot_25.sub_table_emb_12: shape=(10, 2), dtype=float32 (values omitted)
+  merged_0.slot_26.sub_table_emb_13: shape=(10, 2), dtype=float32 (values omitted)
+  merged_0.slot_28.sub_table_emb_14: shape=(10, 2), dtype=float32 (values omitted)
+  merged_0.slot_29.sub_table_emb_15: shape=(10, 2), dtype=float32 (values omitted)
+  merged_0.slot_30.sub_table_emb_16: shape=(10, 2), dtype=float32 (values omitted)
+  merged_0.slot_31.sub_table_emb_17: shape=(10, 2), dtype=float32 (values omitted)
+  merged_0.slot_33.sub_table_emb_18: shape=(10, 2), dtype=float32 (values omitted)
+  merged_0.slot_35.sub_table_emb_19: shape=(10, 2), dtype=float32 (values omitted)
+  merged_0.slot_4.sub_table_emb_2: shape=(10, 2), dtype=float32, values=[1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0]
+  merged_0.slot_36.sub_table_emb_20: shape=(10, 2), dtype=float32 (values omitted)
+  merged_0.slot_40.sub_table_emb_21: shape=(10, 2), dtype=float32 (values omitted)
+  merged_0.slot_41.sub_table_emb_22: shape=(10, 2), dtype=float32 (values omitted)
+  merged_0.slot_42.sub_table_emb_23: shape=(10, 2), dtype=float32 (values omitted)
+  merged_0.slot_43.sub_table_emb_24: shape=(10, 2), dtype=float32 (values omitted)
+  merged_0.slot_46.sub_table_emb_25: shape=(10, 2), dtype=float32 (values omitted)
+  merged_0.slot_47.sub_table_emb_26: shape=(10, 2), dtype=float32 (values omitted)
+  merged_0.slot_48.sub_table_emb_27: shape=(10, 2), dtype=float32 (values omitted)
+  merged_0.slot_49.sub_table_emb_28: shape=(10, 2), dtype=float32 (values omitted)
+  merged_0.slot_50.sub_table_emb_29: shape=(10, 2), dtype=float32 (values omitted)
+  merged_0.slot_5.sub_table_emb_3: shape=(10, 2), dtype=float32 (values omitted)
+  merged_0.slot_53.sub_table_emb_30: shape=(10, 2), dtype=float32 (values omitted)
+  merged_0.slot_54.sub_table_emb_31: shape=(10, 2), dtype=float32 (values omitted)
+  merged_0.slot_56.sub_table_emb_32: shape=(10, 2), dtype=float32 (values omitted)
+  merged_0.slot_57.sub_table_emb_33: shape=(10, 2), dtype=float32 (values omitted)
+  merged_0.slot_59.sub_table_emb_34: shape=(10, 2), dtype=float32 (values omitted)
+  merged_0.slot_60.sub_table_emb_35: shape=(10, 2), dtype=float32 (values omitted)
+  merged_0.slot_61.sub_table_emb_36: shape=(10, 2), dtype=float32 (values omitted)
+  merged_0.slot_62.sub_table_emb_37: shape=(10, 2), dtype=float32 (values omitted)
+  merged_0.slot_63.sub_table_emb_38: shape=(10, 2), dtype=float32 (values omitted)
+  merged_0.slot_66.sub_table_emb_39: shape=(10, 2), dtype=float32 (values omitted)
+  merged_0.slot_6.sub_table_emb_4: shape=(10, 2), dtype=float32 (values omitted)
+  merged_0.slot_69.sub_table_emb_40: shape=(10, 2), dtype=float32 (values omitted)
+  merged_0.slot_70.sub_table_emb_41: shape=(10, 2), dtype=float32 (values omitted)
+  merged_0.slot_73.sub_table_emb_42: shape=(10, 2), dtype=float32 (values omitted)
+  merged_0.slot_77.sub_table_emb_43: shape=(10, 2), dtype=float32 (values omitted)
+  merged_0.slot_79.sub_table_emb_44: shape=(10, 2), dtype=float32 (values omitted)
+  merged_0.slot_84.sub_table_emb_45: shape=(10, 2), dtype=float32 (values omitted)
+  merged_0.slot_85.sub_table_emb_46: shape=(10, 2), dtype=float32 (values omitted)
+  merged_0.slot_87.sub_table_emb_47: shape=(10, 2), dtype=float32 (values omitted)
+  merged_0.slot_89.sub_table_emb_48: shape=(10, 2), dtype=float32 (values omitted)
+  merged_0.slot_91.sub_table_emb_49: shape=(10, 2), dtype=float32 (values omitted)
+  merged_0.slot_7.sub_table_emb_5: shape=(10, 2), dtype=float32 (values omitted)
+  merged_0.slot_9.sub_table_emb_6: shape=(10, 2), dtype=float32 (values omitted)
+  merged_0.slot_13.sub_table_emb_7: shape=(10, 2), dtype=float32 (values omitted)
+  merged_0.slot_17.sub_table_emb_8: shape=(10, 2), dtype=float32 (values omitted)
+  merged_0.slot_20.sub_table_emb_9: shape=(10, 2), dtype=float32 (values omitted)
+  merged_0.slot_0.sub_table_output_0: shape=(10, 1, 2), dtype=float32, values=[1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0]
+  merged_0.slot_1.sub_table_output_1: shape=(10, 1, 2), dtype=float32, values=[1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0]
+  merged_0.slot_22.sub_table_output_10: shape=(10, 1, 2), dtype=float32 (values omitted)
+  merged_0.slot_23.sub_table_output_11: shape=(10, 1, 2), dtype=float32 (values omitted)
+  merged_0.slot_25.sub_table_output_12: shape=(10, 1, 2), dtype=float32 (values omitted)
+  merged_0.slot_26.sub_table_output_13: shape=(10, 1, 2), dtype=float32 (values omitted)
+  merged_0.slot_28.sub_table_output_14: shape=(10, 1, 2), dtype=float32 (values omitted)
+  merged_0.slot_29.sub_table_output_15: shape=(10, 1, 2), dtype=float32 (values omitted)
+  merged_0.slot_30.sub_table_output_16: shape=(10, 1, 2), dtype=float32 (values omitted)
+  merged_0.slot_31.sub_table_output_17: shape=(10, 1, 2), dtype=float32 (values omitted)
+  merged_0.slot_33.sub_table_output_18: shape=(10, 1, 2), dtype=float32 (values omitted)
+  merged_0.slot_35.sub_table_output_19: shape=(10, 1, 2), dtype=float32 (values omitted)
+  merged_0.slot_4.sub_table_output_2: shape=(10, 1, 2), dtype=float32, values=[1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0]
+  merged_0.slot_36.sub_table_output_20: shape=(10, 1, 2), dtype=float32 (values omitted)
+  merged_0.slot_40.sub_table_output_21: shape=(10, 1, 2), dtype=float32 (values omitted)
+  merged_0.slot_41.sub_table_output_22: shape=(10, 1, 2), dtype=float32 (values omitted)
+  merged_0.slot_42.sub_table_output_23: shape=(10, 1, 2), dtype=float32 (values omitted)
+  merged_0.slot_43.sub_table_output_24: shape=(10, 1, 2), dtype=float32 (values omitted)
+  merged_0.slot_46.sub_table_output_25: shape=(10, 1, 2), dtype=float32 (values omitted)
+  merged_0.slot_47.sub_table_output_26: shape=(10, 1, 2), dtype=float32 (values omitted)
+  merged_0.slot_48.sub_table_output_27: shape=(10, 1, 2), dtype=float32 (values omitted)
+  merged_0.slot_49.sub_table_output_28: shape=(10, 1, 2), dtype=float32 (values omitted)
+  merged_0.slot_50.sub_table_output_29: shape=(10, 1, 2), dtype=float32 (values omitted)
+  merged_0.slot_5.sub_table_output_3: shape=(10, 1, 2), dtype=float32 (values omitted)
+  merged_0.slot_53.sub_table_output_30: shape=(10, 1, 2), dtype=float32 (values omitted)
+  merged_0.slot_54.sub_table_output_31: shape=(10, 1, 2), dtype=float32 (values omitted)
+  merged_0.slot_56.sub_table_output_32: shape=(10, 1, 2), dtype=float32 (values omitted)
+  merged_0.slot_57.sub_table_output_33: shape=(10, 1, 2), dtype=float32 (values omitted)
+  merged_0.slot_59.sub_table_output_34: shape=(10, 1, 2), dtype=float32 (values omitted)
+  merged_0.slot_60.sub_table_output_35: shape=(10, 1, 2), dtype=float32 (values omitted)
+  merged_0.slot_61.sub_table_output_36: shape=(10, 1, 2), dtype=float32 (values omitted)
+  merged_0.slot_62.sub_table_output_37: shape=(10, 1, 2), dtype=float32 (values omitted)
+  merged_0.slot_63.sub_table_output_38: shape=(10, 1, 2), dtype=float32 (values omitted)
+  merged_0.slot_66.sub_table_output_39: shape=(10, 1, 2), dtype=float32 (values omitted)
+  merged_0.slot_6.sub_table_output_4: shape=(10, 1, 2), dtype=float32 (values omitted)
+  merged_0.slot_69.sub_table_output_40: shape=(10, 1, 2), dtype=float32 (values omitted)
+  merged_0.slot_70.sub_table_output_41: shape=(10, 1, 2), dtype=float32 (values omitted)
+  merged_0.slot_73.sub_table_output_42: shape=(10, 1, 2), dtype=float32 (values omitted)
+  merged_0.slot_77.sub_table_output_43: shape=(10, 1, 2), dtype=float32 (values omitted)
+  merged_0.slot_79.sub_table_output_44: shape=(10, 1, 2), dtype=float32 (values omitted)
+  merged_0.slot_84.sub_table_output_45: shape=(10, 1, 2), dtype=float32 (values omitted)
+  merged_0.slot_85.sub_table_output_46: shape=(10, 1, 2), dtype=float32 (values omitted)
+  merged_0.slot_87.sub_table_output_47: shape=(10, 1, 2), dtype=float32 (values omitted)
+  merged_0.slot_89.sub_table_output_48: shape=(10, 1, 2), dtype=float32 (values omitted)
+  merged_0.slot_91.sub_table_output_49: shape=(10, 1, 2), dtype=float32 (values omitted)
+  merged_0.slot_7.sub_table_output_5: shape=(10, 1, 2), dtype=float32 (values omitted)
+  merged_0.slot_9.sub_table_output_6: shape=(10, 1, 2), dtype=float32 (values omitted)
+  merged_0.slot_13.sub_table_output_7: shape=(10, 1, 2), dtype=float32 (values omitted)
+  merged_0.slot_17.sub_table_output_8: shape=(10, 1, 2), dtype=float32 (values omitted)
+  merged_0.slot_20.sub_table_output_9: shape=(10, 1, 2), dtype=float32 (values omitted)
+  merged_0.uindex: shape=(400,), dtype=int32, values=[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, ... (+336 more)]
+  merged_1.combined_keys: shape=(13600,), dtype=int64, values=[1964244, 2439021, 2004650, 1749036, 1869881, 2389167, 2179508, 1937598, 2265442, 2265442, 1718211, 1749036, 1869881, 1989385, 2101929, 2130407, 2011237, 2130407, 2389167, 2367718, 2004650, 2304647, 1749036, 2265442, 1937598, 2179508, 1658168, 2130407, 2068699, 2389167, 2004650, 2004650, 1658168, 1937598, 1937598, 1658168, 1964244, 1937598, 1692995, 2474904, 2474904, 1718211, 2367718, 1869881, 2068699, 2136502, 1658168, 2474904, 2439021, 2389167, 2004650, 1718211, 2004650, 2130407, 2395476, 2389167, 2136502, 1937598, 1718211, 1757192, 2474904, 2179508, 2395476, 2263946, ... (+13536 more)]
+  merged_1.global_embeddings: shape=(1312, 2), dtype=float32, values=[1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, ... (+2560 more)]
+  merged_1.indices: shape=(13600,), dtype=int64, values=[656, 820, 328, 657, 164, 1148, 658, 984, 329, 329, 492, 657, 164, 165, 166, 1149, 821, 1149, 1148, 985, 328, 1150, 657, 329, 984, 658, 0, 1149, 493, 1148, 328, 328, 0, 984, 984, 0, 656, 984, 494, 1, 1, 492, 985, 164, 493, 986, 0, 1, 820, 1148, 328, 492, 328, 1149, 659, 1148, 986, 984, 492, 2, 1, 658, 659, 330, ... (+13536 more)]
+  merged_1.recv_embeddings: shape=(1312, 2), dtype=float32, values=[1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, ... (+2560 more)]
+  merged_1.recv_sizes: shape=(8,), dtype=int64, values=[164, 164, 164, 164, 164, 164, 164, 164]
+  merged_1.restored_embeddings: shape=(13600, 2), dtype=float32, values=[1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, ... (+27136 more)]
+  merged_1.send_sizes: shape=(8,), dtype=int64, values=[164, 164, 164, 164, 164, 164, 164, 164]
+  merged_1.slot_3.sub_table_emb_0: shape=(320, 2), dtype=float32, values=[1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, ... (+576 more)]
+  merged_1.slot_8.sub_table_emb_1: shape=(540, 2), dtype=float32 (values omitted)
+  merged_1.slot_21.sub_table_emb_10: shape=(360, 2), dtype=float32 (values omitted)
+  merged_1.slot_24.sub_table_emb_11: shape=(360, 2), dtype=float32 (values omitted)
+  merged_1.slot_32.sub_table_emb_12: shape=(180, 2), dtype=float32 (values omitted)
+  merged_1.slot_34.sub_table_emb_13: shape=(190, 2), dtype=float32 (values omitted)
+  merged_1.slot_37.sub_table_emb_14: shape=(20, 2), dtype=float32 (values omitted)
+  merged_1.slot_38.sub_table_emb_15: shape=(20, 2), dtype=float32 (values omitted)
+  merged_1.slot_39.sub_table_emb_16: shape=(380, 2), dtype=float32 (values omitted)
+  merged_1.slot_44.sub_table_emb_17: shape=(60, 2), dtype=float32 (values omitted)
+  merged_1.slot_45.sub_table_emb_18: shape=(470, 2), dtype=float32 (values omitted)
+  merged_1.slot_51.sub_table_emb_19: shape=(250, 2), dtype=float32 (values omitted)
+  merged_1.slot_10.sub_table_emb_2: shape=(940, 2), dtype=float32 (values omitted)
+  merged_1.slot_52.sub_table_emb_20: shape=(440, 2), dtype=float32 (values omitted)
+  merged_1.slot_55.sub_table_emb_21: shape=(260, 2), dtype=float32 (values omitted)
+  merged_1.slot_58.sub_table_emb_22: shape=(1250, 2), dtype=float32 (values omitted)
+  merged_1.slot_64.sub_table_emb_23: shape=(250, 2), dtype=float32 (values omitted)
+  merged_1.slot_65.sub_table_emb_24: shape=(570, 2), dtype=float32 (values omitted)
+  merged_1.slot_67.sub_table_emb_25: shape=(60, 2), dtype=float32 (values omitted)
+  merged_1.slot_68.sub_table_emb_26: shape=(300, 2), dtype=float32 (values omitted)
+  merged_1.slot_71.sub_table_emb_27: shape=(120, 2), dtype=float32 (values omitted)
+  merged_1.slot_72.sub_table_emb_28: shape=(40, 2), dtype=float32 (values omitted)
+  merged_1.slot_74.sub_table_emb_29: shape=(310, 2), dtype=float32 (values omitted)
+  merged_1.slot_11.sub_table_emb_3: shape=(130, 2), dtype=float32 (values omitted)
+  merged_1.slot_75.sub_table_emb_30: shape=(440, 2), dtype=float32 (values omitted)
+  merged_1.slot_76.sub_table_emb_31: shape=(430, 2), dtype=float32 (values omitted)
+  merged_1.slot_78.sub_table_emb_32: shape=(350, 2), dtype=float32 (values omitted)
+  merged_1.slot_80.sub_table_emb_33: shape=(50, 2), dtype=float32 (values omitted)
+  merged_1.slot_81.sub_table_emb_34: shape=(110, 2), dtype=float32 (values omitted)
+  merged_1.slot_82.sub_table_emb_35: shape=(390, 2), dtype=float32 (values omitted)
+  merged_1.slot_83.sub_table_emb_36: shape=(470, 2), dtype=float32 (values omitted)
+  merged_1.slot_86.sub_table_emb_37: shape=(160, 2), dtype=float32 (values omitted)
+  merged_1.slot_88.sub_table_emb_38: shape=(730, 2), dtype=float32 (values omitted)
+  merged_1.slot_90.sub_table_emb_39: shape=(50, 2), dtype=float32 (values omitted)
+  merged_1.slot_12.sub_table_emb_4: shape=(1000, 2), dtype=float32 (values omitted)
+  merged_1.slot_92.sub_table_emb_40: shape=(340, 2), dtype=float32 (values omitted)
+  merged_1.slot_93.sub_table_emb_41: shape=(10, 2), dtype=float32 (values omitted)
+  merged_1.slot_94.sub_table_emb_42: shape=(30, 2), dtype=float32 (values omitted)
+  merged_1.slot_95.sub_table_emb_43: shape=(10, 2), dtype=float32 (values omitted)
+  merged_1.slot_96.sub_table_emb_44: shape=(260, 2), dtype=float32 (values omitted)
+  merged_1.slot_97.sub_table_emb_45: shape=(10, 2), dtype=float32 (values omitted)
+  merged_1.slot_98.sub_table_emb_46: shape=(10, 2), dtype=float32 (values omitted)
+  merged_1.slot_99.sub_table_emb_47: shape=(10, 2), dtype=float32 (values omitted)
+  merged_1.slot_14.sub_table_emb_5: shape=(80, 2), dtype=float32 (values omitted)
+  merged_1.slot_15.sub_table_emb_6: shape=(250, 2), dtype=float32 (values omitted)
+  merged_1.slot_16.sub_table_emb_7: shape=(190, 2), dtype=float32 (values omitted)
+  merged_1.slot_18.sub_table_emb_8: shape=(240, 2), dtype=float32 (values omitted)
+  merged_1.slot_19.sub_table_emb_9: shape=(160, 2), dtype=float32 (values omitted)
+  merged_1.slot_3.sub_table_output_0: shape=(10, 32, 2), dtype=float32, values=[1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, ... (+576 more)]
+  merged_1.slot_8.sub_table_output_1: shape=(10, 54, 2), dtype=float32 (values omitted)
+  merged_1.slot_21.sub_table_output_10: shape=(10, 36, 2), dtype=float32 (values omitted)
+  merged_1.slot_24.sub_table_output_11: shape=(10, 36, 2), dtype=float32 (values omitted)
+  merged_1.slot_32.sub_table_output_12: shape=(10, 18, 2), dtype=float32 (values omitted)
+  merged_1.slot_34.sub_table_output_13: shape=(10, 19, 2), dtype=float32 (values omitted)
+  merged_1.slot_37.sub_table_output_14: shape=(10, 2, 2), dtype=float32 (values omitted)
+  merged_1.slot_38.sub_table_output_15: shape=(10, 2, 2), dtype=float32 (values omitted)
+  merged_1.slot_39.sub_table_output_16: shape=(10, 38, 2), dtype=float32 (values omitted)
+  merged_1.slot_44.sub_table_output_17: shape=(10, 6, 2), dtype=float32 (values omitted)
+  merged_1.slot_45.sub_table_output_18: shape=(10, 47, 2), dtype=float32 (values omitted)
+  merged_1.slot_51.sub_table_output_19: shape=(10, 25, 2), dtype=float32 (values omitted)
+  merged_1.slot_10.sub_table_output_2: shape=(10, 94, 2), dtype=float32 (values omitted)
+  merged_1.slot_52.sub_table_output_20: shape=(10, 44, 2), dtype=float32 (values omitted)
+  merged_1.slot_55.sub_table_output_21: shape=(10, 26, 2), dtype=float32 (values omitted)
+  merged_1.slot_58.sub_table_output_22: shape=(10, 125, 2), dtype=float32 (values omitted)
+  merged_1.slot_64.sub_table_output_23: shape=(10, 25, 2), dtype=float32 (values omitted)
+  merged_1.slot_65.sub_table_output_24: shape=(10, 57, 2), dtype=float32 (values omitted)
+  merged_1.slot_67.sub_table_output_25: shape=(10, 6, 2), dtype=float32 (values omitted)
+  merged_1.slot_68.sub_table_output_26: shape=(10, 30, 2), dtype=float32 (values omitted)
+  merged_1.slot_71.sub_table_output_27: shape=(10, 12, 2), dtype=float32 (values omitted)
+  merged_1.slot_72.sub_table_output_28: shape=(10, 4, 2), dtype=float32 (values omitted)
+  merged_1.slot_74.sub_table_output_29: shape=(10, 31, 2), dtype=float32 (values omitted)
+  merged_1.slot_11.sub_table_output_3: shape=(10, 13, 2), dtype=float32 (values omitted)
+  merged_1.slot_75.sub_table_output_30: shape=(10, 44, 2), dtype=float32 (values omitted)
+  merged_1.slot_76.sub_table_output_31: shape=(10, 43, 2), dtype=float32 (values omitted)
+  merged_1.slot_78.sub_table_output_32: shape=(10, 35, 2), dtype=float32 (values omitted)
+  merged_1.slot_80.sub_table_output_33: shape=(10, 5, 2), dtype=float32 (values omitted)
+  merged_1.slot_81.sub_table_output_34: shape=(10, 11, 2), dtype=float32 (values omitted)
+  merged_1.slot_82.sub_table_output_35: shape=(10, 39, 2), dtype=float32 (values omitted)
+  merged_1.slot_83.sub_table_output_36: shape=(10, 47, 2), dtype=float32 (values omitted)
+  merged_1.slot_86.sub_table_output_37: shape=(10, 16, 2), dtype=float32 (values omitted)
+  merged_1.slot_88.sub_table_output_38: shape=(10, 73, 2), dtype=float32 (values omitted)
+  merged_1.slot_90.sub_table_output_39: shape=(10, 5, 2), dtype=float32 (values omitted)
+  merged_1.slot_12.sub_table_output_4: shape=(10, 100, 2), dtype=float32 (values omitted)
+  merged_1.slot_92.sub_table_output_40: shape=(10, 34, 2), dtype=float32 (values omitted)
+  merged_1.slot_93.sub_table_output_41: shape=(10, 1, 2), dtype=float32 (values omitted)
+  merged_1.slot_94.sub_table_output_42: shape=(10, 3, 2), dtype=float32 (values omitted)
+  merged_1.slot_95.sub_table_output_43: shape=(10, 1, 2), dtype=float32 (values omitted)
+  merged_1.slot_96.sub_table_output_44: shape=(10, 26, 2), dtype=float32 (values omitted)
+  merged_1.slot_97.sub_table_output_45: shape=(10, 1, 2), dtype=float32 (values omitted)
+  merged_1.slot_98.sub_table_output_46: shape=(10, 1, 2), dtype=float32 (values omitted)
+  merged_1.slot_99.sub_table_output_47: shape=(10, 1, 2), dtype=float32 (values omitted)
+  merged_1.slot_14.sub_table_output_5: shape=(10, 8, 2), dtype=float32 (values omitted)
+  merged_1.slot_15.sub_table_output_6: shape=(10, 25, 2), dtype=float32 (values omitted)
+  merged_1.slot_16.sub_table_output_7: shape=(10, 19, 2), dtype=float32 (values omitted)
+  merged_1.slot_18.sub_table_output_8: shape=(10, 24, 2), dtype=float32 (values omitted)
+  merged_1.slot_19.sub_table_output_9: shape=(10, 16, 2), dtype=float32 (values omitted)
+  merged_1.uindex: shape=(1312,), dtype=int32, values=[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, ... (+1248 more)]
+  merged_2.combined_keys: shape=(40000,), dtype=int64, values=[1386399, 834833, 128597, 1079602, 182810, 812460, 523260, 280942, 243546, 1228983, 351401, 174563, 196711, 1311190, 879133, 321763, 1083727, 1339664, 624521, 1125966, 1385289, 501575, 1538759, 9399, 1354699, 1137697, 528061, 144221, 805458, 967226, 1449481, 1474958, 460781, 264890, 1323399, 1421647, 123792, 1536494, 1016047, 286844, 1113084, 1184881, 824266, 137454, 426966, 1546984, 1201056, 44259, 558490, 274088, 1341207, 361170, 897645, 833243, 1095914, 991684, 1310468, 1517624, 534139, 637290, 500673, 1541180, 1350390, 640886, ... (+39936 more)]
+  merged_2.global_embeddings: shape=(4000, 2), dtype=float32, values=[1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, ... (+7936 more)]
+  merged_2.indices: shape=(40000,), dtype=int64, values=[3500, 500, 2500, 1000, 1001, 2000, 2001, 3000, 1002, 3501, 501, 1500, 3502, 3001, 2501, 1501, 3503, 0, 502, 3002, 503, 3504, 3505, 3506, 1502, 504, 2502, 2503, 1003, 1004, 505, 3003, 2504, 1005, 3507, 3508, 1, 3004, 3509, 2002, 2003, 506, 1006, 3005, 3006, 2, 3, 1503, 1007, 4, 3510, 1008, 2505, 1504, 1009, 2004, 2005, 5, 1505, 1010, 507, 2006, 3007, 3008, ... (+39936 more)]
+  merged_2.recv_embeddings: shape=(4000, 2), dtype=float32, values=[1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, ... (+7936 more)]
+  merged_2.recv_sizes: shape=(8,), dtype=int64, values=[500, 500, 500, 500, 500, 500, 500, 500]
+  merged_2.restored_embeddings: shape=(40000, 2), dtype=float32, values=[1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, ... (+79936 more)]
+  merged_2.send_sizes: shape=(8,), dtype=int64, values=[500, 500, 500, 500, 500, 500, 500, 500]
+  merged_2.slot_2.sub_table_emb_0: shape=(40000, 2), dtype=float32, values=[1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, ... (+79936 more)]
+  merged_2.slot_2.sub_table_output_0: shape=(10, 4000, 2), dtype=float32, values=[1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, ... (+79936 more)]
+  merged_2.uindex: shape=(4000,), dtype=int32, values=[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, ... (+3936 more)]
+  merged_3.combined_keys: shape=(40000,), dtype=int64, values=[14551624, 14640023, 17849301, 16409174, 15136675, 15917668, 16648451, 15567416, 15221020, 17784147, 15138586, 16593969, 15973663, 15738367, 14479484, 17322324, 14787422, 17243973, 14774637, 16770292, 15576282, 16072163, 15136676, 16963177, 15380769, 17274103, 17020867, 16377930, 14579377, 15450123, 16415073, 14450009, 14972003, 16289889, 16629049, 17680571, 17170265, 15964059, 17564971, 17104999, 16996434, 16929162, 15706004, 14488896, 17031840, 15014877, 15505531, 16106468, 15792426, 14580321, 15464115, 15434873, 17844283, 15419098, 15633535, 16480645, 16896376, 17237381, 17425082, 17589038, 15780718, 17029321, 17640695, 15613940, ... (+39936 more)]
+  merged_3.global_embeddings: shape=(4000, 2), dtype=float32, values=[1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, ... (+7936 more)]
+  merged_3.indices: shape=(40000,), dtype=int64, values=[0, 3500, 2500, 3000, 1500, 2000, 1501, 1, 2001, 1502, 1000, 500, 3501, 3502, 2002, 2003, 3001, 2501, 2502, 2004, 1001, 1503, 2005, 501, 502, 3503, 1504, 1002, 503, 1505, 504, 505, 1506, 506, 507, 1507, 508, 1508, 1509, 3504, 1003, 1004, 2006, 2, 3, 2503, 1510, 2007, 1005, 509, 1511, 510, 1512, 1006, 3505, 2504, 4, 2505, 1007, 3002, 3003, 511, 3506, 2008, ... (+39936 more)]
+  merged_3.recv_embeddings: shape=(4000, 2), dtype=float32, values=[1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, ... (+7936 more)]
+  merged_3.recv_sizes: shape=(8,), dtype=int64, values=[500, 500, 500, 500, 500, 500, 500, 500]
+  merged_3.restored_embeddings: shape=(40000, 2), dtype=float32, values=[1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, ... (+79936 more)]
+  merged_3.send_sizes: shape=(8,), dtype=int64, values=[500, 500, 500, 500, 500, 500, 500, 500]
+  merged_3.slot_27.sub_table_emb_0: shape=(40000, 2), dtype=float32 (values omitted)
+  merged_3.slot_27.sub_table_output_0: shape=(10, 4000, 2), dtype=float32 (values omitted)
+  merged_3.uindex: shape=(4000,), dtype=int32, values=[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, ... (+3936 more)]
+========================================================================
+[Step 0] 3. 模型输出 (DCN + loss)
+========================================================================
+  loss: shape=(), dtype=float32, values=[0.39850947]
+  batch_embedding: shape=(10, 9410, 2), dtype=float32, values=[1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, ... (+188136 more)]
+  logits: shape=(10, 1), dtype=float32, values=[0.11463077, 0.11463077, 0.11463077, 0.11463077, 0.11463077, 0.11463077, 0.11463077, 0.11463077, 0.11463077, 0.11463077]
+  pred_prob: shape=(10, 1), dtype=float32, values=[0.5286264, 0.5286264, 0.5286264, 0.5286264, 0.5286264, 0.5286264, 0.5286264, 0.5286264, 0.5286264, 0.5286264]
+[Step 0] 完成: loss=0.398509, train_cost=79.5558s, total_cost=79.5628s
+[Step 1] 完成: loss=0.259906, train_cost=52.8058s, total_cost=52.8063s
+[Step 2] 完成: loss=0.234116, train_cost=3.7262s, total_cost=3.7266s
+[Step 3] 完成: loss=0.256882, train_cost=3.5001s, total_cost=3.5004s
+[Step 4] 完成: loss=0.261825, train_cost=3.7025s, total_cost=3.7028s
+[Step 5] 完成: loss=0.238290, train_cost=3.6592s, total_cost=3.6596s
+[Step 6] 完成: loss=0.204065, train_cost=4.0264s, total_cost=4.0268s
+[Step 7] 完成: loss=0.176117, train_cost=3.7225s, total_cost=3.7230s
+[Step 8] 完成: loss=0.161932, train_cost=3.6398s, total_cost=3.6402s
+[Step 9] 完成: loss=0.157767, train_cost=3.4602s, total_cost=3.4607s
+========================================================================
+训练结束
+========================================================================
+  total_train_cost=29.4472s
