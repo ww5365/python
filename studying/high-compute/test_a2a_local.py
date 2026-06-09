@@ -120,6 +120,7 @@ MAX_MERGE_TABLE_SLOT_SIZE = 4001 #4001
 use_pooling_in_pull = False
 # 是否运行合表测试的模式
 USE_MERGED_TABLE = os.environ.get('USE_MERGED_TABLE', 'true').lower() == 'true'
+
 # 单卡词汇表大小（假设多卡均分）
 local_vocabulary_size = [ v//num_npus+1 for v in slots_vocabulary_size]
 
@@ -256,7 +257,7 @@ class MergedTableKeyProcessor:
         sub_table_key_counts = []
 
         for i, input_ids in enumerate(input_ids_list):
-            flat_input_ids = tf.reshape(input_ids, [-1])
+            flat_input_ids = tf.reshape(input_ids, [-1])   #  input_ids tf.Tensor类型，-1 表示自动推断维度的大小，展平为一维，(10,1) -> (10,)
             global_keys_list.append(flat_input_ids)
 
             # 记录该小表的key数量
@@ -264,7 +265,7 @@ class MergedTableKeyProcessor:
             sub_table_key_counts.append(num_keys)
 
         # Step 2: 拼接所有小表的global_keys
-        combined_global_keys = tf.concat(global_keys_list, axis=0)
+        combined_global_keys = tf.concat(global_keys_list, axis=0)  # global_keys_list是list[tf.Tensor] 类型，拼接所有小表的global_keys [（10，）, (10,)...] -> (500,)
 
         # Step 3: 执行_key_process (使用合并后的大表参数)
         send_sizes, recv_sizes, indices, uindex, offset_count = self._key_process(
@@ -543,10 +544,10 @@ def compute_merged_table_groups(sub_tables, merged_config=None):
 
     for idx in sorted_indices:
         table = sub_tables[idx]
-        new_capacity = current_capacity + table.capacity
+        new_capacity = current_capacity + table.capacity  # local_vocabulary_size：这是单机词汇量，除以了8卡后的结果
         new_slot_size = current_slot_size + table.slot_size
 
-        # 检查是否需要开新组
+        # 检查是否需要开新组：分组策略 1：容量超过最大容量，2：小表数量超过最大小表数量，3：slot数超过最大slot配置
         if (new_capacity > max_table_capacity or
             len(current_group) >= max_tables_per_group or
             new_slot_size > max_table_slot_size) and current_group:
@@ -1097,6 +1098,20 @@ if __name__ == '__main__':
     # 获取合表分组
     groups, sub_tables = get_merged_table_groups(
         local_vocabulary_size, all2all_slot, sparse_optimizer, merged_config=merged_config)
+    """
+    local_vocabulary_size: 100 长度 
+    [4,9,197592,112439,210,88,212,238,189740,33,330288,45679,351370,40,28110,87843,66761,102,84329,56220,31,126494,240,168,126494,4,134,445894,13]
+    all2all_slot: 100
+    [1,1,4000,...]
+
+    输出：
+    共 4 个大表, 100 个小表
+    merged_table_0: sub_tables=[0, 1, 4, 5, 6, 7, 9, 13, 17, 20, 22, 23, 25, 26, 28, 29, 30, 31, 33, 35, 36, 40, 41, 42, 43, 46, 47, 48, 49, 50, 53, 54, 56, 57, 59, 60, 61, 62, 63, 66, 69, 70, 73, 77, 79, 84, 85, 87, 89, 91], capacities=[244, 9, 210, 88, 212, 238, 33, 40, 102, 31, 240, 168, 4, 134, 13, 126, 196, 199, 69, 218, 131, 93, 214, 197, 179, 158, 238, 77, 115, 238, 245, 26, 153, 93, 239, 184, 96, 74, 75, 181, 9, 151, 26, 213, 225, 122, 166, 20, 202, 124], slot_sizes=[1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
+    merged_table_1: sub_tables=[3, 8, 10, 11, 12, 14, 15, 16, 18, 19, 21, 24, 32, 34, 37, 38, 39, 44, 45, 51, 52, 55, 58, 64, 65, 67, 68, 71, 72, 74, 75, 76, 78, 80, 81, 82, 83, 86, 88, 90, 92, 93, 94, 95, 96, 97, 98, 99], capacities=[112439, 189740, 330288, 45679, 351370, 28110, 87843, 66761, 84329, 56220, 126494, 126494, 63247, 66761, 7028, 7028, 133521, 21083, 165144, 87843, 154603, 91357, 439213, 87843, 200281, 21083, 105411, 42165, 14055, 108925, 154603, 151090, 122980, 17569, 38651, 137035, 165144, 56220, 256501, 17569, 119466, 109, 10542, 9, 91357, 171, 165, 51], slot_sizes=[32, 54, 94, 13, 100, 8, 25, 19, 24, 16, 36, 36, 18, 19, 2, 2, 38, 6, 47, 25, 44, 26, 125, 25, 57, 6, 30, 12, 4, 31, 44, 43, 35, 5, 11, 39, 47, 16, 73, 5, 34, 1, 3, 1, 26, 1, 1, 1]
+    merged_table_2: sub_tables=[2], capacities=[197592], slot_sizes=[4000]
+    merged_table_3: sub_tables=[27], capacities=[445894], slot_sizes=[4000]
+
+    """
     log_section(logger, '合表分组')
     logger.info(f'  共 {len(groups)} 个大表, {len(sub_tables)} 个小表')
     for gi, group in enumerate(groups):
@@ -1134,6 +1149,19 @@ if __name__ == '__main__':
             f'  MergedTable id={mt.table_id}, global_capacity={mt.global_capacity}, '
             f'embedding_dim={mt.embedding_dim}, num_sub_tables={mt.get_num_sub_tables()}'
         )
+    
+    '''
+    
+    merged_tables 数量: 4
+    sub_table_to_merged: [0, 0, 2, 1, 0, 0, 0, 0, 1, 0, 1, 1, 1, 0, 1, 1, 1, 0, 1, 1, 0, 1, 0, 0, 1, 0, 0, 3, 0, 0, 0, 0, 1, 0, 1, 0, 0, 1, 1, 1, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 1, 1, 0, 0, 1, 0, 0, 1, 0, 0, 0, 0, 0, 1, 1, 0, 1, 1, 0, 0, 1, 1, 0, 1, 1, 1, 0, 1, 0, 1, 1, 1, 1, 0, 0, 1, 0, 1, 0, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1]
+    MergedTable id=0, global_capacity=6838, embedding_dim=2, num_sub_tables=50
+    MergedTable id=1, global_capacity=4761590, embedding_dim=2, num_sub_tables=48
+    MergedTable id=2, global_capacity=197592, embedding_dim=2, num_sub_tables=1
+    MergedTable id=3, global_capacity=445894, embedding_dim=2, num_sub_tables=1
+
+    sub_table_to_merged: 小表(slot)属于哪个大表，索引标识的是小表slot
+
+    '''
 
     # 为每个大表创建MergedTableEmbeddingEngine
     merged_engines = []
@@ -1165,9 +1193,11 @@ if __name__ == '__main__':
         sub_table_indices = [i for i, mapped_idx in enumerate(sub_table_to_merged) if mapped_idx == eng_idx]
         sub_inputs = [local_input_placeholders[i] for i in sub_table_indices]
 
+        # sub_table_indices： 大表0: 包含小表 [0, 1, 4, 5, 6, 7, 9, 13, 17, 20, 22, 23, 25, 26, 28, 29, 30, 31, 33, 35, 36, 40, 41, 42, 43, 46, 47, 48, 49, 50, 53, 54, 56, 57, 59, 60, 61, 62, 63, 66, 69, 70, 73, 77, 79, 84, 85, 87, 89, 91], 使用对应的input placeholders
+        # sub_inputs: [slot0[1721, 1496, 156, 135, 22, 1496, 461, 1721, 50, 643], slot1shape(10,1), slot4shape(10,1)...] 每个分组输入 
         print(f"   大表{eng_idx}: 包含小表 {sub_table_indices}, 使用对应的input placeholders")
 
-        # 前向传播
+        # 前向传播， 对于大表0 sub_inputs: 50 * （1，10）
         embs_before_pooling, embs = engine.lookup_and_gather(sub_inputs)
 
         # 按照all2all_slot顺序组装

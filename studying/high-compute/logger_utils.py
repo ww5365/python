@@ -42,7 +42,7 @@ def _format_values(arr, max_show):
     if n == 0:
         return '[]'
     show = min(n, max_show)
-    vals = ', '.join(f'{v!r}' for v in flat[:show])
+    vals = ', '.join(f'{v!r}' for v in flat[:show]) # {v!r} 表示将v转换为字符串，并使用repr()函数进行格式化,字符串加引号，整数则不变
     if n > show:
         vals += f', ... (+{n - show} more)'
     return f'[{vals}]'
