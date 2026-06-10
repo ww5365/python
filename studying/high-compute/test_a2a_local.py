@@ -251,6 +251,22 @@ class MergedTableKeyProcessor:
             uindex: tf.Tensor - 全局uindex
             offset_count: int - offset数量
             key_to_sub_table_map: tf.Tensor - key到大表的映射信息
+
+        数据处理示例：
+        input_ids_list = [
+        slot_0: (10,1) → [1721, 1496, 156, 135, 22, 1496, 461, 1721, 50, 643],
+        slot_1: (10,1) → [1950, 1997, 2001, 1988, 1994, ...],
+        slot_4: (10,1) → [2483532, 2482255, ...],
+        ... 共 50 个小表
+        ]
+        sub_table_key_counts = [10, 10, 10, ..., 10]   # 50 个 10
+        combined_global_keys: shape=(500,)   # 50 × 10
+
+        [   1721,1496,156,135,22,1496,461,1721,50,643,     ← slot_0  [0:10)
+            1950,1997,2001,1988,1994,1995,1960,1988,2007,1997,  ← slot_1  [10:20)
+            2483532,2482255,...,2483248,                    ← slot_4  [20:30)
+            ...共 50 段，每段 10 个]
+
         """
         # Step 1: 将每个小表的key转换为global_key
         global_keys_list = []
@@ -265,12 +281,13 @@ class MergedTableKeyProcessor:
             sub_table_key_counts.append(num_keys)
 
         # Step 2: 拼接所有小表的global_keys
+        # merged_0.combined_keys: shape=(500,)
         combined_global_keys = tf.concat(global_keys_list, axis=0)  # global_keys_list是list[tf.Tensor] 类型，拼接所有小表的global_keys [（10，）, (10,)...] -> (500,)
 
         # Step 3: 执行_key_process (使用合并后的大表参数)
         send_sizes, recv_sizes, indices, uindex, offset_count = self._key_process(
-            combined_global_keys,
-            self.merged_table.table_id,
+            combined_global_keys,   # shape: (500,)
+            self.merged_table.table_id,  # 大表id
             slot_size=1,  # 已经是拼接后的，slot_size设为1
             name_=f'keyprocess_merged_{self.merged_table.table_id}',
             is_prefetch_=False,
@@ -680,7 +697,22 @@ def create_merged_all2all_embedding_for_every_slot(sfps, groups, sub_tables):
         )
 
         merged_vocabulary_size = sum(sub_tables[idx].capacity for idx in group)
-        merged_slot_size = sum(sub_tables[idx].slot_size for idx in group)
+        merged_slot_size = sum(sub_tables[idx].slot_size for idx in group)  # 合表功能后，按照这个组中所有小表的slot大小，创建一个大的slot
+        # 创建sfps中的table， 参数：
+        # embedding_type.all2all: 表示使用all2all通信方式
+        # merged_vocabulary_size: 大表总容量
+        # embedding_dim: embedding维度
+        # bs: batch size
+        # [merged_slot_size]: slot大小
+        # opt: optimizer
+        # init: 初始化器
+        # sfps.c_lib.key_type.int64: 键类型
+        # sfps.c_lib.pooling_type.sum: 池化类型
+        # sfps.c_lib.hash_type.hash: 哈希类型
+        # comm_policy: 通信策略
+        # feature_policy: 特征策略
+        # None: 填充参数
+
         sfps.create_table(sfps.c_lib.embedding_type.all2all, merged_vocabulary_size, embedding_dim,
                           bs, [merged_slot_size], opt, init, sfps.c_lib.key_type.int64, sfps.c_lib.pooling_type.sum,
                           sfps.c_lib.hash_type.hash, comm_policy, feature_policy, None)
@@ -1197,7 +1229,7 @@ if __name__ == '__main__':
         # sub_inputs: [slot0[1721, 1496, 156, 135, 22, 1496, 461, 1721, 50, 643], slot1shape(10,1), slot4shape(10,1)...] 每个分组输入 
         print(f"   大表{eng_idx}: 包含小表 {sub_table_indices}, 使用对应的input placeholders")
 
-        # 前向传播， 对于大表0 sub_inputs: 50 * （1，10）
+        # 前向传播， 对于大表0 sub_inputs: 50 * （10,1）
         embs_before_pooling, embs = engine.lookup_and_gather(sub_inputs)
 
         # 按照all2all_slot顺序组装

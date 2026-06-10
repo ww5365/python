@@ -94,7 +94,10 @@ def get_npu_hbm_mb(device_id=None):
         if used is not None:
             return used, total, 'npu-smi info'
 
-    # 2) memory capacity + usages rate
+    # 2) memory capacity + usages rate  计算思路
+    # 先用 npu-smi info -t memory -i <device_id> -c 0 获取 HBM 总容量（HBM Capacity(MB)）。
+    # 再用 npu-smi info -t usages -i <device_id> -c 0 获取 HBM 使用率（HBM Usage Rate(%)）。
+    # 通过 capacity × usage_rate% 计算已用量，返回 (used, capacity)。
     rc, mem_out, _ = _run_cmd(['npu-smi', 'info', '-t', 'memory', '-i', str(device_id), '-c', '0'])
     capacity = _parse_hbm_capacity(mem_out) if rc == 0 else None
     rc2, usage_out, _ = _run_cmd(['npu-smi', 'info', '-t', 'usages', '-i', str(device_id), '-c', '0'])
@@ -124,6 +127,13 @@ def get_host_rss_mb():
 
 def estimate_tf_variables_mb():
     """Estimate float32 size of all global variables (graph built, may not be allocated yet)."""
+    """
+    遍历图中所有全局变量，根据变量名的关键词分类累加其 float32（4字节/元素）大小的估算值：
+    包含 _m_hash, _v_hash, /m_slot, /v_slot, /m/, /v/ 或 adam, slot, lazyadam 等关键词 → 归为优化器槽位（slot_mb）
+    包含 merged_embedding_table 或 embedding_table → 归为Embedding 参数（emb_mb）
+    包含 cross_, deep_, model/, dense → 归为DCN 等密集层参数（dense_mb）
+    其他 → 归为其余变量（other_mb）
+    """
     import tensorflow as tf
     if tf.__version__.startswith('2'):
         import tensorflow.compat.v1 as tf
