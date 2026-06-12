@@ -133,6 +133,8 @@ def estimate_tf_variables_mb():
     包含 merged_embedding_table 或 embedding_table → 归为Embedding 参数（emb_mb）
     包含 cross_, deep_, model/, dense → 归为DCN 等密集层参数（dense_mb）
     其他 → 归为其余变量（other_mb）
+
+    脚本中的全局变量：详见：
     """
     import tensorflow as tf
     if tf.__version__.startswith('2'):
@@ -173,6 +175,23 @@ def estimate_merged_tables_mb(merged_tables, embedding_dim):
     emb_mb = total_rows * embedding_dim * 4 / (1024 * 1024)
     return total_rows, emb_mb
 
+
+
+"""
+
+log_memory输出的日志示例：
+stage=10_after_global_variables_initializer | time=09:45:25 | NPU_HBM=17694MB/65536MB(+14418MB)[npu-smi usages] | host_RSS=9480MB(+7782MB) | tf_var_est=8783.6MB(emb=2172.4 slot=5855.7 dense=755.5) | merged_table_est=2172.4MB(rows=8898031)
+
+下面各个字段的含义：
+
+| 字段 | 含义 | 关注点 |
+|------|------|--------|
+| NPU_HBM | NPU 实际占用 | 对比初始化前后的增量 |
+| emb=xxx | Embedding 变量估算 | 是否与 merged_table_est 一致 |
+| dense=xxx | DCN 参数 | 随训练是否增长 |
+| slot=xxx | Optimizer 状态 | Adam m/v slot |
+| merged_table_est | 合表理论值 | 验证估算准确性 |
+"""
 
 def log_memory(stage, extra=None, use_baseline=True, merged_tables=None, embedding_dim=None):
     """
