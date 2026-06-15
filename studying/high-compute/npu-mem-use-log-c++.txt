@@ -1,0 +1,316 @@
+迭代0：
+   
+   232	2026-06-12 17:50:10| |INFO|[MEM_PROFILE] | rank=0 | dev=0 | stage=iter0_before_run | time=17:50:08 | NPU_HBM=NA[unavailable(no npu-smi)] | host_RSS=7798MB | tf_var_est=5525.2MB(emb=1086.2 slot=3683.5 dense=755.5)
+   233	
+   234	2026-06-12 17:50:12| |INFO|[MEM_PROFILE] | rank=0 | dev=0 | stage=iter0_before_full_train_step | time=17:50:10 | NPU_HBM=NA[unavailable(no npu-smi)] | host_RSS=7798MB | tf_var_est=5525.2MB(emb=1086.2 slot=3683.5 dense=755.5)
+   235	
+   236	2026-06-12 17:51:02| |ERROR|Rank 0 table 34 op 0, free HBM 52854(MB) total HBM 62420(MB), ret=0
+   237	2026-06-12 17:51:02| |ERROR|Rank 0 table 18 op 0, free HBM 52854(MB) total HBM 62420(MB), ret=0
+   238	2026-06-12 17:51:02| |ERROR|Rank 0 table 11 op 0, free HBM 52854(MB) total HBM 62420(MB), ret=0
+   239	2026-06-12 17:51:02| |ERROR|Rank 0 table 35 op 0, free HBM 52854(MB) total HBM 62420(MB), ret=0
+   240	2026-06-12 17:51:02| |ERROR|Rank 0 table 33 op 0, free HBM 52854(MB) total HBM 62420(MB), ret=0
+   241	2026-06-12 17:51:02| |ERROR|Rank 0 table 29 op 0, free HBM 52854(MB) total HBM 62420(MB), ret=0
+   242	2026-06-12 17:51:02| |ERROR|Rank 0 table 32 op 0, free HBM 52854(MB) total HBM 62420(MB), ret=0
+   243	2026-06-12 17:51:02| |ERROR|Rank 0 table 21 op 0, free HBM 52854(MB) total HBM 62420(MB), ret=0
+   244	2026-06-12 17:51:02| |ERROR|Rank 0 table 8 op 0, free HBM 52854(MB) total HBM 62420(MB), ret=0
+   245	2026-06-12 17:51:02| |ERROR|Rank 0 table 7 op 0, free HBM 52854(MB) total HBM 62420(MB), ret=0
+   246	2026-06-12 17:51:02| |ERROR|Rank 0 table 6 op 0, free HBM 52854(MB) total HBM 62420(MB), ret=0
+   247	2026-06-12 17:51:02| |ERROR|Rank 0 table 30 op 0, free HBM 52854(MB) total HBM 62420(MB), ret=0
+   248	2026-06-12 17:51:02| |ERROR|Rank 0 table 31 op 0, free HBM 52854(MB) total HBM 62420(MB), ret=0
+   249	2026-06-12 17:51:02| |ERROR|Rank 0 table 9 op 0, free HBM 52854(MB) total HBM 62420(MB), ret=0
+   250	2026-06-12 17:51:02| |ERROR|Rank 0 table 10 op 0, free HBM 52854(MB) total HBM 62420(MB), ret=0
+   251	2026-06-12 17:51:02| |ERROR|Rank 0 table 22 op 0, free HBM 52854(MB) total HBM 62420(MB), ret=0
+   252	2026-06-12 17:51:02| |ERROR|Rank 0 table 14 op 0, free HBM 52854(MB) total HBM 62420(MB), ret=0
+   253	2026-06-12 17:51:02| |ERROR|Rank 0 table 20 op 0, free HBM 52854(MB) total HBM 62420(MB), ret=0
+   254	2026-06-12 17:51:02| |ERROR|Rank 0 table 28 op 0, free HBM 52854(MB) total HBM 62420(MB), ret=0
+   255	2026-06-12 17:51:02| |ERROR|Rank 0 table 1 op 0, free HBM 52854(MB) total HBM 62420(MB), ret=0
+   256	2026-06-12 17:51:02| |ERROR|Rank 0 table 5 op 0, free HBM 52854(MB) total HBM 62420(MB), ret=0
+   257	2026-06-12 17:51:02| |ERROR|Rank 0 table 15 op 0, free HBM 52854(MB) total HBM 62420(MB), ret=0
+   258	2026-06-12 17:51:02| |ERROR|Rank 0 table 37 op 0, free HBM 52854(MB) total HBM 62420(MB), ret=0
+   259	2026-06-12 17:51:02| |ERROR|Rank 0 table 25 op 0, free HBM 52854(MB) total HBM 62420(MB), ret=0
+   260	2026-06-12 17:51:02| |ERROR|Rank 0 table 4 op 0, free HBM 52854(MB) total HBM 62420(MB), ret=0
+   261	2026-06-12 17:51:02| |ERROR|Rank 0 table 19 op 0, free HBM 52854(MB) total HBM 62420(MB), ret=0
+   262	2026-06-12 17:51:02| |ERROR|Rank 0 table 27 op 0, free HBM 52854(MB) total HBM 62420(MB), ret=0
+   263	2026-06-12 17:51:02| |ERROR|Rank 0 table 26 op 0, free HBM 52854(MB) total HBM 62420(MB), ret=0
+   264	2026-06-12 17:51:02| |ERROR|Rank 0 table 0 op 0, free HBM 52854(MB) total HBM 62420(MB), ret=0
+   265	2026-06-12 17:51:02| |ERROR|Rank 0 table 12 op 0, free HBM 52854(MB) total HBM 62420(MB), ret=0
+   266	2026-06-12 17:51:02| |ERROR|Rank 0 table 2 op 0, free HBM 52854(MB) total HBM 62420(MB), ret=0
+   267	2026-06-12 17:51:02| |ERROR|Rank 0 table 24 op 0, free HBM 52854(MB) total HBM 62420(MB), ret=0
+   268	2026-06-12 17:51:02| |ERROR|Rank 0 table 16 op 0, free HBM 52854(MB) total HBM 62420(MB), ret=0
+   269	2026-06-12 17:51:02| |ERROR|Rank 0 table 3 op 0, free HBM 52854(MB) total HBM 62420(MB), ret=0
+   270	2026-06-12 17:51:02| |ERROR|Rank 0 table 17 op 0, free HBM 52854(MB) total HBM 62420(MB), ret=0
+   271	2026-06-12 17:51:02| |ERROR|Rank 0 table 13 op 0, free HBM 52854(MB) total HBM 62420(MB), ret=0
+   272	2026-06-12 17:51:02| |ERROR|Rank 0 table 36 op 0, free HBM 52854(MB) total HBM 62420(MB), ret=0
+   273	2026-06-12 17:51:02| |ERROR|Rank 0 table 23 op 0, free HBM 52854(MB) total HBM 62420(MB), ret=0
+
+   296	2026-06-12 17:52:43| |ERROR|Rank 0 table 5 op 3, free HBM 52570(MB) total HBM 62420(MB), ret=0
+   297	2026-06-12 17:52:43| |ERROR|2026-06-12 17:52:42.839824: I  : 121
+   298	2026-06-12 17:52:43| |ERROR|Rank 0 table 3 op 3, free HBM 52570(MB) total HBM 62420(MB), ret=0
+   299	2026-06-12 17:52:43| |ERROR|2026-06-12 17:52:42.859693: I  : 141
+   300	2026-06-12 17:52:43| |ERROR|Rank 0 table 9 op 3, free HBM 52570(MB) total HBM 62420(MB), ret=0
+   301	2026-06-12 17:52:43| |ERROR|2026-06-12 17:52:42.966605: I  : 241
+   302	2026-06-12 17:52:43| |ERROR|2026-06-12 17:52:42.967162: I  : 41
+   303	2026-06-12 17:52:43| |ERROR|Rank 0 table 22 op 3, free HBM 52566(MB) total HBM 62420(MB), ret=0
+   304	2026-06-12 17:52:43| |ERROR|2026-06-12 17:52:43.005641: I  : 131
+   305	2026-06-12 17:52:43| |ERROR|Rank 0 table 29 op 3, free HBM 52542(MB) total HBM 62420(MB), ret=0
+   306	2026-06-12 17:52:43| |ERROR|Rank 0 table 2 op 3, free HBM 52542(MB) total HBM 62420(MB), ret=0
+   307	2026-06-12 17:52:43| |ERROR|2026-06-12 17:52:43.103880: I  : 91
+   308	2026-06-12 17:52:43| |ERROR|Rank 0 table 11 op 3, free HBM 52542(MB) total HBM 62420(MB), ret=0
+   309	2026-06-12 17:52:43| |ERROR|2026-06-12 17:52:43.160864: I  : 71
+   310	2026-06-12 17:52:43| |ERROR|Rank 0 table 7 op 3, free HBM 52542(MB) total HBM 62420(MB), ret=0
+   311	2026-06-12 17:52:43| |ERROR|2026-06-12 17:52:43.184425: I  : 191
+   312	2026-06-12 17:52:43| |ERROR|Rank 0 table 8 op 3, free HBM 52542(MB) total HBM 62420(MB), ret=0
+   313	2026-06-12 17:52:43| |ERROR|2026-06-12 17:52:43.266616: I  : 111
+   314	2026-06-12 17:52:43| |ERROR|Rank 0 table 34 op 3, free HBM 52542(MB) total HBM 62420(MB), ret=0
+   315	2026-06-12 17:52:43| |ERROR|2026-06-12 17:52:43.354480: I  : 31
+   316	2026-06-12 17:52:43| |ERROR|2026-06-12 17:52:43.354651: I  : 221
+   317	2026-06-12 17:52:43| |ERROR|2026-06-12 17:52:43.354804: I  : 151
+   318	2026-06-12 17:52:43| |ERROR|2026-06-12 17:52:43.355112: I  : 51
+   319	2026-06-12 17:52:43| |ERROR|Rank 0 table 6 op 3, free HBM 52542(MB) total HBM 62420(MB), ret=0
+   320	2026-06-12 17:52:43| |ERROR|2026-06-12 17:52:43.498731: I  : 61
+   321	2026-06-12 17:52:43| |ERROR|Rank 0 table 24 op 3, free HBM 52524(MB) total HBM 62420(MB), ret=0
+   322	2026-06-12 17:52:43| |ERROR|Rank 0 table 4 op 3, free HBM 52524(MB) total HBM 62420(MB), ret=0
+   323	2026-06-12 17:52:43| |ERROR|Rank 0 table 10 op 3, free HBM 52524(MB) total HBM 62420(MB), ret=0
+   324	2026-06-12 17:52:43| |ERROR|Rank 0 table 30 op 3, free HBM 52524(MB) total HBM 62420(MB), ret=0
+   325	2026-06-12 17:52:43| |ERROR|Rank 0 table 0 op 3, free HBM 52524(MB) total HBM 62420(MB), ret=0
+   326	2026-06-12 17:52:43| |ERROR|2026-06-12 17:52:43.550753: I  : 171
+   327	2026-06-12 17:52:43| |ERROR|Rank 0 table 35 op 3, free HBM 52524(MB) total HBM 62420(MB), ret=0
+   328	2026-06-12 17:52:43| |ERROR|2026-06-12 17:52:43.624250: I  : 201
+   329	2026-06-12 17:52:43| |ERROR|Rank 0 table 23 op 3, free HBM 52524(MB) total HBM 62420(MB), ret=0
+   330	2026-06-12 17:52:43| |ERROR|2026-06-12 17:52:43.674810: I  : 231
+   331	2026-06-12 17:52:43| |ERROR|2026-06-12 17:52:43.679386: I  : 211
+   332	2026-06-12 17:52:43| |ERROR|Rank 0 table 25 op 3, free HBM 52506(MB) total HBM 62420(MB), ret=0
+   333	2026-06-12 17:52:43| |ERROR|Rank 0 table 12 op 3, free HBM 52486(MB) total HBM 62420(MB), ret=0
+   334	2026-06-12 17:52:43| |ERROR|2026-06-12 17:52:43.746452: I  : 81
+   335	2026-06-12 17:52:43| |ERROR|Rank 0 table 1 op 3, free HBM 52486(MB) total HBM 62420(MB), ret=0
+   336	2026-06-12 17:52:43| |ERROR|2026-06-12 17:52:43.767633: I  : 181
+   337	2026-06-12 17:52:43| |ERROR|Rank 0 table 26 op 3, free HBM 52486(MB) total HBM 62420(MB), ret=0
+   338	2026-06-12 17:52:44| |ERROR|2026-06-12 17:52:43.818055: I  : 161
+   339	2026-06-12 17:52:44| |ERROR|Rank 0 table 27 op 3, free HBM 52486(MB) total HBM 62420(MB), ret=0
+
+   342	2026-06-12 17:52:44| |ERROR|Rank 0 table 31 op 3, free HBM 52104(MB) total HBM 62420(MB), ret=0
+   343	2026-06-12 17:52:44| |ERROR|2026-06-12 17:52:43.900318: I  : 291
+   344	2026-06-12 17:52:44| |ERROR|Rank 0 table 17 op 3, free HBM 52104(MB) total HBM 62420(MB), ret=0
+   345	2026-06-12 17:52:44| |ERROR|Rank 0 table 18 op 3, free HBM 52104(MB) total HBM 62420(MB), ret=0
+   349	2026-06-12 17:52:44| |ERROR|Rank 0 table 15 op 3, free HBM 51518(MB) total HBM 62420(MB), ret=0
+   350	2026-06-12 17:52:44| |ERROR|Rank 0 table 19 op 3, free HBM 51518(MB) total HBM 62420(MB), ret=0
+   351	2026-06-12 17:52:44| |ERROR|Rank 0 table 21 op 3, free HBM 51518(MB) total HBM 62420(MB), ret=0
+   352	2026-06-12 17:52:44| |ERROR|2026-06-12 17:52:44.125205: I  : 301
+   353	2026-06-12 17:52:44| |ERROR|2026-06-12 17:52:44.125355: I  : 311
+   354	2026-06-12 17:52:44| |ERROR|Rank 0 table 16 op 3, free HBM 51518(MB) total HBM 62420(MB), ret=0
+   355	2026-06-12 17:52:44| |ERROR|Rank 0 table 20 op 3, free HBM 51518(MB) total HBM 62420(MB), ret=0
+   356	2026-06-12 17:52:44| |ERROR|2026-06-12 17:52:44.246262: I  : 331
+   357	2026-06-12 17:52:44| |ERROR|2026-06-12 17:52:44.251682: I  : 341
+   358	2026-06-12 17:52:44| |ERROR|Rank 0 table 13 op 3, free HBM 51518(MB) total HBM 62420(MB), ret=0
+   359	2026-06-12 17:52:44| |ERROR|Rank 0 table 14 op 3, free HBM 51518(MB) total HBM 62420(MB), ret=0
+   360	2026-06-12 17:52:44| |ERROR|2026-06-12 17:52:44.368412: I  : 351
+   361	2026-06-12 17:52:44| |ERROR|Rank 0 table 32 op 3, free HBM 51518(MB) total HBM 62420(MB), ret=0
+   362	2026-06-12 17:52:44| |ERROR|2026-06-12 17:52:44.389818: I  : 391
+   363	2026-06-12 17:52:44| |ERROR|Rank 0 table 28 op 3, free HBM 51518(MB) total HBM 62420(MB), ret=0
+   364	2026-06-12 17:52:44| |ERROR|2026-06-12 17:52:44.405236: I  : 381
+   365	2026-06-12 17:52:44| |ERROR|Rank 0 table 37 op 3, free HBM 51518(MB) total HBM 62420(MB), ret=0
+   366	2026-06-12 17:52:44| |ERROR|2026-06-12 17:52:44.427570: I  : 371
+   367	2026-06-12 17:52:44| |ERROR|Rank 0 table 36 op 3, free HBM 51518(MB) total HBM 62420(MB), ret=0
+   368	2026-06-12 17:52:44| |ERROR|2026-06-12 17:52:44.449216: I  : 361
+   369	2026-06-12 17:52:44| |ERROR|Rank 0 table 33 op 3, free HBM 51518(MB) total HBM 62420(MB), ret=0
+
+   373	2026-06-12 17:52:53| |ERROR|Rank 0 table 22 op 6, free HBM 46863(MB) total HBM 62420(MB), ret=0
+   374	2026-06-12 17:52:53| |ERROR|Rank 0 table 23 op 6, free HBM 46863(MB) total HBM 62420(MB), ret=0
+   375	2026-06-12 17:52:53| |ERROR|Rank 0 table 24 op 6, free HBM 46863(MB) total HBM 62420(MB), ret=0
+   376	2026-06-12 17:52:53| |ERROR|Rank 0 table 26 op 6, free HBM 46863(MB) total HBM 62420(MB), ret=0
+   377	2026-06-12 17:52:53| |ERROR|Rank 0 table 9 op 6, free HBM 46863(MB) total HBM 62420(MB), ret=0
+   378	2026-06-12 17:52:53| |ERROR|Rank 0 table 2 op 6, free HBM 46863(MB) total HBM 62420(MB), ret=0
+   379	2026-06-12 17:52:53| |ERROR|Rank 0 table 1 op 6, free HBM 46863(MB) total HBM 62420(MB), ret=0
+   380	2026-06-12 17:52:53| |ERROR|Rank 0 table 33 op 6, free HBM 46863(MB) total HBM 62420(MB), ret=0
+   381	2026-06-12 17:52:53| |ERROR|Rank 0 table 3 op 6, free HBM 46863(MB) total HBM 62420(MB), ret=0
+   382	2026-06-12 17:52:53| |ERROR|Rank 0 table 35 op 6, free HBM 46863(MB) total HBM 62420(MB), ret=0
+   383	2026-06-12 17:52:53| |ERROR|Rank 0 table 10 op 6, free HBM 46863(MB) total HBM 62420(MB), ret=0
+   384	2026-06-12 17:52:53| |ERROR|Rank 0 table 27 op 6, free HBM 46863(MB) total HBM 62420(MB), ret=0
+   385	2026-06-12 17:52:53| |ERROR|Rank 0 table 31 op 6, free HBM 46863(MB) total HBM 62420(MB), ret=0
+   386	2026-06-12 17:52:53| |ERROR|Rank 0 table 25 op 6, free HBM 46863(MB) total HBM 62420(MB), ret=0
+   387	2026-06-12 17:52:53| |ERROR|Rank 0 table 32 op 6, free HBM 46863(MB) total HBM 62420(MB), ret=0
+   388	2026-06-12 17:52:53| |ERROR|Rank 0 table 21 op 6, free HBM 46863(MB) total HBM 62420(MB), ret=0
+   389	2026-06-12 17:52:53| |ERROR|Rank 0 table 34 op 6, free HBM 46863(MB) total HBM 62420(MB), ret=0
+   390	2026-06-12 17:52:53| |ERROR|Rank 0 table 4 op 6, free HBM 46863(MB) total HBM 62420(MB), ret=0
+   391	2026-06-12 17:52:53| |ERROR|Rank 0 table 29 op 6, free HBM 46863(MB) total HBM 62420(MB), ret=0
+   392	2026-06-12 17:52:53| |ERROR|Rank 0 table 37 op 6, free HBM 46863(MB) total HBM 62420(MB), ret=0
+   393	2026-06-12 17:52:53| |ERROR|Rank 0 table 28 op 6, free HBM 46863(MB) total HBM 62420(MB), ret=0
+   394	2026-06-12 17:52:53| |ERROR|Rank 0 table 20 op 6, free HBM 46863(MB) total HBM 62420(MB), ret=0
+   395	2026-06-12 17:52:53| |ERROR|Rank 0 table 17 op 6, free HBM 46863(MB) total HBM 62420(MB), ret=0
+   396	2026-06-12 17:52:53| |ERROR|Rank 0 table 11 op 6, free HBM 46863(MB) total HBM 62420(MB), ret=0
+   397	2026-06-12 17:52:53| |ERROR|Rank 0 table 7 op 6, free HBM 46863(MB) total HBM 62420(MB), ret=0
+   398	2026-06-12 17:52:53| |ERROR|Rank 0 table 19 op 6, free HBM 46863(MB) total HBM 62420(MB), ret=0
+   399	2026-06-12 17:52:53| |ERROR|Rank 0 table 6 op 6, free HBM 46863(MB) total HBM 62420(MB), ret=0
+   400	2026-06-12 17:52:53| |ERROR|Rank 0 table 15 op 6, free HBM 46863(MB) total HBM 62420(MB), ret=0
+   401	2026-06-12 17:52:53| |ERROR|Rank 0 table 16 op 6, free HBM 46863(MB) total HBM 62420(MB), ret=0
+   402	2026-06-12 17:52:53| |ERROR|Rank 0 table 8 op 6, free HBM 46863(MB) total HBM 62420(MB), ret=0
+   403	2026-06-12 17:52:53| |ERROR|Rank 0 table 18 op 6, free HBM 46863(MB) total HBM 62420(MB), ret=0
+   404	2026-06-12 17:52:53| |ERROR|Rank 0 table 36 op 6, free HBM 46863(MB) total HBM 62420(MB), ret=0
+   405	2026-06-12 17:52:53| |ERROR|Rank 0 table 5 op 6, free HBM 46863(MB) total HBM 62420(MB), ret=0
+   406	2026-06-12 17:52:53| |ERROR|Rank 0 table 14 op 6, free HBM 46863(MB) total HBM 62420(MB), ret=0
+   407	2026-06-12 17:52:53| |ERROR|Rank 0 table 12 op 6, free HBM 46863(MB) total HBM 62420(MB), ret=0
+   408	2026-06-12 17:52:53| |ERROR|Rank 0 table 13 op 6, free HBM 46863(MB) total HBM 62420(MB), ret=0
+   409	2026-06-12 17:52:53| |ERROR|Rank 0 table 30 op 6, free HBM 46863(MB) total HBM 62420(MB), ret=0
+   410	2026-06-12 17:52:53| |ERROR|Rank 0 table 0 op 6, free HBM 46863(MB) total HBM 62420(MB), ret=0
+
+   431	2026-06-12 17:55:45| |ERROR|Rank 0 table 23 op 10, free HBM 17640(MB) total HBM 62420(MB), ret=0
+   432	2026-06-12 17:55:45| |ERROR|Rank 0 table 9 op 10, free HBM 17640(MB) total HBM 62420(MB), ret=0
+   433	2026-06-12 17:55:45| |ERROR|Rank 0 table 6 op 10, free HBM 17640(MB) total HBM 62420(MB), ret=0
+   434	2026-06-12 17:55:45| |ERROR|Rank 0 table 24 op 10, free HBM 17640(MB) total HBM 62420(MB), ret=0
+   435	2026-06-12 17:55:45| |ERROR|Rank 0 table 17 op 10, free HBM 17640(MB) total HBM 62420(MB), ret=0
+   436	2026-06-12 17:55:45| |ERROR|Rank 0 table 30 op 10, free HBM 17640(MB) total HBM 62420(MB), ret=0
+   437	2026-06-12 17:55:45| |ERROR|Rank 0 table 22 op 10, free HBM 17640(MB) total HBM 62420(MB), ret=0
+   438	2026-06-12 17:55:45| |ERROR|Rank 0 table 21 op 10, free HBM 17640(MB) total HBM 62420(MB), ret=0
+   439	2026-06-12 17:55:45| |ERROR|Rank 0 table 37 op 10, free HBM 17640(MB) total HBM 62420(MB), ret=0
+   440	2026-06-12 17:55:45| |ERROR|Rank 0 table 29 op 10, free HBM 17640(MB) total HBM 62420(MB), ret=0
+   441	2026-06-12 17:55:45| |ERROR|Rank 0 table 27 op 10, free HBM 17640(MB) total HBM 62420(MB), ret=0
+   442	2026-06-12 17:55:45| |ERROR|Rank 0 table 13 op 10, free HBM 17640(MB) total HBM 62420(MB), ret=0
+   443	2026-06-12 17:55:45| |ERROR|Rank 0 table 25 op 10, free HBM 17640(MB) total HBM 62420(MB), ret=0
+   444	2026-06-12 17:55:45| |ERROR|Rank 0 table 7 op 10, free HBM 17640(MB) total HBM 62420(MB), ret=0
+   445	2026-06-12 17:55:45| |ERROR|Rank 0 table 33 op 10, free HBM 17640(MB) total HBM 62420(MB), ret=0
+   446	2026-06-12 17:55:45| |ERROR|Rank 0 table 26 op 10, free HBM 17640(MB) total HBM 62420(MB), ret=0
+   447	2026-06-12 17:55:45| |ERROR|Rank 0 table 31 op 10, free HBM 17640(MB) total HBM 62420(MB), ret=0
+   448	2026-06-12 17:55:45| |ERROR|Rank 0 table 32 op 10, free HBM 17640(MB) total HBM 62420(MB), ret=0
+   449	2026-06-12 17:55:45| |ERROR|Rank 0 table 28 op 10, free HBM 17640(MB) total HBM 62420(MB), ret=0
+   450	2026-06-12 17:55:45| |ERROR|Rank 0 table 0 op 10, free HBM 17640(MB) total HBM 62420(MB), ret=0
+   451	2026-06-12 17:55:45| |ERROR|Rank 0 table 20 op 10, free HBM 17640(MB) total HBM 62420(MB), ret=0
+   452	2026-06-12 17:55:45| |ERROR|Rank 0 table 15 op 10, free HBM 17640(MB) total HBM 62420(MB), ret=0
+   453	2026-06-12 17:55:45| |ERROR|Rank 0 table 36 op 10, free HBM 17640(MB) total HBM 62420(MB), ret=0
+   454	2026-06-12 17:55:45| |ERROR|Rank 0 table 16 op 10, free HBM 17640(MB) total HBM 62420(MB), ret=0
+   455	2026-06-12 17:55:45| |ERROR|Rank 0 table 10 op 10, free HBM 17640(MB) total HBM 62420(MB), ret=0
+   456	2026-06-12 17:55:45| |ERROR|Rank 0 table 1 op 10, free HBM 17640(MB) total HBM 62420(MB), ret=0
+   457	2026-06-12 17:55:45| |ERROR|Rank 0 table 3 op 10, free HBM 17640(MB) total HBM 62420(MB), ret=0
+   458	2026-06-12 17:55:45| |ERROR|Rank 0 table 18 op 10, free HBM 17640(MB) total HBM 62420(MB), ret=0
+   459	2026-06-12 17:55:45| |ERROR|Rank 0 table 2 op 10, free HBM 17640(MB) total HBM 62420(MB), ret=0
+   460	2026-06-12 17:55:45| |ERROR|Rank 0 table 11 op 10, free HBM 17640(MB) total HBM 62420(MB), ret=0
+   461	2026-06-12 17:55:45| |ERROR|Rank 0 table 14 op 10, free HBM 17640(MB) total HBM 62420(MB), ret=0
+   462	2026-06-12 17:55:45| |ERROR|Rank 0 table 0 op 22, free HBM 17640(MB) total HBM 62420(MB), ret=0
+   463	2026-06-12 17:55:45| |ERROR|Rank 0 table 5 op 10, free HBM 17640(MB) total HBM 62420(MB), ret=0
+   464	2026-06-12 17:55:45| |ERROR|Rank 0 table 34 op 10, free HBM 17640(MB) total HBM 62420(MB), ret=0
+   465	2026-06-12 17:55:45| |ERROR|Rank 0 table 4 op 10, free HBM 17640(MB) total HBM 62420(MB), ret=0
+   466	2026-06-12 17:55:45| |ERROR|Rank 0 table 8 op 10, free HBM 17640(MB) total HBM 62420(MB), ret=0
+   467	2026-06-12 17:55:45| |ERROR|Rank 0 table 19 op 10, free HBM 17640(MB) total HBM 62420(MB), ret=0
+   468	2026-06-12 17:55:45| |ERROR|Rank 0 table 35 op 10, free HBM 17640(MB) total HBM 62420(MB), ret=0
+   469	2026-06-12 17:55:45| |ERROR|Rank 0 table 12 op 10, free HBM 17640(MB) total HBM 62420(MB), ret=0
+   598	2026-06-12 18:07:35| |ERROR|Rank 0 table 0 op 33, free HBM 10780(MB) total HBM 62420(MB), ret=0
+   599	2026-06-12 18:07:35| |ERROR|Rank 0 table 11 op 11, free HBM 10780(MB) total HBM 62420(MB), ret=0
+   600	2026-06-12 18:07:35| |ERROR|Rank 0 table 1 op 11, free HBM 10780(MB) total HBM 62420(MB), ret=0
+   601	2026-06-12 18:07:35| |ERROR|Rank 0 table 17 op 11, free HBM 10780(MB) total HBM 62420(MB), ret=0
+   602	2026-06-12 18:07:35| |ERROR|Rank 0 table 13 op 11, free HBM 10780(MB) total HBM 62420(MB), ret=0
+   603	2026-06-12 18:07:35| |ERROR|Rank 0 table 20 op 11, free HBM 10780(MB) total HBM 62420(MB), ret=0
+   604	2026-06-12 18:07:35| |ERROR|Rank 0 table 14 op 11, free HBM 10780(MB) total HBM 62420(MB), ret=0
+   605	2026-06-12 18:07:35| |ERROR|Rank 0 table 18 op 11, free HBM 10780(MB) total HBM 62420(MB), ret=0
+   606	2026-06-12 18:07:35| |ERROR|Rank 0 table 27 op 11, free HBM 10780(MB) total HBM 62420(MB), ret=0
+   607	2026-06-12 18:07:35| |ERROR|Rank 0 table 0 op 11, free HBM 10780(MB) total HBM 62420(MB), ret=0
+   608	2026-06-12 18:07:35| |ERROR|Rank 0 table 23 op 11, free HBM 10780(MB) total HBM 62420(MB), ret=0
+   609	2026-06-12 18:07:35| |ERROR|Rank 0 table 10 op 11, free HBM 10780(MB) total HBM 62420(MB), ret=0
+   610	2026-06-12 18:07:35| |ERROR|Rank 0 table 21 op 11, free HBM 10780(MB) total HBM 62420(MB), ret=0
+   611	2026-06-12 18:07:35| |ERROR|Rank 0 table 34 op 11, free HBM 10780(MB) total HBM 62420(MB), ret=0
+   612	2026-06-12 18:07:35| |ERROR|Rank 0 table 24 op 11, free HBM 10780(MB) total HBM 62420(MB), ret=0
+   613	2026-06-12 18:07:35| |ERROR|Rank 0 table 19 op 11, free HBM 10780(MB) total HBM 62420(MB), ret=0
+   614	2026-06-12 18:07:35| |ERROR|Rank 0 table 12 op 11, free HBM 10780(MB) total HBM 62420(MB), ret=0
+   615	2026-06-12 18:07:35| |ERROR|Rank 0 table 15 op 11, free HBM 10780(MB) total HBM 62420(MB), ret=0
+   616	2026-06-12 18:07:35| |ERROR|Rank 0 table 4 op 11, free HBM 10780(MB) total HBM 62420(MB), ret=0
+   617	2026-06-12 18:07:35| |ERROR|Rank 0 table 33 op 11, free HBM 10780(MB) total HBM 62420(MB), ret=0
+   618	2026-06-12 18:07:35| |ERROR|Rank 0 table 30 op 11, free HBM 10780(MB) total HBM 62420(MB), ret=0
+   619	2026-06-12 18:07:35| |ERROR|Rank 0 table 2 op 11, free HBM 10780(MB) total HBM 62420(MB), ret=0
+   620	2026-06-12 18:07:35| |ERROR|Rank 0 table 8 op 11, free HBM 10780(MB) total HBM 62420(MB), ret=0
+   621	2026-06-12 18:07:35| |ERROR|Rank 0 table 16 op 11, free HBM 10780(MB) total HBM 62420(MB), ret=0
+   622	2026-06-12 18:07:35| |ERROR|Rank 0 table 5 op 11, free HBM 10780(MB) total HBM 62420(MB), ret=0
+   623	2026-06-12 18:07:35| |ERROR|Rank 0 table 29 op 11, free HBM 10780(MB) total HBM 62420(MB), ret=0
+   624	2026-06-12 18:07:35| |ERROR|Rank 0 table 22 op 11, free HBM 10780(MB) total HBM 62420(MB), ret=0
+   625	2026-06-12 18:07:35| |ERROR|Rank 0 table 7 op 11, free HBM 10780(MB) total HBM 62420(MB), ret=0
+   626	2026-06-12 18:07:35| |ERROR|Rank 0 table 3 op 11, free HBM 10780(MB) total HBM 62420(MB), ret=0
+   627	2026-06-12 18:07:35| |ERROR|Rank 0 table 28 op 11, free HBM 10780(MB) total HBM 62420(MB), ret=0
+   628	2026-06-12 18:07:35| |ERROR|Rank 0 table 25 op 11, free HBM 10780(MB) total HBM 62420(MB), ret=0
+   629	2026-06-12 18:07:35| |ERROR|Rank 0 table 35 op 11, free HBM 10780(MB) total HBM 62420(MB), ret=0
+   630	2026-06-12 18:07:35| |ERROR|Rank 0 table 36 op 11, free HBM 10780(MB) total HBM 62420(MB), ret=0
+   631	2026-06-12 18:07:35| |ERROR|Rank 0 table 31 op 11, free HBM 10780(MB) total HBM 62420(MB), ret=0
+   632	2026-06-12 18:07:35| |ERROR|Rank 0 table 37 op 11, free HBM 10780(MB) total HBM 62420(MB), ret=0
+   633	2026-06-12 18:07:35| |ERROR|Rank 0 table 9 op 11, free HBM 10780(MB) total HBM 62420(MB), ret=0
+   634	2026-06-12 18:07:35| |ERROR|Rank 0 table 32 op 11, free HBM 10780(MB) total HBM 62420(MB), ret=0
+   635	2026-06-12 18:07:35| |ERROR|Rank 0 table 6 op 11, free HBM 10780(MB) total HBM 62420(MB), ret=0
+   636	2026-06-12 18:07:35| |ERROR|Rank 0 table 26 op 11, free HBM 10780(MB) total HBM 62420(MB), ret=0
+
+   654	2026-06-12 18:09:04| |ERROR|Rank 0 table 33 op 17, free HBM 10627(MB) total HBM 62420(MB), ret=0
+   655	2026-06-12 18:09:04| |ERROR|Rank 0 table 32 op 17, free HBM 10627(MB) total HBM 62420(MB), ret=0
+   656	2026-06-12 18:09:04| |ERROR|Rank 0 table 20 op 17, free HBM 10627(MB) total HBM 62420(MB), ret=0
+   657	2026-06-12 18:09:04| |ERROR|Rank 0 table 14 op 17, free HBM 10627(MB) total HBM 62420(MB), ret=0
+   658	2026-06-12 18:09:04| |ERROR|Rank 0 table 26 op 17, free HBM 10627(MB) total HBM 62420(MB), ret=0
+   659	2026-06-12 18:09:04| |ERROR|Rank 0 table 27 op 17, free HBM 10627(MB) total HBM 62420(MB), ret=0
+   660	2026-06-12 18:09:04| |ERROR|Rank 0 table 9 op 17, free HBM 10627(MB) total HBM 62420(MB), ret=0
+   661	2026-06-12 18:09:04| |ERROR|Rank 0 table 28 op 17, free HBM 10627(MB) total HBM 62420(MB), ret=0
+   662	2026-06-12 18:09:04| |ERROR|Rank 0 table 13 op 17, free HBM 10627(MB) total HBM 62420(MB), ret=0
+   663	2026-06-12 18:09:04| |ERROR|Rank 0 table 21 op 17, free HBM 10627(MB) total HBM 62420(MB), ret=0
+   664	2026-06-12 18:09:04| |ERROR|Rank 0 table 22 op 17, free HBM 10627(MB) total HBM 62420(MB), ret=0
+   665	2026-06-12 18:09:04| |ERROR|Rank 0 table 3 op 17, free HBM 10627(MB) total HBM 62420(MB), ret=0
+   666	2026-06-12 18:09:04| |ERROR|Rank 0 table 6 op 17, free HBM 10627(MB) total HBM 62420(MB), ret=0
+   667	2026-06-12 18:09:04| |ERROR|Rank 0 table 34 op 17, free HBM 10627(MB) total HBM 62420(MB), ret=0
+   668	2026-06-12 18:09:04| |ERROR|Rank 0 table 7 op 17, free HBM 10627(MB) total HBM 62420(MB), ret=0
+   669	2026-06-12 18:09:04| |ERROR|Rank 0 table 15 op 17, free HBM 10627(MB) total HBM 62420(MB), ret=0
+   670	2026-06-12 18:09:04| |ERROR|Rank 0 table 37 op 17, free HBM 10627(MB) total HBM 62420(MB), ret=0
+   671	2026-06-12 18:09:04| |ERROR|Rank 0 table 0 op 17, free HBM 10627(MB) total HBM 62420(MB), ret=0
+   672	2026-06-12 18:09:04| |ERROR|Rank 0 table 8 op 17, free HBM 10627(MB) total HBM 62420(MB), ret=0
+   673	2026-06-12 18:09:04| |ERROR|Rank 0 table 1 op 17, free HBM 10627(MB) total HBM 62420(MB), ret=0
+   674	2026-06-12 18:09:04| |ERROR|Rank 0 table 5 op 17, free HBM 10627(MB) total HBM 62420(MB), ret=0
+   675	2026-06-12 18:09:04| |ERROR|Rank 0 table 11 op 17, free HBM 10627(MB) total HBM 62420(MB), ret=0
+   676	2026-06-12 18:09:04| |ERROR|Rank 0 table 23 op 17, free HBM 10627(MB) total HBM 62420(MB), ret=0
+   677	2026-06-12 18:09:04| |ERROR|Rank 0 table 29 op 17, free HBM 10627(MB) total HBM 62420(MB), ret=0
+   678	2026-06-12 18:09:04| |ERROR|Rank 0 table 31 op 17, free HBM 10627(MB) total HBM 62420(MB), ret=0
+   679	2026-06-12 18:09:04| |ERROR|Rank 0 table 19 op 17, free HBM 10627(MB) total HBM 62420(MB), ret=0
+   680	2026-06-12 18:09:04| |ERROR|Rank 0 table 25 op 17, free HBM 10627(MB) total HBM 62420(MB), ret=0
+   681	2026-06-12 18:09:04| |ERROR|Rank 0 table 17 op 17, free HBM 10627(MB) total HBM 62420(MB), ret=0
+   682	2026-06-12 18:09:04| |ERROR|Rank 0 table 18 op 17, free HBM 10627(MB) total HBM 62420(MB), ret=0
+   683	2026-06-12 18:09:04| |ERROR|Rank 0 table 12 op 17, free HBM 10627(MB) total HBM 62420(MB), ret=0
+   684	2026-06-12 18:09:04| |ERROR|Rank 0 table 24 op 17, free HBM 10627(MB) total HBM 62420(MB), ret=0
+   685	2026-06-12 18:09:04| |ERROR|Rank 0 table 4 op 17, free HBM 10627(MB) total HBM 62420(MB), ret=0
+   686	2026-06-12 18:09:04| |ERROR|Rank 0 table 16 op 17, free HBM 10627(MB) total HBM 62420(MB), ret=0
+   687	2026-06-12 18:09:04| |ERROR|Rank 0 table 35 op 17, free HBM 10627(MB) total HBM 62420(MB), ret=0
+   688	2026-06-12 18:09:04| |ERROR|Rank 0 table 10 op 17, free HBM 10627(MB) total HBM 62420(MB), ret=0
+   689	2026-06-12 18:09:04| |ERROR|Rank 0 table 2 op 17, free HBM 10627(MB) total HBM 62420(MB), ret=0
+   690	2026-06-12 18:09:04| |ERROR|Rank 0 table 36 op 17, free HBM 10627(MB) total HBM 62420(MB), ret=0
+   691	2026-06-12 18:09:04| |ERROR|Rank 0 table 30 op 17, free HBM 10627(MB) total HBM 62420(MB), ret=0
+
+   698	
+   699	2026-06-12 18:09:42| |ERROR|Rank 0 table 20 op 21, free HBM 8869(MB) total HBM 62420(MB), ret=0
+   700	2026-06-12 18:09:42| |ERROR|Rank 0 table 32 op 21, free HBM 8869(MB) total HBM 62420(MB), ret=0
+   701	2026-06-12 18:09:42| |ERROR|Rank 0 table 34 op 21, free HBM 8869(MB) total HBM 62420(MB), ret=0
+   702	2026-06-12 18:09:42| |ERROR|Rank 0 table 6 op 21, free HBM 8869(MB) total HBM 62420(MB), ret=0
+   703	2026-06-12 18:09:42| |ERROR|Rank 0 table 29 op 21, free HBM 8869(MB) total HBM 62420(MB), ret=0
+   704	2026-06-12 18:09:42| |ERROR|Rank 0 table 7 op 21, free HBM 8869(MB) total HBM 62420(MB), ret=0
+   705	2026-06-12 18:09:42| |ERROR|Rank 0 table 35 op 21, free HBM 8869(MB) total HBM 62420(MB), ret=0
+   706	2026-06-12 18:09:42| |ERROR|Rank 0 table 3 op 21, free HBM 8869(MB) total HBM 62420(MB), ret=0
+   707	2026-06-12 18:09:42| |ERROR|Rank 0 table 15 op 21, free HBM 8869(MB) total HBM 62420(MB), ret=0
+   708	2026-06-12 18:09:42| |ERROR|Rank 0 table 21 op 21, free HBM 8869(MB) total HBM 62420(MB), ret=0
+   709	2026-06-12 18:09:42| |ERROR|Rank 0 table 8 op 21, free HBM 8869(MB) total HBM 62420(MB), ret=0
+   710	2026-06-12 18:09:42| |ERROR|Rank 0 table 16 op 21, free HBM 8869(MB) total HBM 62420(MB), ret=0
+   711	2026-06-12 18:09:42| |ERROR|Rank 0 table 28 op 21, free HBM 8869(MB) total HBM 62420(MB), ret=0
+   712	2026-06-12 18:09:42| |ERROR|Rank 0 table 22 op 21, free HBM 8869(MB) total HBM 62420(MB), ret=0
+   713	2026-06-12 18:09:42| |ERROR|Rank 0 table 23 op 21, free HBM 8869(MB) total HBM 62420(MB), ret=0
+   714	2026-06-12 18:09:42| |ERROR|Rank 0 table 30 op 21, free HBM 8869(MB) total HBM 62420(MB), ret=0
+   715	2026-06-12 18:09:42| |ERROR|Rank 0 table 36 op 21, free HBM 8869(MB) total HBM 62420(MB), ret=0
+   716	2026-06-12 18:09:42| |ERROR|Rank 0 table 14 op 21, free HBM 8869(MB) total HBM 62420(MB), ret=0
+   717	2026-06-12 18:09:42| |ERROR|Rank 0 table 17 op 21, free HBM 8869(MB) total HBM 62420(MB), ret=0
+   718	2026-06-12 18:09:42| |ERROR|Rank 0 table 9 op 21, free HBM 8869(MB) total HBM 62420(MB), ret=0
+   719	2026-06-12 18:09:42| |ERROR|Rank 0 table 18 op 21, free HBM 8869(MB) total HBM 62420(MB), ret=0
+   720	2026-06-12 18:09:42| |ERROR|Rank 0 table 24 op 21, free HBM 8869(MB) total HBM 62420(MB), ret=0
+   721	2026-06-12 18:09:42| |ERROR|Rank 0 table 25 op 21, free HBM 8869(MB) total HBM 62420(MB), ret=0
+   722	2026-06-12 18:09:42| |ERROR|Rank 0 table 1 op 21, free HBM 8869(MB) total HBM 62420(MB), ret=0
+   723	2026-06-12 18:09:42| |ERROR|Rank 0 table 5 op 21, free HBM 8869(MB) total HBM 62420(MB), ret=0
+   724	2026-06-12 18:09:42| |ERROR|Rank 0 table 0 op 21, free HBM 8869(MB) total HBM 62420(MB), ret=0
+   725	2026-06-12 18:09:42| |ERROR|Rank 0 table 37 op 21, free HBM 8869(MB) total HBM 62420(MB), ret=0
+   726	2026-06-12 18:09:42| |ERROR|Rank 0 table 26 op 21, free HBM 8869(MB) total HBM 62420(MB), ret=0
+   727	2026-06-12 18:09:42| |ERROR|Rank 0 table 12 op 21, free HBM 8869(MB) total HBM 62420(MB), ret=0
+   728	2026-06-12 18:09:42| |ERROR|Rank 0 table 2 op 21, free HBM 8869(MB) total HBM 62420(MB), ret=0
+   729	2026-06-12 18:09:42| |ERROR|Rank 0 table 13 op 21, free HBM 8869(MB) total HBM 62420(MB), ret=0
+   730	2026-06-12 18:09:42| |ERROR|Rank 0 table 27 op 21, free HBM 8869(MB) total HBM 62420(MB), ret=0
+   731	2026-06-12 18:09:42| |ERROR|Rank 0 table 4 op 21, free HBM 8869(MB) total HBM 62420(MB), ret=0
+   732	2026-06-12 18:09:42| |ERROR|Rank 0 table 31 op 21, free HBM 8869(MB) total HBM 62420(MB), ret=0
+   733	2026-06-12 18:09:42| |ERROR|Rank 0 table 0 op 99, free HBM 8869(MB) total HBM 62420(MB), ret=0
+   734	2026-06-12 18:09:42| |ERROR|Rank 0 table 11 op 21, free HBM 8869(MB) total HBM 62420(MB), ret=0
+   735	2026-06-12 18:09:42| |ERROR|Rank 0 table 33 op 21, free HBM 8869(MB) total HBM 62420(MB), ret=0
+   736	2026-06-12 18:09:42| |ERROR|Rank 0 table 19 op 21, free HBM 8869(MB) total HBM 62420(MB), ret=0
+   737	2026-06-12 18:09:42| |ERROR|Rank 0 table 10 op 21, free HBM 8869(MB) total HBM 62420(MB), ret=0
+   738	2026-06-12 18:09:46| |INFO|[MEM_PROFILE] | rank=0 | dev=0 | stage=iter0_after_full_train_step | time=18:09:42 | NPU_HBM=NA[unavailable(no npu-smi)] | host_RSS=22015MB | tf_var_est=5525.2MB(emb=1086.2 slot=3683.5 dense=755.5)
+   739	2026-06-12 18:09:46| |INFO|iter 0, step cost 1175.7574014663696 exclude read dataset
+   740	2026-06-12 18:09:46| |INFO|iter 0, step cost 1179.5934736728668 include read dataset
