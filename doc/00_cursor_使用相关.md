@@ -1,12 +1,12 @@
-# 安装和使用
+## cursor安装和使用
 
-## 安装
+### 安装
 下载cursor：https://cursor.com/cn/home
 
 
-## 使用
+### 使用
 
-### 自动代码生成和调试
+#### 自动代码生成和调试
 
 * ctrl + L ： 打开和关闭智能对话窗口，通过这个对话窗，可以询问怎么编程，代码的分析
 
@@ -18,14 +18,14 @@
 
 * 错误诊断和修复： 找到报错的代码片段 -> fix in chat (ctrl + shift + D)-> chat中自动生成：提示词 修复代码
 
-### 文档
+#### 文档
 
 * api文档生成： md文件中写prompt，把源文件路径，规则，写清楚  -> @md文件  -> query：生成api文档
 * 本地文件，博客等网站，代码库： cursor可以参考来进行代码编写： **这个功能很重要**
   cursor setting -> indexing&Docs -> Docs(add Doc)
   加下对这个库中代码的参考：https://github.com/NVIDIA/recsys-examples/tree/main/corelib/dynamicemb
 
-### @的使用
+#### @的使用
 
 手动**添加上下文**的方式	用法示例	目的
 - @Files （引用文件）	“参照 **@src/utils/helper.ts** 的写法，创建一个新的日志工具函数。”	让AI精确读取某个或多个文件，避免它“猜”错文件。
