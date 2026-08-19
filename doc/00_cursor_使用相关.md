@@ -43,6 +43,17 @@ git 自动提交工具？
 ## claude code 
 
 
+### claude的安装
+
+####  安装过程
+1. Node.js 22+  :  先安装nodejs 
+    >> 官方安装包 (.msi): 访问 Node.js 官网，下载 LTS 版本的 .msi 安装包，双击运行，按提示完成安装即可
+    >> 版本：node -v  npm -v
+2. 安装claude code : npm install -g @anthropic-ai/claude-code
+3. 验证：claude --version
+4. 更新：npm update -g @anthropic-ai/claude-code   
+
+
 
 ### clude 使用
 
