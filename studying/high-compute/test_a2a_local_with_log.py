@@ -78,50 +78,6 @@ logger.info(f"Hyperparameters: bs={bs}, embedding_dim={embedding_dim}, Iters={It
             f"local_vocabulary_size={local_vocabulary_size}, all2all_slot={all2all_slot}, "
             f"num_npus={num_npus}, uplicate_rate={uplicate_rate}, conbiner={conbiner}")
 
-def create_embeddings(vocab_sizes, embedding_dim, slot_vec, conbiner, num_npus, base_table_id, sparse_optimizer, pooling=True):
-    # 创建所有embedding tables
-    embedding_engines = []
-    embedding_tables = []
-    
-    logger.info("=============================================part3==============================================================")
-
-    for i, vocab_size in enumerate(vocab_sizes):
-        embEngine = EmbeddingEngine(
-            local_vocab_size=local_vocabulary_size[i],
-            embedding_dim=embedding_dim,
-            slot_vec=[slot_vec[i]],
-            conbiner = conbiner,
-            num_npus=num_npus,
-            rank=rank,
-            table_id=base_table_id+i,
-            sparse_optimizer=sparse_optimizer,
-            pooling=pooling
-        )
-         
-        embedding_tables.append(embEngine.embedding_table)
-        embedding_engines.append(embEngine)
-        
-        # 从 tf.Variable 中提取名称、形状、数据类型
-        var_name = embEngine.embedding_table.name
-        var_shape = embEngine.embedding_table.shape
-        var_dtype = embEngine.embedding_table.dtype
-
-        logger.info(
-            f"Created EmbeddingEngine[{i}]: "
-            f"table_id={base_table_id + i}, "
-            f"local_vocab_size={local_vocabulary_size[i]}, "
-            f"embedding_dim={embedding_dim}, "
-            f"slot_vec={slot_vec[i]}, "
-            f"conbiner={conbiner}, "
-            f"pooling={pooling}, "
-            f"embedding_table name={var_name}, "
-            f"shape={var_shape}, "
-            f"dtype={var_dtype}"
-        )
-
-    return embedding_tables, embedding_engines
-
-
 # 输入数据
 local_indices = []
 for i in range(len(all2all_slot)):
@@ -184,7 +140,54 @@ def create_all2all_embedding_for_every_slot(sfps):
         sfps.create_table(sfps.c_lib.embedding_type.all2all, local_vocabulary_size[i], embedding_dim,
                           bs, [all2all_slot[i]], opt, init, sfps.c_lib.key_type.int64, sfps.c_lib.pooling_type.sum,
                           sfps.c_lib.hash_type.hash, comm_policy, feature_policy, None)
-        
+
+
+def create_embeddings(vocab_sizes, embedding_dim, slot_vec, conbiner, num_npus, base_table_id, sparse_optimizer,
+                      pooling=True):
+    # 创建所有embedding tables
+    embedding_engines = []
+    embedding_tables = []
+
+    logger.info(
+        "=============================================part3==============================================================")
+
+    for i, vocab_size in enumerate(vocab_sizes):
+        embEngine = EmbeddingEngine(
+            local_vocab_size=local_vocabulary_size[i],
+            embedding_dim=embedding_dim,
+            slot_vec=[slot_vec[i]],
+            conbiner=conbiner,
+            num_npus=num_npus,
+            rank=rank,
+            table_id=base_table_id + i,
+            sparse_optimizer=sparse_optimizer,
+            pooling=pooling
+        )
+
+        embedding_tables.append(embEngine.embedding_table)
+        embedding_engines.append(embEngine)
+
+        # 从 tf.Variable 中提取名称、形状、数据类型
+        var_name = embEngine.embedding_table.name
+        var_shape = embEngine.embedding_table.shape
+        var_dtype = embEngine.embedding_table.dtype
+
+        logger.info(
+            f"Created EmbeddingEngine[{i}]: "
+            f"table_id={base_table_id + i}, "
+            f"local_vocab_size={local_vocabulary_size[i]}, "
+            f"embedding_dim={embedding_dim}, "
+            f"slot_vec={slot_vec[i]}, "
+            f"conbiner={conbiner}, "
+            f"pooling={pooling}, "
+            f"embedding_table name={var_name}, "
+            f"shape={var_shape}, "
+            f"dtype={var_dtype}"
+        )
+
+    return embedding_tables, embedding_engines
+
+
 def get_input(worker_rank, step, uplicate_rate=0.6):
     return local_indices, local_labels   # 同时返回标签
 
