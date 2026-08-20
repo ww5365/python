@@ -53,14 +53,114 @@ git 自动提交工具？
 3. 验证：claude --version
 4. 更新：npm update -g @anthropic-ai/claude-code   
 
+#### 配置
 
+1. 大模型：参考：https://gitcode.com/org/openCsiTool/discussions/1
+2. 配置：C:\Users\Administrator\.claude\settings.json  配置自定义的模型
+```
+{
+  "env": {
+    "ANTHROPIC_AUTH_TOKEN": "API-key",
+    "ANTHROPIC_BASE_URL": "IP或网址",
+    "ANTHROPIC_CODE_NONESSENTIAL_TRAFFIC": "1",
+    "ANTHROPIC_MODEL": "GLM-5.2",
+    "ANTHROPIC_DEFAULT_OPUS_MODEL": "GLM-5.1",
+    "ANTHROPIC_DEFAULT_SONNET_MODEL": "GLM-5",
+    "ANTHROPIC_DEFAULT_HAIKU_MODEL": "Qwen3.7-Plus",
+    "CLAUDE_CODE_SUBAGENT_MODEL": "Qwen3.7-Max"
+  },
+  "model": "GLM-5.2",
+  "theme": "dark",
+  "respectGitignore": false,
+  "effortLevel": "medium"
+}
+
+```
 
 ### clude 使用
 
 
+#### 基本使用
 * build 和 plan 模型有什么区别？
-  build是主代理模式，可以调用工具，进行日常开发，修改代码。plan模型进行代码分析，提出建议或修改计划，不希望改动代码。
-* @general 通用子代理，可以修改代码，几乎全部工具权限(除todo外), 适合场景：比较复杂的问题，需要多步，或多个独立的工作单元，共同完成。使用这种模式。比如：@general 根据task.md的描述，帮忙我完成积分系统的开发。系统会开一个子代理，使用多步来完成任务； 另外，想开多个子代理来完成任务，可以多次调用@general，比如，第一次：@general 根据task.md的描述，帮忙我完成积分系统的前端开发；第二次紧接输入@general 根据task.md的描述，帮忙我完成积分系统的后端开发；
+build是主代理模式，可以调用工具，进行日常开发，修改代码。
+plan模型进行代码分析，提出建议或修改计划，不希望改动代码。
+
+* @general 通用子代理，可以修改代码，几乎全部工具权限(除todo外),
+适合场景：比较复杂的问题，需要多步，或多个独立的工作单元，共同完成。
+模式1： @general 根据task.md的描述，帮忙我完成积分系统的开发。系统会开一个子代理，使用多步来完成任务； 
+模式2：想开多个子代理来完成任务，可以多次调用@general
+第一次：@general 根据task.md的描述，帮忙我完成积分系统的前端开发；
+第二次紧接输入@general 根据task.md的描述，帮忙我完成积分系统的后端开发；
+
+
+
+#### Skills 和 MCP
+
+Skills：是封装好的提示词 / 标准化工作流，让 Claude 变成特定领域的「专业人士」，本质是让 AI 「更懂怎么干」
+
+
+MCP 服务器：是真正的工具能力，能让 Claude 访问本地文件、浏览器、外部 API、第三方工具，本质是让 AI 「真的能去干」
+
+
+##### skill 查找安装和使用 
+
+
+###### npx skils 安装
+```text
+# 1. 搜索社区技能（关键词匹配）
+npx skills find <关键词>
+
+# 2. 安装技能（-y 跳过确认，-g 全局安装，必加！）
+npx skills add <owner/repo@skill> -y -g
+
+
+安装find-skills 用来找skill的skill
+npx skills add https://github.com/vercel-labs/skills --skill find-skills
+
+可以用find命令来找skills了
+npx skills find "skills的关键词"
+
+
+# 3. 查看已安装的全部技能
+npx skills list -g
+
+也可以通过目录查看claude下安装的skills:
+C:\Users\Administrator\.claude\skills
+
+
+# 4. 检查技能更新
+npx skills check
+
+# 5. 更新所有已安装技能
+npx skills update
+
+```
+
+典型的使用过程：
+
+```text
+1. 查找skill：skill-creator  创建skills的skill
+npx skills find "skill-creator"
+
+anthropics/skills@skill-creator 356.7K installs
+└ https://skills.sh/anthropics/skills/skill-creator
+
+2. 安装这个skills
+
+npx skills add https://github.com/anthropics/skills --skill skill-creator
+
+3. 使用这个skills
+
+/skills  claude中能看到安装的skills
+
+输入：生成一个将markdown转换为pdf格式skill
+
+结果：C:\Users\Administrator\.claude\skills\md-to-pdf  这个目录下生成skills
+
+
+```
+
+
 
 
 
