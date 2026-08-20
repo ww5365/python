@@ -493,8 +493,8 @@ class EmbeddingEngine:
         
         # # 步骤6 gather 
        
-        restored_embeddings = tf.gather(recv_embeds_list, self.indices)
-        final_restored = tf.reshape(restored_embeddings, [bs, -1, self.embedding_dim])
+        restored_embeddings = tf.gather(recv_embeds_list, self.indices) # 可以取到30个维度为8的embedding值 [30, 8]
+        final_restored = tf.reshape(restored_embeddings, [bs, -1, self.embedding_dim]) # [10,3,8]
         
         # ---------- 保存中间张量用于运行时打印 ----------
         self.debug_tensors['send_sizes'] = self.send_sizes
