@@ -251,16 +251,16 @@ def dcn_model(batch_embedding, label, is_pooling=True):
         deep_dims = [512, 128]  # 深度网络层维度
         # deep_dims = [128, 32, 8, 4]  # 深度网络层维度
         # deep_dims = [32]  # 深度网络层维度
-        x_deep = output
+        x_deep = output  # [10, 16]
         for i, dim in enumerate(deep_dims):
             w = tf.get_variable(f'deep_w_{i}', shape=[x_deep.shape[-1], dim],
-                                initializer=tf.glorot_normal_initializer())
+                                initializer=tf.glorot_normal_initializer())  # [16, 512]
             b = tf.get_variable(f'deep_b_{i}', shape=[dim],
-                                initializer=tf.zeros_initializer())
-            x_deep = tf.nn.relu(tf.matmul(x_deep, w) + b)
+                                initializer=tf.zeros_initializer())  # [512]
+            x_deep = tf.nn.relu(tf.matmul(x_deep, w) + b)  
 
         # ===== 3. 合并两部分输出 =====
-        concat = tf.concat([xl, x_deep], axis=1)
+        concat = tf.concat([xl, x_deep], axis=1) # [10, 144]
         logits = tf.layers.dense(concat, 1, activation=None)
 
         # ===== 4. 定义输出节点 =====
