@@ -371,7 +371,7 @@ def alltoallv_exchange_embeddings(send_tensors, send_sizes, recv_sizes):
     
     # 接收配置：计算接收缓冲区大小和偏移量
     recv_total = tf.reduce_sum(recv_sizes)
-    recv_buf = tf.zeros([recv_total], dtype=tf.float32)  # 预分配接收缓冲区
+    recv_buf = tf.zeros([recv_total], dtype=tf.float32)  # 预分配一个长度为 recv_total、全 0 的接收缓冲区张量
     recv_counts = tf.cast(recv_sizes, tf.int64)
     recv_displacements = tf.cumsum(tf.concat([[0], tf.cast(recv_sizes[:-1], tf.int64)], axis=0))
     
