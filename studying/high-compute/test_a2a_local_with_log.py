@@ -678,7 +678,7 @@ if __name__ == '__main__':
     all2all_embedding = tf.concat(all2all_embeddings, axis=1) # [10, 7, 8]
     batch_embedding = all2all_embedding
     logger.info(f"batch_embedding static shape: {batch_embedding.shape}")
-    loss, logits = dcn_model(batch_embedding, label_placeholder, is_pooling=use_pooling_in_pull)
+    loss, logits = dcn_model(batch_embedding, label_placeholder, is_pooling=use_pooling_in_pull) # 抽象数学计算过程？
 
     # 预测概率，用于AUC计算
     pred_prob = tf.sigmoid(logits, name='pred_prob')
@@ -696,7 +696,7 @@ if __name__ == '__main__':
     # logger.info(f"-----var_list: {var_list}")
     dense_vars = var_list[len(all2all_slot):]   # [0, len(all2all_slot))是什么？embedding变量， 之后是dense层变量
     dense_grads = optimizer.compute_gradients(loss, dense_vars)
-    sparse_grads = sparse_optimizer.compute_gradients(loss, all2all_embeddings_before_gather)
+    sparse_grads = sparse_optimizer.compute_gradients(loss, all2all_embeddings_before_gather) # 反向为什么是all2all_embeddings_before_gather，不是all2all_embeddings？
     
     # ADDED LOGGER: 记录可训练变量总数
     logger.info(f"Total trainable variables: {len(var_list)}")
