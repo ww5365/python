@@ -245,7 +245,9 @@ def dcn_model(batch_embedding, label, is_pooling=True):
                                 initializer=tf.glorot_normal_initializer())
             b = tf.get_variable(f'cross_b_{i}', shape=[input_dim],
                                 initializer=tf.zeros_initializer())
-            xl = x0 * tf.matmul(xl, w) + xl + b  # 交叉公式: x_{l+1} = x0 * (xl^T w) + xl + b
+            xl = x0 * tf.matmul(xl, w) + xl + b  
+            # 交叉公式: x_{l+1} = x0 * (xl^T w) + xl + b  
+            # 但实际使用：x1 = x0 * tf.matmul(x1, w) + x1 + b  ？ 看wiki中分析，实际是一样的
 
         # ===== 2. Deep Network (隐式高阶交叉) =====
         deep_dims = [512, 128]  # 深度网络层维度
@@ -267,6 +269,8 @@ def dcn_model(batch_embedding, label, is_pooling=True):
         prediction = tf.identity(logits, name='prediction_output')  # 添加输出节点
 
         loss = tf.reduce_mean(tf.square(logits - label), name='loss')
+
+        # label是0/1标签，实际业务中，常代表：CTR，是否点击/转化等二分类标签 [客户Embedding+商品的Embedding, label]
 
     # 修改：返回 loss 和 logits（用于计算AUC）
     return loss, logits
@@ -678,7 +682,9 @@ if __name__ == '__main__':
     all2all_embedding = tf.concat(all2all_embeddings, axis=1) # [10, 7, 8]
     batch_embedding = all2all_embedding
     logger.info(f"batch_embedding static shape: {batch_embedding.shape}")
-    loss, logits = dcn_model(batch_embedding, label_placeholder, is_pooling=use_pooling_in_pull) # 抽象数学计算过程？
+    loss, logits = dcn_model(batch_embedding, label_placeholder, is_pooling=use_pooling_in_pull) 
+    # 抽象数学计算过程？
+    # label_placeholder输入是0/1标签，结合输入[10,7,9] embedding，是代表了什么含义？
 
     # 预测概率，用于AUC计算
     pred_prob = tf.sigmoid(logits, name='pred_prob')
