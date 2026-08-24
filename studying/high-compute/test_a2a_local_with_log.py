@@ -705,7 +705,7 @@ if __name__ == '__main__':
     sparse_grads = sparse_optimizer.compute_gradients(loss, all2all_embeddings_before_gather) # 反向为什么是all2all_embeddings_before_gather，不是all2all_embeddings？
     
     # ADDED LOGGER: 记录可训练变量总数
-    logger.info(f"Total trainable variables: {len(var_list)}")
+    logger.info(f"Total trainable variables: {len(var_list)}")  # 14
     
     # # dense 层allreduce
     grads_and_vars = dense_grads
