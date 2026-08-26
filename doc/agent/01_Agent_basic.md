@@ -1,6 +1,10 @@
 # Agent
 
 
+## 基本概念
+
+https://gitcode.csdn.net/69c0747b0a2f6a37c5997319.html 《MCP、Tools、Skill、Function Call 区别详解》
+
 
 ## 2026.1.27 
 
