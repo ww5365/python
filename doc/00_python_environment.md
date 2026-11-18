@@ -62,7 +62,7 @@ anaconda [下载地址](https://www.anaconda.com/products/distribution#download-
 Anaconda3-2022.10-Windows-x86_64.exe 里面是3.9 Python版本
 
 环境变量手动配置
-![配置anaconda环境变量](./assets/01_anaconda_environment_var.png)
+![配置anaconda环境变量](./assets/20251022-01_anaconda_environment_var.png)
 
 ### anaconda 创建新的python运行环境
 

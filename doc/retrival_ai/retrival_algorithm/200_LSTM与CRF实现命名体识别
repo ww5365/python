@@ -1,0 +1,185 @@
+LSTM + CRF 命名体识别
+
+
+
+参考:
+
+1. [条件随机场CRF](https://zhuanlan.zhihu.com/p/29989121) ： 文中1.6节的实例计算，特征函数是假设已知的
+2. [CRF条件随机场的原理、例子、公式推导和应用](https://zhuanlan.zhihu.com/p/148813079)
+
+3. [LSTM+CRF序列标注](https://www.mindspore.cn/tutorials/application/zh-CN/master/nlp/sequence_labeling.html) : 这个比较好，mindspore的的文档
+4. [基于Bi-LSTM与CRF实现中文命名实体识别任务](https://developer.aliyun.com/article/1144569)
+
+5. [基于Pytorch的命名实体识别框架: github上的项目](https://github.com/wzzzd/lm_ner)
+
+6. [BiLSTM模型中CRF层的运行原理](https://lonepatient.top/2018/07/06/CRF-Layer-on-the-Top-of-BiLSTM%20--1.html) :  这个博文系列举例能让人，理解基本的识别原理，对应的github：https://github.com/lonePatient/BiLSTM-CRF-NER-PyTorch/tree/master
+
+7. [PyTorch Bi-LSTM+CRF NER标注代码精读](https://zhuanlan.zhihu.com/p/140479197)  :  pytorch官方实现lstm+crf简单解读，重点是知道pytorch官方有实现经典的bilstm + CRF模型
+
+8. [12-BiLSTM和CRF算法的序列标注原理.ipynb](https://github.com/YangBin1729/nlp_notes/blob/master/06-%E8%87%AA%E7%84%B6%E8%AF%AD%E8%A8%80%E5%A4%84%E7%90%86/12-BiLSTM%E5%92%8CCRF%E7%AE%97%E6%B3%95%E7%9A%84%E5%BA%8F%E5%88%97%E6%A0%87%E6%B3%A8%E5%8E%9F%E7%90%86.ipynb) ： 画了一张图，挺有助于理解：计算所有路径分数
+
+9. [一文读懂BiLSTM+CRF实现命名实体识别](https://paddlepedia.readthedocs.io/en/latest/tutorials/natural_language_processing/ner/bilstm_crf.html) : paddle官方文档介绍
+
+10.[中文NER的那些事儿1. Bert-Bilstm-CRF基线模型详解&代码实现](https://github.com/lonePatient/BiLSTM-CRF-NER-PyTorch/tree/master) : 
+
+
+
+* 维特比算法：viterbi算法
+
+1. (如何通俗地讲解 viterbi 算法？)[https://www.zhihu.com/question/20136144] : 路生,石溪  主要看了这两个答主的答案
+
+篱笆网络图的最短路径问题的求解，是一种动态规划算法
+2. [HMM模型和Viterbi算法](https://bbs.huaweicloud.com/blogs/322757) : 这里面有个实际计算示例，可以参考，github上类似此示例的viterbi实现算法：https://github.com/shawroad/Algorithm/blob/master/0014-%E7%BB%B4%E7%89%B9%E6%AF%94%E7%AE%97%E6%B3%95python%E5%AE%9E%E7%8E%B0.py
+
+* LSTM ： long short term memory
+
+1. [Understanding LSTM Networks](https://colah.github.io/posts/2015-08-Understanding-LSTMs/)  : lstm 基础讲解，比较经典的，其它blog好多都是基于此写的，如：https://zhuanlan.zhihu.com/p/42717426
+2. (长短时记忆网络 LSTM)[https://paddlepedia.readthedocs.io/en/latest/tutorials/sequence_model/lstm.html] : paddle的wiki，写的很基础，参考之一， 基础入
+3. (LSTM公式的按元素乘)[https://blog.csdn.net/qq_42251308/article/details/106765750] ： lstm公式中，星号运算符或圆圈中点 运算符 的含义，按位乘， element-wise multiplication 
+4. (人人都能看懂的LSTM介绍及反向传播算法推导（非常详细）)[https://zhuanlan.zhihu.com/p/83496936] : 
+   * 这篇博文中，引用了：反向传播，backpropagation,计算，https://zhuanlan.zhihu.com/p/79657669， 这里我们比较容易理解是，dJ/dw 计算反向传播的梯度时，多个样本而言，w和b是共享的，也就是说，dw影响每个样本，都有可能导致dJ损失，所以我们看到dJ/dw的计算中，包含了多个样本的影响的相加
+   *  推动了，lstm和gru的正向和反向传播 
+5. (Deriving LSTM Gradient for Backpropagation)[https://agustinus.kristia.de/techblog/2016/08/12/lstm-backprop/] ： 英文blog，推导lstm的反向传播，并用代码实例，演示
+6. (手推LSTM和GRU全解(包括反向传播))[手推LSTM和GRU全解(包括反向传播)] ： 手工记录了lstm的推导，解释了为什么lstm比rnn可以缓解梯度消失问题
+
+7.(神经网络的梯度推导与代码验证》之LSTM的前向传播和反向梯度推导 )[https://www.cnblogs.com/sumwailiu/p/13623985.html] ： 这篇博文，比较详尽的推导了lstm的反向传播公式，里面引用了rnn和bp，矩阵求导的内容（迹函数，矩阵求导及法则），有点难以理解。还有不少疑问？？
+
+8.(【重温经典】大白话讲解LSTM长短期记忆网络 如何缓解梯度消失，手把手公式推导反向传播)[https://www.bilibili.com/video/BV1qM4y1M7Nv?p=1&vd_source=ff1d5f0f1a1b50dc5fc0b20e64d1bba6] ： 这个视频也是参考了4: https://zhuanlan.zhihu.com/p/83496936, 详细讲解了lstm
+
+9. (Simple LSTM)[https://nicodjimenez.github.io/2014/08/08/lstm.html] : 2014年blog，配合github上实现的代码理解：https://github.com/nicodjimenez/lstm/tree/master  感觉比较经典。
+   有一个中文版本的blog：https://www.cnblogs.com/liujshi/p/6159007.html
+   扩展版本的lstm代码： https://github.com/fmscole/backpropagation/tree/master/LSTM
+
+
+10.(浅谈交叉熵及其求导过程)[ https://zhuanlan.zhihu.com/p/99923080]: 我脑残的又补了下softmax的求导
+
+11. (LSTM反向传播详解Part1)[https://blog.csdn.net/csuyhb/article/details/99546576] ： 这个手推lstm的反向传播，也可以，可以和参考8，b站的结合起来看，配套的代码，没有下载到源码 (Part3源码下载地址)[https://download.csdn.net/download/csuyhb/11645281?spm=1001.2101.3001.6661.1&utm_medium=distribute.pc_relevant_t0.none-task-download-2%7Edefault%7ECTRLIST%7EPaid-1-11645281-blog-123267676.235%5Ev43%5Epc_blog_bottom_relevance_base4&depth_1-utm_source=distribute.pc_relevant_t0.none-task-download-2%7Edefault%7ECTRLIST%7EPaid-1-11645281-blog-123267676.235%5Ev43%5Epc_blog_bottom_relevance_base4&utm_relevant_index=1]
+     注意：*代码已经下载到，重点参考这篇博文来理解*
+
+    adam优化器，参考：https://blog.csdn.net/qq_42109740/article/details/105401197
+
+
+12. https://github.com/zenny-chen/Machine-Learning-resource-collection/tree/master?tab=readme-ov-file
+
+13. (RNN、LSTM反向传播推导详解)[https://blog.csdn.net/qq_29762941/article/details/89294252] : 吴恩达的深度学习作业时，进行rnn和lstm反向传播的求导。
+
+向量/向量：求导， 雅克比矩阵， 可参考：https://www.cnblogs.com/sumwailiu/p/13398121.html#chain
+Y=AX+b Z=f(Y)  Y对A：向量对矩阵求导？: https://www.cnblogs.com/crazypigf/p/17286929.html
+
+克罗内克积： 圆圈中叉， https://blog.csdn.net/qq_38406029/article/details/115752582     
+哈达玛积： 圆圈中点 
+
+
+吴恩达的深度学习课程， 黄海广的整理 ， (吴恩达deeplearning.ai)[https://zhuanlan.zhihu.com/p/41161643] ： 主要是学习笔记，有163的公开课连接，五门课程介绍非常清晰。 
+https://zhuanlan.zhihu.com/p/41161643  这个文章中有学习体会和两个参考文档，第1个参考文档中有课程练习代码。
+
+吴恩达的course上的三门大课： 
+2022年最新版本的ML课程
+深度学习课程
+生成式AI课程
+
+
+14(LSTM内部结构及前向传播原理——LSTM从零实现系列(1))[https://forecast.blog.csdn.net/article/details/127958263?spm=1001.2014.3001.5502&ydreferer=aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3lhbmd3b2hlbm1haTEvYXJ0aWNsZS9kZXRhaWxzLzEyODE5NDcyOA%3D%3D]
+这个也是一个系列
+
+源码：？  博主没提供github
+
+参考了这个吗？ LSTM无框架源码实现 ： https://github.com/ww5365/LSTM/tree/master/LSTM%E6%97%A0%E6%A1%86%E6%9E%B6%E6%BA%90%E7%A0%81%E5%AE%9E%E7%8E%B0
+
+
+## 关键词/关键短语提取
+
+1. 关键词提取（Keyword extraction）、关键短语提取（Keyphrase extraction）工具yake ： https://codenews.cc/view/370
+   Keyphrase Extraction 一个快速从中文里抽取关键短语的工具 ： https://cloud.tencent.com/developer/article/1957803
+
+   Rake、Yake、Keybert 和 Textrank  
+   iac
+
+
+2. 基于TextRank提取关键词、关键短语、摘要 ： https://www.cnblogs.com/bymo/p/8462120.html
+
+3. 关键词提取和摘要算法TextRank详解与实战 ： https://zhuanlan.zhihu.com/p/126733456   ： * 重点参考这篇文章 *
+
+ * ？ 为什么要加入d这个阻尼系数  ：   新网站的网页没有被投票，这样多轮迭代计算后，价值s，可能是0， 不符合我们预期
+
+*  状态转移矩阵
+
+
+
+
+
+4. 使用 jieba 实现关键词提取 ： https://aistudio.baidu.com/projectdetail/2210377?channelType=0&channel=0  ： 这个是paddle的公开项目的参考文章 
+5. * Python使用TextRank算法提取关键词 : https://www.leyeah.com/article/python-uses-textrank-algorithm-extract-keywords-720739 * 
+
+其中3.4结合起来看，能基本理解了pagerank和TextRank的算法原理，5有部分示例和代码的理解，这个不错，示例代码使用spaCy来实现。
+
+
+6. 实现工具： 
+spacy ： 可能要选择用的实现框架
+stanza   
+Polyglot 
+iac ： 百度的实现，中文支持，好像支持的语言较多
+
+7. keyBERT：    https://blog.csdn.net/mingzai624/article/details/129012015    这个里面是关键词提取的各个方法的综述
+
+8. TextRank算法详细讲解与代码实现（完整）： https://www.cnblogs.com/motohq/p/11887420.html  这篇文章给了文本摘要的一个示例代码
+
+
+
+
+## interview较好的项目资料
+
+(ML-NLP)[https://github.com/NLP-LOVE/ML-NLP]
+
+
+
+
+## sumary
+
+crf
+vertibi
+textrank
+lstm
+
+
+大模型的创新能力
+
+叮！快来看看我和文心一言的奇妙对话～点击链接 https://yiyan.baidu.com/share/3wB3QT8Zcl -- 文心一言，既能写文案、读文档，又能绘画聊天、写诗做表，你的全能伙伴！
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

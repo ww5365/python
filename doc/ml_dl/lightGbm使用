@@ -1,0 +1,145 @@
+特征的离散化处理
+https://www.jianshu.com/p/918649ce379a      
+
+特征的离散化是特征工程中一种常见的针对连续特征数据进行预处理的方式
+
+集成学习——Bagging和Boosting
+https://www.jianshu.com/p/c69301c8cd95
+
+KFold 交叉验证
+从过拟合的角度上讲，N折交叉验证是防止过拟合的手段之一，它是以寻找最佳模型的方式防止过拟合
+
+参考：
+https://zhuanlan.zhihu.com/p/113623623
+
+AUC计算
+参考：
+https://www.cnblogs.com/tmpUser/p/15092467.html  【推荐算法】AUC的计算方法
+https://blog.csdn.net/pearl8899/article/details/126129148  AUC的两种计算方式
+https://zhuanlan.zhihu.com/p/411010918   谈auc的计算
+
+AUC是一根竖线，是什么场景？
+
+准召率,ROC等计算
+https://www.cnblogs.com/limingqi/p/11729572.html
+
+
+multi_logloss ： 多分类的对数损失函数
+参考：
+https://blog.csdn.net/Linyi_DanielWu/article/details/108278465
+
+
+
+
+lightGBM 使用
+参考：
+https://www.biaodianfu.com/lightgbm.html
+https://lightgbm.cn/docs/7/   # 官方文档
+https://zhuanlan.zhihu.com/p/376485485  LightGBM参数设置，看这篇就够了  
+https://www.showmeai.tech/article-detail/205  https://www.showmeai.tech/article-detail/205
+
+https://blog.51cto.com/u_15274944/5042180#max_depthnum_leaves_135   这篇给了个类似的调参思路，重点参考
+
+https://developer.aliyun.com/article/1053083  
+
+
+lightgbm.cv 使用
+
+http://xn--48st0qbtbj02b.com/index.php/2021/09/22/lgb-cv.html
+https://blog.csdn.net/weixin_44414593/article/details/108727307
+
+  early_stopping_rounds ： 重点理解这个参数？
+  stopping_rounds=15指如果验证集的误差在15次迭代内没有降低，则停止迭代  这个误差不降低的数据，我怎么去验证？
+
+  ``` python
+  from lightgbm import log_evaluation, early_stopping
+  callbacks = [log_evaluation(period=1), early_stopping(stopping_rounds=10)]
+# 打开log记录
+[49]    cv_agg's multi_logloss: 1.15338 + 0.0087536
+[50]    cv_agg's multi_logloss: 1.15362 + 0.00885681
+[51]    cv_agg's multi_logloss: 1.1535 + 0.00865666
+[52]    cv_agg's multi_logloss: 1.15359 + 0.00869833
+[53]    cv_agg's multi_logloss: 1.15353 + 0.00839901
+[54]    cv_agg's multi_logloss: 1.15358 + 0.00833005
+[55]    cv_agg's multi_logloss: 1.15385 + 0.00771347
+[56]    cv_agg's multi_logloss: 1.15402 + 0.00734993
+[57]    cv_agg's multi_logloss: 1.15404 + 0.00722902
+[58]    cv_agg's multi_logloss: 1.15437 + 0.00715347
+[59]    cv_agg's multi_logloss: 1.15444 + 0.00744138
+Early stopping, best iteration is:
+[49]    cv_agg's multi_logloss: 1.15338 + 0.0087536
+  ```
+
+
+lambda_l2 分析
+https://www.jianshu.com/p/a86b39f0b151
+
+
+lightGBM 底层原理和xgboost的异同：
+
+LightGBM = XGBoost + Histogram + GOSS + EFB。
+https://blog.csdn.net/pearl8899/article/details/106159264
+
+https://www.showmeai.tech/article-detail/205  机器学习实战 | LightGBM建模应用详解
+
+lightGBM的训练预测和分析等使用
+https://aitechtogether.com/article/17905.html
+https://blog.51cto.com/showmeai/5133227
+https://blog.csdn.net/weixin_44953928/article/details/123426233
+
+lightgbm c++ 使用
+https://gist.github.com/cbecker/fb628bec3c179fc49617ba369cbb1aab 
+
+孟子社区：
+无意中发现的学习机器学习，深度学习和NLP课程的资料汇总：
+https://www.langboat.com/mengzi/course/basics/7-nlp
+http://nlp.seas.harvard.edu/annotated-transformer/  ： 这个是havard的对transformer的解析的blog
+
+
+
+lightgbm应用：
+
+量化交易策略：
+https://www.joinquant.com/view/community/detail/562c2d23d3d035f89991b33a2138089a     手把手教你LGB+Alpha260+TopKDropN策略  
+
+基于LightGBM的时间序列预测:
+https://microsoft.github.io/ai-edu/%E5%AE%9E%E8%B7%B5%E6%A1%88%E4%BE%8B/B16-%E5%9F%BA%E4%BA%8ELightGBM%E7%9A%84%E6%97%B6%E9%97%B4%E5%BA%8F%E5%88%97%E9%A2%84%E6%B5%8B/
+
+
+
+
+NER：
+
+https://www.qiniu.com/qfans/qnso-59319207  地理实体识别
+https://github.com/wshzd/NER/tree/master   这个是地理实体识别的实例
+
+
+
+再出发的准备步骤：
+
+1. pytorch平台
+
+
+2. 项目
+
+排序项目：
+
+思考：
+特征的筛选？ 特征有效性分析
+样本标注
+
+
+语义召回项目
+
+
+
+知识图谱项目
+
+
+
+
+
+
+
+
+
