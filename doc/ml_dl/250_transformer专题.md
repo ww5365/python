@@ -14,7 +14,15 @@
 
 
 
+## 上述材料学习
 
+### 手算transformer用excel计算和DryRun：https://github.com/ImagineAILab/ai-by-hand-excel
+
+实际是GPT2的计算过程
+
+
+1. 疑问点1： block1 - 14 MLP: expand to the hidden layer  为什么要进行维度的扩展？
+2. 
 
 
 
