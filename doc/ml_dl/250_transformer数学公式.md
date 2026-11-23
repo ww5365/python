@@ -136,34 +136,46 @@ m_{u,v} = \begin{cases}
 \end{cases}
 \]
 
-经 softmax 后，未来位置的权重趋近于零：
+经 softmax 后，未来位置的权重趋近于零。第 \(i\) 个头使用各自的投影，掩码矩阵 \(M\) 相同：
 
 \[
-A = \text{softmax}(A'),\quad H^{\text{mask}} = A V
+A_i = \text{softmax}(A_i'),\quad \text{head}_i^{\text{mask}} = A_i V_i
 \]
 
-然后 Add & Norm：
+LayerNorm 之前，先把各头在特征维拼接，再做输出投影 \(W^O\)：
 
 \[
-H^{\text{mask}} = \text{LayerNorm}\big(\tilde{F} + H^{\text{mask}}\big)
+\text{MultiHead}^{\text{mask}}(\tilde{F}) = \text{Concat}(\text{head}_1^{\text{mask}}, \ldots, \text{head}_h^{\text{mask}})\,W^O
+\]
+
+然后残差加 LayerNorm：
+
+\[
+H^{\text{mask}} = \text{LayerNorm}\big(\tilde{F} + \text{MultiHead}^{\text{mask}}(\tilde{F})\big)
 \]
 
 ### 2. Cross-Attention（编码器-解码器注意力）
 
-Cross-Attention 让 Decoder 在生成每个 token 时“查看”整个编码器输出。**Query 来自 Decoder**，**Key 和 Value 来自 Encoder 输出 \(H^E\)**：
+Cross-Attention 让 Decoder 在生成每个 token 时“查看”整个编码器输出。每个头各自投影。**Query 来自 Decoder**，**Key 和 Value 来自 Encoder 输出 \(H^E\)**：
 
 \[
-Q = H^{\text{mask}} W_c^Q,\quad K = H^E W_c^K,\quad V = H^E W_c^V
+Q_i = H^{\text{mask}} W_{c,i}^Q,\quad K_i = H^E W_{c,i}^K,\quad V_i = H^E W_{c,i}^V
 \]
 
 \[
-H^{\text{cross}} = \text{softmax}\left(\frac{QK^\top}{\sqrt{d_k}}\right)V
+\text{head}_i^{\text{cross}} = \text{softmax}\left(\frac{Q_i K_i^\top}{\sqrt{d_k}}\right)V_i
 \]
 
-经 Add & Norm：
+LayerNorm 之前同样先拼接，再做输出投影 \(W_c^O\)：
 
 \[
-H^{\text{cross}} = \text{LayerNorm}\big(H^{\text{mask}} + H^{\text{cross}}\big)
+\text{MultiHead}^{\text{cross}} = \text{Concat}(\text{head}_1^{\text{cross}}, \ldots, \text{head}_h^{\text{cross}})\,W_c^O
+\]
+
+经残差加 LayerNorm：
+
+\[
+H^{\text{cross}} = \text{LayerNorm}\big(H^{\text{mask}} + \text{MultiHead}^{\text{cross}}\big)
 \]
 
 ### 3. FFN + Add & Norm
