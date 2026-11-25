@@ -96,6 +96,52 @@ u=0.4345 \in [0.2,0.55)
 
 
 
+## 二、 pretraining 训练
+
+### 2.1 DATA & INITIALISATION
+
+#### 损失函数
+
+gpt2使用的损失函数是：**语言模型训练的交叉熵损失函数**，更准确地说，是**平均负对数似然损失**：
+
+\[
+L=\frac{1}{6}\sum_{i=0}^{5}-\log p(t_{i+1}\mid t_0,\dots,t_i)
+\]
+
+含义是：
+
+- 对每个位置 \(i\)，模型在只看到 \(t_0,\dots,t_i\) 的条件下，预测下一个 token \(t_{i+1}\)；
+- \(p(t_{i+1}\mid t_0,\dots,t_i)\) 是模型给正确下一个 token 的概率；
+- 取负对数 \(-\log p\)，正确 token 概率越高，损失越小；
+- 最后对所有位置求平均：token的个数是7个，N=6 求平均
+
+**为什么？损失函数只考虑计算了预测正确情况下损失，对于预测错误没有考虑**
+
+交叉熵是：
+
+\[
+L_i
+=-\sum_{v\in\mathcal V} q_i(v)\log p_\theta(v\mid \text{context})
+\]
+
+逐项看：
+
+- 对正确 token \(v=t_{i+1}\)：\(q_i(v)=1\)，这一项是  
+  \[
+  -1\cdot \log p_\theta(t_{i+1}\mid \text{context})
+  \]
+- 对错误 token \(v\ne t_{i+1}\)：\(q_i(v)=0\)，这一项是  
+  \[
+  -0\cdot \log p_\theta(v\mid \text{context})=0
+  \]
+
+
+
+核心原因就一句话：所有 token 的概率加起来必须等于 1，所以错误 token 的概率变高，虽然没有计入到损失，但正确 token 的概率肯定会被压低，所以变相的已经增加了损失。
+
+
+
+
 
 
 

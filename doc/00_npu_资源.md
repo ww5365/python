@@ -105,14 +105,7 @@ ssh -p 39188 atomgit@frp-sea.com
 
 
 
-昨天： 
 
-大EP分离
-prefilling
-LORA
-动态shape子图优化   
-
-昨天讨论的问题，了解下
 
 
 
